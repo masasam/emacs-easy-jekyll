@@ -586,31 +586,34 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (setq easy-jekyll-root easy-jekyll--publish-root)
   (setq easy-jekyll-url easy-jekyll--publish-url))
 
+(defun easy-jekyll--headers (file)
+  "Return a draft header string for a new article as FILE."
+  (let ((datetimezone
+         (concat
+          (format-time-string "%Y-%m-%d %T ")
+          (format-time-string "%z"))))
+    (concat
+     "---"
+     "\nlayout: post"
+     "\ntitle:  " file
+     "\ndate:   " datetimezone
+     "\ncategories: "
+     "\n---\n")))
+
 ;;;###autoload
 (defun easy-jekyll-newpost (post-file)
   "Create a new post with jekyll.
 POST-FILE needs to have and extension '.md' or '.textile'."
   (interactive (list (read-from-minibuffer "Filename: " `(,easy-jekyll-default-ext . 1) nil nil nil)))
-  (let ((filename (concat easy-jekyll-postdir "/" post-file))
+  (let ((filename (concat easy-jekyll-postdir "/" (format-time-string "%Y-%m-%d-" (current-time)) post-file))
 	(file-ext (file-name-extension post-file)))
     (when (not (member file-ext easy-jekyll--formats))
       (error "Please enter .%s file name or .%s file name" easy-jekyll-markdown-extension easy-jekyll-textile-extension))
     (easy-jekyll-with-env
      (when (file-exists-p (file-truename filename))
        (error "%s already exists!" (concat easy-jekyll-basedir filename)))
-     (if (<= 0.25 (easy-jekyll--version))
-	 (call-process "jekyll" nil "*jekyll*" t "new" filename)
-       (progn
-	 (if (or (string-equal file-ext easy-jekyll-markdown-extension)
-		 (string-equal file-ext easy-jekyll-asciidoc-extension)
-		 (string-equal file-ext "rst")
-		 (string-equal file-ext "mmark")
-		 (string-equal file-ext easy-jekyll-html-extension))
-	     (call-process "jekyll" nil "*jekyll*" t "new" filename))))
      (find-file (concat "content/" filename))
-     (when (and (> 0.25 (easy-jekyll--version))
-		(string-equal file-ext "org"))
-       (insert (easy-jekyll--org-headers (file-name-base post-file))))
+     (insert (easy-jekyll--headers (file-name-base post-file)))
      (goto-char (point-max))
      (save-buffer))))
 
@@ -636,10 +639,6 @@ POST-FILE needs to have and extension '.md' or '.textile'."
     (delete-process easy-jekyll--server-process))
   (when (get-buffer easy-jekyll--preview-buffer)
     (kill-buffer easy-jekyll--preview-buffer)))
-
-(defun easy-jekyll--orgtime-format (x)
-  "Format orgtime as X."
-  (concat (substring x 0 3) ":" (substring x 3 5)))
 
 ;;;###autoload
 (defun easy-jekyll-github-deploy ()
