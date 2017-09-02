@@ -625,11 +625,8 @@ POST-FILE needs to have and extension '.md' or '.textile'."
    (if (process-live-p easy-jekyll--server-process)
        (browse-url easy-jekyll-preview-url)
      (progn
-       (if (<= 0.25 (easy-jekyll--version))
-	   (setq easy-jekyll--server-process
-	   	 (start-process "jekyll-server" easy-jekyll--preview-buffer "jekyll" "server" "--navigateToChanged"))
-	 (setq easy-jekyll--server-process
-	       (start-process "jekyll-server" easy-jekyll--preview-buffer "jekyll" "server")))
+       (setq easy-jekyll--server-process
+	     (start-process "jekyll-serve" easy-jekyll--preview-buffer "jekyll" "serve"))
        (browse-url easy-jekyll-preview-url)
        (run-at-time easy-jekyll-previewtime nil 'easy-jekyll--preview-end)))))
 
