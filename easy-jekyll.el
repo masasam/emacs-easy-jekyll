@@ -687,10 +687,10 @@ POST-FILE needs to have and extension '.md' or '.textile'."
      (error "'aws' is not installed"))
    (unless easy-jekyll-amazon-s3-bucket-name
      (error "Please set 'easy-jekyll-amazon-s3-bucket-name' variable"))
-   (when (file-directory-p "public")
-     (delete-directory "public" t nil))
-   (shell-command-to-string "jekyll --destination public")
-   (shell-command-to-string (concat "aws s3 sync --delete public s3://" easy-jekyll-amazon-s3-bucket-name "/"))
+   (when (file-directory-p "_site")
+     (delete-directory "_site" t nil))
+   (shell-command-to-string "jekyll build --destination _site")
+   (shell-command-to-string (concat "aws s3 sync --delete _site s3://" easy-jekyll-amazon-s3-bucket-name "/"))
    (message "Blog deployed")
    (when easy-jekyll-url
      (browse-url easy-jekyll-url))))
