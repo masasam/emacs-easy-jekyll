@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.1
+;; Version: 0.3.1
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -736,10 +736,10 @@ POST-FILE needs to have and extension '.md' or '.textile'."
      (error "'Google Cloud SDK' is not installed"))
    (unless easy-jekyll-google-cloud-storage-bucket-name
      (error "Please set 'easy-jekyll-google-cloud-storage-bucket-name' variable"))
-   (when (file-directory-p "public")
-     (delete-directory "public" t nil))
-   (shell-command-to-string "jekyll --destination public")
-   (shell-command-to-string (concat "gsutil -m rsync -d -r public gs://" easy-jekyll-google-cloud-storage-bucket-name "/"))
+   (when (file-directory-p "_site")
+     (delete-directory "_site" t nil))
+   (shell-command-to-string "jekyll build --destination _site")
+   (shell-command-to-string (concat "gsutil -m rsync -d -r _site gs://" easy-jekyll-google-cloud-storage-bucket-name "/"))
    (message "Blog deployed")
    (when easy-jekyll-url
      (browse-url easy-jekyll-url))))
