@@ -1074,7 +1074,7 @@ Optional prefix ARG says how many lines to move; default is one line."
   (let ((filename (concat (replace-regexp-in-string (regexp-quote "content/") "" easy-jekyll-postdir t t) "/" post-file))
         (file-ext (file-name-extension post-file)))
     (when (not (member file-ext easy-jekyll--formats))
-      (error "Please enter .%s or .org or .%s or .rst or .mmark or .%s file name" easy-jekyll-markdown-extension easy-jekyll-asciidoc-extension easy-jekyll-html-extension))
+      (error "Please enter .%s file name or .%s file name" easy-jekyll-markdown-extension easy-jekyll-textile-extension))
     (easy-jekyll-with-env
      (when (file-exists-p (file-truename (concat "content/" filename)))
        (error "%s already exists!" (concat easy-jekyll-basedir "content/" filename)))
