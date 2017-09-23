@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.5.2
+;; Version: 0.6.2
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -1099,8 +1099,6 @@ Optional prefix ARG says how many lines to move; default is one line."
   "Undraft file on the pointer."
   (interactive)
   (easy-jekyll-with-env
-   (when (> 0.25 (easy-jekyll--version))
-     (error "'easy-jekyll-undraft' requires jekyll 0.25 or higher"))
    (unless (or (string-match "^$" (thing-at-point 'line))
 	       (eq (point) (point-max))
 	       (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
@@ -1109,7 +1107,9 @@ Optional prefix ARG says how many lines to move; default is one line."
 		  easy-jekyll-basedir)))
        (when (and (file-exists-p file)
 		  (not (file-directory-p file)))
-	 (shell-command-to-string (concat "jekyll undraft " file))
+	 (unless (file-directory-p "_drafts")
+	   (make-directory "_drafts" t))
+	 (rename-file file (concat "_drafts/" (file-name-nondirectory file)) 1)
 	 (easy-jekyll-refresh))))))
 
 (defun easy-jekyll-open ()
