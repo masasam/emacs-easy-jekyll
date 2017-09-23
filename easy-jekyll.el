@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.4.2
+;; Version: 0.5.2
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -664,6 +664,14 @@ POST-FILE needs to have and extension '.md' or '.textile'."
      (insert (easy-jekyll--headers (file-name-base post-file)))
      (goto-char (point-max))
      (save-buffer))))
+
+(defun easy-jekyll--version ()
+  "Return the version of jekyll."
+  (let ((source (split-string
+		 (with-temp-buffer
+		   (shell-command-to-string "jekyll --version"))
+		 " ")))
+    (string-to-number (nth 1 source))))
 
 ;;;###autoload
 (defun easy-jekyll-preview ()
