@@ -1424,8 +1424,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-draft-list ()
   "List drafts."
   (easy-jekyll-with-env
-   (unless (file-directory-p (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
-     (error "Did you execute jekyll new site bookshelf?"))
+   (unless (file-directory-p (expand-file-name "_drafts" easy-jekyll-basedir))
+     (make-directory (expand-file-name "_drafts" easy-jekyll-basedir) t))
    (setq easy-jekyll--mode-buffer (get-buffer-create easy-jekyll--buffer-name))
    (setq easy-jekyll--draft-list nil)
    (switch-to-buffer easy-jekyll--mode-buffer)
@@ -1437,11 +1437,10 @@ Optional prefix ARG says how many lines to move; default is one line."
      (insert (propertize easy-jekyll--help 'face 'easy-jekyll-help-face)))
    (unless easy-jekyll--refresh
      (setq easy-jekyll--cursor (point)))
-   (let ((files (directory-files (expand-file-name easy-jekyll-postdir easy-jekyll-basedir)))
+   (let ((files (directory-files (expand-file-name "_drafts" easy-jekyll-basedir)))
 	 (lists (list)))
      (if (eq 2 (length files))
 	 (progn
-	   (insert easy-jekyll--first-help)
 	   (easy-jekyll-mode)
 	   (goto-char easy-jekyll--cursor))
        (progn
