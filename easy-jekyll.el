@@ -660,7 +660,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
     (easy-jekyll-with-env
      (when (file-exists-p (file-truename filename))
        (error "%s already exists!" (concat easy-jekyll-basedir filename)))
-     (find-file (concat "content/" filename))
+     (find-file filename)
      (insert (easy-jekyll--headers (file-name-base post-file)))
      (goto-char (point-max))
      (save-buffer))))
