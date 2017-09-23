@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.4.1
+;; Version: 0.4.2
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -599,8 +599,8 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
      (browse-url easy-jekyll-url))))
 
 ;;;###autoload
-(defun easy-jekyll-publish-timer(n)
-  "A timer that publish after the specified number of minutes has elapsed."
+(defun easy-jekyll-publish-timer (n)
+  "A timer that publish after the specified number as N of minutes has elapsed."
   (interactive "nMinute:")
   (setq easy-jekyll--basedir-timer easy-jekyll-basedir)
   (setq easy-jekyll--sshdomain-timer easy-jekyll-sshdomain)
@@ -610,7 +610,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 	(run-at-time (* n 60) nil #'easy-jekyll-publish-on-timer)))
 
 ;;;###autoload
-(defun easy-jekyll-cancel-publish-timer()
+(defun easy-jekyll-cancel-publish-timer ()
   "Cancel timer that publish after the specified number of minutes has elapsed."
   (interactive)
   (when easy-jekyll--publish-timer
@@ -699,8 +699,8 @@ POST-FILE needs to have and extension '.md' or '.textile'."
        (browse-url easy-jekyll-url)))))
 
 ;;;###autoload
-(defun easy-jekyll-github-deploy-timer(n)
-  "A timer that github-deploy after the specified number of minutes has elapsed."
+(defun easy-jekyll-github-deploy-timer (n)
+  "A timer that github-deploy after the specified number as N of minutes has elapsed."
   (interactive "nMinute:")
   (setq easy-jekyll--github-deploy-basedir-timer easy-jekyll-basedir)
   (setq easy-jekyll--github-deploy-url-timer easy-jekyll-url)
@@ -708,7 +708,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 	(run-at-time (* n 60) nil #'easy-jekyll-github-deploy-on-timer)))
 
 ;;;###autoload
-(defun easy-jekyll-cancel-github-deploy-timer()
+(defun easy-jekyll-cancel-github-deploy-timer ()
   "Cancel timer that github-deploy after the specified number of minutes has elapsed."
   (interactive)
   (when easy-jekyll--github-deploy-timer
@@ -744,8 +744,8 @@ POST-FILE needs to have and extension '.md' or '.textile'."
      (browse-url easy-jekyll-url))))
 
 ;;;###autoload
-(defun easy-jekyll-amazon-s3-deploy-timer(n)
-  "A timer that amazon-s3-deploy after the specified number of minutes has elapsed."
+(defun easy-jekyll-amazon-s3-deploy-timer (n)
+  "A timer that amazon-s3-deploy after the specified number as N of minutes has elapsed."
   (interactive "nMinute:")
   (setq easy-jekyll--amazon-s3-basedir-timer easy-jekyll-basedir)
   (setq easy-jekyll--amazon-s3-url-timer easy-jekyll-url)
@@ -754,7 +754,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 	(run-at-time (* n 60) nil #'easy-jekyll-amazon-s3-deploy-on-timer)))
 
 ;;;###autoload
-(defun easy-jekyll-cancel-amazon-s3-deploy-timer()
+(defun easy-jekyll-cancel-amazon-s3-deploy-timer ()
   "Cancel timer that amazon-s3-deploy after the specified number of minutes has elapsed."
   (interactive)
   (when easy-jekyll--amazon-s3-timer
@@ -793,8 +793,8 @@ POST-FILE needs to have and extension '.md' or '.textile'."
      (browse-url easy-jekyll-url))))
 
 ;;;###autoload
-(defun easy-jekyll-google-cloud-storage-deploy-timer(n)
-  "A timer that google-cloud-storage-deploy after the specified number of minutes has elapsed."
+(defun easy-jekyll-google-cloud-storage-deploy-timer (n)
+  "A timer that google-cloud-storage-deploy after the specified number as N of minutes has elapsed."
   (interactive "nMinute:")
   (setq easy-jekyll--google-cloud-storage-basedir-timer easy-jekyll-basedir)
   (setq easy-jekyll--google-cloud-storage-url-timer easy-jekyll-url)
@@ -803,7 +803,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 	(run-at-time (* n 60) nil #'easy-jekyll-google-cloud-storage-deploy-on-timer)))
 
 ;;;###autoload
-(defun easy-jekyll-cancel-google-cloud-storage-deploy-timer()
+(defun easy-jekyll-cancel-google-cloud-storage-deploy-timer ()
   "Cancel timer that google-cloud-storage-deploy after the specified number of minutes has elapsed."
   (interactive)
   (when easy-jekyll--google-cloud-storage-timer
