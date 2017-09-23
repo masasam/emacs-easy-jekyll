@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.3.1
+;; Version: 0.4.1
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -790,12 +790,8 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   "Open Jekyll's config file."
   (interactive)
   (easy-jekyll-with-env
-   (cond ((file-exists-p (expand-file-name "config.toml" easy-jekyll-basedir))
-	  (find-file (expand-file-name "config.toml" easy-jekyll-basedir)))
-	 ((file-exists-p (expand-file-name "config.yaml" easy-jekyll-basedir))
-	  (find-file (expand-file-name "config.yaml" easy-jekyll-basedir)))
-	 ((file-exists-p (expand-file-name "config.json" easy-jekyll-basedir))
-	  (find-file (expand-file-name "config.json" easy-jekyll-basedir)))
+   (cond ((file-exists-p (expand-file-name "_config.yml" easy-jekyll-basedir))
+	  (find-file (expand-file-name "_config.yml" easy-jekyll-basedir)))
 	 (t (error "Jekyll config file not found at %s" easy-jekyll-basedir)))))
 
 (defconst easy-jekyll--help
