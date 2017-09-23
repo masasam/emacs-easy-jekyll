@@ -1107,9 +1107,9 @@ Optional prefix ARG says how many lines to move; default is one line."
 		  easy-jekyll-basedir)))
        (when (and (file-exists-p file)
 		  (not (file-directory-p file)))
-	 (unless (file-directory-p "_drafts")
-	   (make-directory "_drafts" t))
-	 (rename-file file (concat "_drafts/" (file-name-nondirectory file)) 1)
+	 (unless (file-directory-p (expand-file-name "_drafts" easy-jekyll-basedir))
+	   (make-directory (expand-file-name "_drafts" easy-jekyll-basedir) t))
+	 (rename-file file (expand-file-name (concat easy-jekyll-basedir "_drafts/" (file-name-nondirectory file))) 1)
 	 (easy-jekyll-refresh))))))
 
 (defun easy-jekyll-open ()
@@ -1424,59 +1424,56 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-draft-list ()
   "List drafts."
   (easy-jekyll-with-env
-   (when (> 0.25 (easy-jekyll--version))
-     (error "'List draft' requires jekyll 0.25 or higher"))
-   (let ((source (split-string
-		  (with-temp-buffer
-		    (let ((ret (call-process-shell-command "jekyll list drafts" nil t)))
-		      (unless (zerop ret)
-			(error "'Jekyll list drafts' comaand does not end normally"))
-		      (buffer-string)))
-		  "\n"))
-	 (lists (list))
-	 (files (list)))
-     (dolist (file source)
-       (when (string-match ".*/\\(.+?\\)$" file)
-	 (push (match-string 1 file) files)))
-     (unless (file-directory-p (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
-       (error "Did you execute jekyll new site bookshelf?"))
-     (setq easy-jekyll--mode-buffer (get-buffer-create easy-jekyll--buffer-name))
-     (switch-to-buffer easy-jekyll--mode-buffer)
-     (setq-local default-directory easy-jekyll-basedir)
-     (setq buffer-read-only nil)
-     (erase-buffer)
-     (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url easy-jekyll--draft-mode "\n\n") 'face 'easy-jekyll-help-face))
-     (unless easy-jekyll-no-help
-       (insert (propertize easy-jekyll--help 'face 'easy-jekyll-help-face)))
-     (unless easy-jekyll--refresh
-       (setq easy-jekyll--cursor (point)))
-     (cond ((eq 1 easy-jekyll--sort-char-flg) (setq files (reverse (sort files 'string<))))
-	   ((eq 2 easy-jekyll--sort-char-flg) (setq files (sort files 'string<))))
-     (while files
-       (push
-	(concat
-	 (format-time-string "%Y-%m-%d %H:%M:%S " (nth 5 (file-attributes
-							  (expand-file-name
-							   (concat easy-jekyll-postdir "/" (car files))
-							   easy-jekyll-basedir))))
-	 (car files))
-	lists)
-       (pop files))
-     (cond ((eq 1 easy-jekyll--sort-time-flg) (setq lists (reverse (sort lists 'string<))))
-	   ((eq 2 easy-jekyll--sort-time-flg) (setq lists (sort lists 'string<))))
-     (while lists
-       (insert (concat (car lists) "\n"))
-       (pop lists))
-     (goto-char easy-jekyll--cursor)
-     (if easy-jekyll--refresh
+   (unless (file-directory-p (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
+     (error "Did you execute jekyll new site bookshelf?"))
+   (setq easy-jekyll--mode-buffer (get-buffer-create easy-jekyll--buffer-name))
+   (setq easy-jekyll--draft-list nil)
+   (switch-to-buffer easy-jekyll--mode-buffer)
+   (setq-local default-directory easy-jekyll-basedir)
+   (setq buffer-read-only nil)
+   (erase-buffer)
+   (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url easy-jekyll--draft-mode "\n\n") 'face 'easy-jekyll-help-face))
+   (unless easy-jekyll-no-help
+     (insert (propertize easy-jekyll--help 'face 'easy-jekyll-help-face)))
+   (unless easy-jekyll--refresh
+     (setq easy-jekyll--cursor (point)))
+   (let ((files (directory-files (expand-file-name easy-jekyll-postdir easy-jekyll-basedir)))
+	 (lists (list)))
+     (if (eq 2 (length files))
 	 (progn
-	   (when (< (line-number-at-pos) easy-jekyll--unmovable-line)
-	     (goto-char (point-min))
-	     (forward-line (- easy-jekyll--unmovable-line 1)))
-	   (beginning-of-line)
+	   (insert easy-jekyll--first-help)
+	   (easy-jekyll-mode)
+	   (goto-char easy-jekyll--cursor))
+       (progn
+	 (cond ((eq 1 easy-jekyll--sort-char-flg) (setq files (reverse (sort files 'string<))))
+	       ((eq 2 easy-jekyll--sort-char-flg) (setq files (sort files 'string<))))
+	 (while files
+	   (unless (or (string= (car files) ".")
+		       (string= (car files) ".."))
+	     (push
+	      (concat
+	       (format-time-string "%Y-%m-%d %H:%M:%S " (nth 5 (file-attributes
+								(expand-file-name
+								 (concat easy-jekyll-postdir "/" (car files))
+								 easy-jekyll-basedir))))
+	       (car files))
+	      lists))
+	   (pop files))
+	 (cond ((eq 1 easy-jekyll--sort-time-flg) (setq lists (reverse (sort lists 'string<))))
+	       ((eq 2 easy-jekyll--sort-time-flg) (setq lists (sort lists 'string<))))
+	 (while lists
+	   (insert (concat (car lists) "\n"))
+	   (pop lists))
+	 (goto-char easy-jekyll--cursor)
+	 (if easy-jekyll--refresh
+	     (progn
+	       (when (< (line-number-at-pos) easy-jekyll--unmovable-line)
+		 (goto-char (point-min))
+		 (forward-line (- easy-jekyll--unmovable-line 1)))
+	       (beginning-of-line)
+	       (forward-char easy-jekyll--forward-char))
 	   (forward-char easy-jekyll--forward-char))
-       (forward-char easy-jekyll--forward-char))
-     (easy-jekyll-mode))))
+	 (easy-jekyll-mode))))))
 
 ;;;###autoload
 (defun easy-jekyll ()
