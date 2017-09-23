@@ -510,6 +510,54 @@
   ""
   :group 'easy-jekyll-faces)
 
+(defvar easy-jekyll--mode-buffer nil
+  "Main buffer of easy-jekyll.")
+
+(defvar easy-jekyll--cursor nil
+  "Cursor of easy-jekyll.")
+
+(defvar easy-jekyll--line nil
+  "Line of easy-jekyll.")
+
+(defvar easy-jekyll--sort-time-flg 1
+  "Sort time flg of easy-jekyll.")
+
+(defvar easy-jekyll--sort-char-flg nil
+  "Sort char flg of easy-jekyll.")
+
+(defvar easy-jekyll--refresh nil
+  "Refresh flg of easy-jekyll.")
+
+(defvar easy-jekyll--current-blog 0
+  "Current blog number.")
+
+(defconst easy-jekyll--blog-maximum-number 10
+  "Maximum number of blogs.")
+
+(defconst easy-jekyll--basedir-0 easy-jekyll-basedir
+  "Default blog base directory.")
+
+(defconst easy-jekyll--url-0 easy-jekyll-url
+  "Default blog url.")
+
+(defconst easy-jekyll--root-0 easy-jekyll-root
+  "Default blog root.")
+
+(defconst easy-jekyll--sshdomain-0 easy-jekyll-sshdomain
+  "Default blog sshdomain.")
+
+(defconst easy-jekyll--amazon-s3-bucket-name-0 easy-jekyll-amazon-s3-bucket-name
+  "Default blog amazon s3 bucket name.")
+
+(defconst easy-jekyll--google-cloud-storage-bucket-name-0 easy-jekyll-google-cloud-storage-bucket-name
+  "Default blog google cloud storage bucket name.")
+
+(defconst easy-jekyll--buffer-name "*Easy-jekyll*"
+  "Buffer name of easy-jekyll.")
+
+(defconst easy-jekyll--forward-char 20
+  "Forward-char of easy-jekyll.")
+
 ;;;###autoload
 (defun easy-jekyll-article ()
   "Open a list of articles written in jekyll with dired."
@@ -888,54 +936,6 @@ Enjoy!
     (define-key map ">" 'easy-jekyll-next-blog)
     map)
   "Keymap for easy-jekyll major mode.")
-
-(defvar easy-jekyll--mode-buffer nil
-  "Main buffer of easy-jekyll.")
-
-(defvar easy-jekyll--cursor nil
-  "Cursor of easy-jekyll.")
-
-(defvar easy-jekyll--line nil
-  "Line of easy-jekyll.")
-
-(defvar easy-jekyll--sort-time-flg 1
-  "Sort time flg of easy-jekyll.")
-
-(defvar easy-jekyll--sort-char-flg nil
-  "Sort char flg of easy-jekyll.")
-
-(defvar easy-jekyll--refresh nil
-  "Refresh flg of easy-jekyll.")
-
-(defvar easy-jekyll--current-blog 0
-  "Current blog number.")
-
-(defconst easy-jekyll--blog-maximum-number 10
-  "Maximum number of blogs.")
-
-(defconst easy-jekyll--basedir-0 easy-jekyll-basedir
-  "Default blog base directory.")
-
-(defconst easy-jekyll--url-0 easy-jekyll-url
-  "Default blog url.")
-
-(defconst easy-jekyll--root-0 easy-jekyll-root
-  "Default blog root.")
-
-(defconst easy-jekyll--sshdomain-0 easy-jekyll-sshdomain
-  "Default blog sshdomain.")
-
-(defconst easy-jekyll--amazon-s3-bucket-name-0 easy-jekyll-amazon-s3-bucket-name
-  "Default blog amazon s3 bucket name.")
-
-(defconst easy-jekyll--google-cloud-storage-bucket-name-0 easy-jekyll-google-cloud-storage-bucket-name
-  "Default blog google cloud storage bucket name.")
-
-(defconst easy-jekyll--buffer-name "*Easy-jekyll*"
-  "Buffer name of easy-jekyll.")
-
-(defconst easy-jekyll--forward-char 20
-  "Forward-char of easy-jekyll.")
 
 (define-derived-mode easy-jekyll-mode special-mode "Easy-jekyll"
   "Major mode for easy jekyll.")
