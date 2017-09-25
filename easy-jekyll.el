@@ -853,21 +853,21 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 (defconst easy-jekyll--help
   (if (null easy-jekyll-sort-default-char)
       (progn
-	"n .. New blog post    R .. Rename file   G .. Deploy GitHub    D .. Draft list
-p .. Preview          g .. Refresh       A .. Deploy AWS S3    u .. Undraft file
-v .. Open view-mode   s .. Sort time     T .. Publish timer    N .. No help-mode
-d .. Delete post      c .. Open config   ? .. Help easy-jekyll   I .. Deploy GCS timer
-P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. Deploy GitHub timer
-< .. Previous blog    > .. Next blog     q .. Quit easy-jekyll   W .. Deploy AWS S3 timer
+	"n .. New blog post    R .. Rename file   G .. Deploy GitHub     D .. Draft list
+p .. Preview          g .. Refresh       A .. Deploy AWS S3     u .. Undraft file
+v .. Open view-mode   s .. Sort time     T .. Publish timer     N .. No help-mode
+d .. Delete post      c .. Open config   ? .. Help easy-jekyll  I .. Deploy GCS timer
+P .. Publish server   C .. Deploy GCS    a .. Search helm-ag    H .. Deploy GitHub timer
+< .. Previous blog    > .. Next blog     q .. Quit easy-jekyll  W .. Deploy AWS S3 timer
 
 ")
     (progn
-      "n .. New blog post    R .. Rename file   G .. Deploy GitHub    D .. Draft list
-p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
-v .. Open view-mode   u .. Undraft file  T .. Publish timer    N .. No help-mode
-d .. Delete post      c .. Open config   ? .. Help easy-jekyll   I .. Deploy GCS timer
-P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. Deploy GitHub timer
-< .. Previous blog    > .. Next blog     q .. Quit easy-jekyll   W .. Deploy AWS S3 timer
+      "n .. New blog post    R .. Rename file   G .. Deploy GitHub     D .. Draft list
+p .. Preview          g .. Refresh       A .. Deploy AWS S3     s .. Sort character
+v .. Open view-mode   u .. Undraft file  T .. Publish timer     N .. No help-mode
+d .. Delete post      c .. Open config   ? .. Help easy-jekyll  I .. Deploy GCS timer
+P .. Publish server   C .. Deploy GCS    a .. Search helm-ag    H .. Deploy GitHub timer
+< .. Previous blog    > .. Next blog     q .. Quit easy-jekyll  W .. Deploy AWS S3 timer
 
 "))
   "Help of easy-jekyll.")
@@ -1441,7 +1441,7 @@ Optional prefix ARG says how many lines to move; default is one line."
    (unless (file-directory-p (expand-file-name "_drafts" easy-jekyll-basedir))
      (make-directory (expand-file-name "_drafts" easy-jekyll-basedir) t))
    (setq easy-jekyll--mode-buffer (get-buffer-create easy-jekyll--buffer-name))
-   (setq easy-jekyll--draft-list nil)
+   (setq easy-jekyll--draft-list 1)
    (switch-to-buffer easy-jekyll--mode-buffer)
    (setq-local default-directory easy-jekyll-basedir)
    (setq buffer-read-only nil)
