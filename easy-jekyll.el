@@ -1120,8 +1120,6 @@ Optional prefix ARG says how many lines to move; default is one line."
 		      1)
 	 (easy-jekyll-refresh))))))
 
-(concat easy-jekyll-postdir "/" (format-time-string "%Y-%m-%d-" (current-time)) post-file)
-
 (defun easy-jekyll-open ()
   "Open the file on the pointer."
   (interactive)
