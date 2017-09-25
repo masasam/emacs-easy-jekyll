@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.6.2
+;; Version: 0.7.2
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -1079,20 +1079,24 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-rename (post-file)
   "Renames file on the pointer to POST-FILE."
   (interactive (list (read-from-minibuffer "Rename: " `(,easy-jekyll-default-ext . 1) nil nil nil)))
-  (let ((filename (concat (replace-regexp-in-string (regexp-quote "content/") "" easy-jekyll-postdir t t) "/" post-file))
+  (let ((filename (if easy-jekyll--draft-list
+		      (concat "_draft/" post-file)
+		    (concat easy-jekyll-postdir "/" post-file)))
         (file-ext (file-name-extension post-file)))
     (when (not (member file-ext easy-jekyll--formats))
       (error "Please enter .%s file name or .%s file name" easy-jekyll-markdown-extension easy-jekyll-textile-extension))
     (easy-jekyll-with-env
-     (when (file-exists-p (file-truename (concat "content/" filename)))
-       (error "%s already exists!" (concat easy-jekyll-basedir "content/" filename)))
+     (when (file-exists-p (file-truename filename))
+       (error "%s already exists!" (concat easy-jekyll-basedir filename)))
      (unless (or (string-match "^$" (thing-at-point 'line))
 		 (eq (point) (point-max))
 		 (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
        (let ((name (expand-file-name
-		    (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		    (if easy-jekyll--draft-list
+			(concat "_draft/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		      (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
 		    easy-jekyll-basedir)))
-	 (rename-file name (concat "content/" filename) 1)
+	 (rename-file name filename 1)
 	 (easy-jekyll-refresh))))))
 
 (defun easy-jekyll-undraft ()
