@@ -1107,14 +1107,20 @@ Optional prefix ARG says how many lines to move; default is one line."
 	       (eq (point) (point-max))
 	       (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
      (let ((file (expand-file-name
-		  (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		  (concat "_draft/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
 		  easy-jekyll-basedir)))
        (when (and (file-exists-p file)
 		  (not (file-directory-p file)))
 	 (unless (file-directory-p (expand-file-name "_drafts" easy-jekyll-basedir))
 	   (make-directory (expand-file-name "_drafts" easy-jekyll-basedir) t))
-	 (rename-file file (expand-file-name (concat easy-jekyll-basedir "_drafts/" (file-name-nondirectory file))) 1)
+	 (rename-file file (expand-file-name
+			    (concat easy-jekyll-postdir "/"
+				    (format-time-string "%Y-%m-%d-" (current-time))
+				    (file-name-nondirectory file)))
+		      1)
 	 (easy-jekyll-refresh))))))
+
+(concat easy-jekyll-postdir "/" (format-time-string "%Y-%m-%d-" (current-time)) post-file)
 
 (defun easy-jekyll-open ()
   "Open the file on the pointer."
