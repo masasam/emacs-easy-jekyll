@@ -1163,7 +1163,9 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      (eq (point) (point-max))
 	      (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
     (let ((file (expand-file-name
-		 (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		 (if easy-jekyll--draft-list
+		     (concat "_draft/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		   (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
 		 easy-jekyll-basedir)))
       (when (and (file-exists-p file)
 		 (not (file-directory-p file)))
