@@ -113,7 +113,7 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-postdir "_post"
+(defcustom easy-jekyll-postdir "_posts"
   "Directory where the theme store it's posts."
   :group 'easy-jekyll
   :type 'string)
@@ -1080,7 +1080,7 @@ Optional prefix ARG says how many lines to move; default is one line."
   "Renames file on the pointer to POST-FILE."
   (interactive (list (read-from-minibuffer "Rename: " `(,easy-jekyll-default-ext . 1) nil nil nil)))
   (let ((filename (if easy-jekyll--draft-list
-		      (concat "_draft/" post-file)
+		      (concat "_drafts/" post-file)
 		    (concat easy-jekyll-postdir "/" post-file)))
         (file-ext (file-name-extension post-file)))
     (when (not (member file-ext easy-jekyll--formats))
@@ -1093,7 +1093,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 		 (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
        (let ((name (expand-file-name
 		    (if easy-jekyll--draft-list
-			(concat "_draft/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+			(concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
 		      (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
 		    easy-jekyll-basedir)))
 	 (rename-file name filename 1)
@@ -1107,7 +1107,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	       (eq (point) (point-max))
 	       (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
      (let ((file (expand-file-name
-		  (concat "_draft/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		  (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
 		  easy-jekyll-basedir)))
        (when (and (file-exists-p file)
 		  (not (file-directory-p file)))
@@ -1128,7 +1128,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
     (let ((file (expand-file-name
 		 (if easy-jekyll--draft-list
-		     (concat "_draft/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		     (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
 		   (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
 		 easy-jekyll-basedir)))
       (when (and (file-exists-p file)
@@ -1149,7 +1149,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
     (let ((file (expand-file-name
 		 (if easy-jekyll--draft-list
-		     (concat "_draft/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		     (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
 		   (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
 		 easy-jekyll-basedir)))
       (when (and (file-exists-p file)
@@ -1164,7 +1164,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
     (let ((file (expand-file-name
 		 (if easy-jekyll--draft-list
-		     (concat "_draft/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		     (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
 		   (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
 		 easy-jekyll-basedir)))
       (when (and (file-exists-p file)
