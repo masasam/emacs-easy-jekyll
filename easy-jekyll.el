@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.8.3
+;; Version: 0.9.3
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -393,6 +393,9 @@
   :group 'easy-jekyll
   :type 'string)
 
+(defvar easy-jekyll--preview-loop t
+  "Preview loop flg.")
+
 (defvar easy-jekyll--server-process nil
   "Jekyll process.")
 
@@ -685,8 +688,27 @@ POST-FILE needs to have and extension '.md' or '.textile'."
      (progn
        (setq easy-jekyll--server-process
 	     (start-process "jekyll-serve" easy-jekyll--preview-buffer "jekyll" "serve"))
-       (browse-url easy-jekyll-preview-url)
+       (while easy-jekyll--preview-loop
+	 (if (equal (easy-jekyll--preview-status) "200")
+	     (progn
+	       (setq easy-jekyll--preview-loop nil)
+	       (browse-url easy-jekyll-preview-url)))
+	 (sleep-for 0 100))
+       (setq easy-jekyll--preview-loop t)
        (run-at-time easy-jekyll-previewtime nil 'easy-jekyll--preview-end)))))
+
+(defun easy-jekyll--preview-status ()
+  "Return the http status code of the preview."
+  (nth 1
+       (split-string
+	(nth 0
+	     (split-string
+	      (with-current-buffer (url-retrieve-synchronously "http://127.0.0.1:4000/")
+		(prog1
+		    (buffer-string)
+		  (kill-buffer)))
+	      "\n"))
+	" ")))
 
 (defun easy-jekyll--preview-end ()
   "Finish previewing jekyll at localhost."
