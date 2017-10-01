@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.9.4
+;; Version: 0.9.5
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -67,6 +67,16 @@
   "Preview display time."
   :group 'easy-jekyll
   :type 'integer)
+
+(defcustom easy-jekyll-image-dirctory "images"
+  "Image file directory under 'static' directory."
+  :group 'easy-jekyll
+  :type 'string)
+
+(defcustom easy-jekyll-default-picture-directory "~"
+  "Default directory for selecting images with `easy-jekyll-put-image'."
+  :group 'easy-jekyll
+  :type 'string)
 
 (defcustom easy-jekyll-amazon-s3-bucket-name nil
   "Amazon S3 bucket name."
@@ -153,6 +163,11 @@
   :group 'easy-jekyll
   :type 'string)
 
+(defcustom easy-jekyll-image-dirctory-1 "images"
+  "Blog1 image file directory under 'static' directory."
+  :group 'easy-jekyll
+  :type 'string)
+
 (defcustom easy-jekyll-basedir-2 nil
   "Blog2 base directory."
   :group 'easy-jekyll
@@ -180,6 +195,11 @@
 
 (defcustom easy-jekyll-google-cloud-storage-bucket-name-2 nil
   "Blog2 google cloud storage bucket name."
+  :group 'easy-jekyll
+  :type 'string)
+
+(defcustom easy-jekyll-image-dirctory-2 "images"
+  "Blog2 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
 
@@ -213,8 +233,13 @@
   :group 'easy-jekyll
   :type 'string)
 
+(defcustom easy-jekyll-image-dirctory-3 "images"
+  "Blog3 image file directory under 'static' directory."
+  :group 'easy-jekyll
+  :type 'string)
+
 (defcustom easy-jekyll-basedir-4 nil
-  "Blog1 base directory."
+  "Blog4 base directory."
   :group 'easy-jekyll
   :type 'string)
 
@@ -240,6 +265,11 @@
 
 (defcustom  easy-jekyll-google-cloud-storage-bucket-name-4 nil
   "Blog4 google cloud storage bucket name."
+  :group 'easy-jekyll
+  :type 'string)
+
+(defcustom easy-jekyll-image-dirctory-4 "images"
+  "Blog4 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
 
@@ -273,6 +303,11 @@
   :group 'easy-jekyll
   :type 'string)
 
+(defcustom easy-jekyll-image-dirctory-5 "images"
+  "Blog5 image file directory under 'static' directory."
+  :group 'easy-jekyll
+  :type 'string)
+
 (defcustom easy-jekyll-basedir-6 nil
   "Blog6 base directory."
   :group 'easy-jekyll
@@ -300,6 +335,11 @@
 
 (defcustom easy-jekyll-google-cloud-storage-bucket-name-6 nil
   "Blog6 google cloud storage bucket name."
+  :group 'easy-jekyll
+  :type 'string)
+
+(defcustom easy-jekyll-image-dirctory-6 "images"
+  "Blog6 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
 
@@ -333,6 +373,11 @@
   :group 'easy-jekyll
   :type 'string)
 
+(defcustom easy-jekyll-image-dirctory-7 "images"
+  "Blog7 image file directory under 'static' directory."
+  :group 'easy-jekyll
+  :type 'string)
+
 (defcustom easy-jekyll-basedir-8 nil
   "Blog8 base directory."
   :group 'easy-jekyll
@@ -363,6 +408,11 @@
   :group 'easy-jekyll
   :type 'string)
 
+(defcustom easy-jekyll-image-dirctory-8 "images"
+  "Blog8 image file directory under 'static' directory."
+  :group 'easy-jekyll
+  :type 'string)
+
 (defcustom easy-jekyll-basedir-9 nil
   "Blog9 base directory."
   :group 'easy-jekyll
@@ -374,7 +424,7 @@
   :type 'string)
 
 (defcustom easy-jekyll-root-9 nil
-  "Blog1 root."
+  "Blog9 root."
   :group 'easy-jekyll
   :type 'string)
 
@@ -390,6 +440,11 @@
 
 (defcustom easy-jekyll-google-cloud-storage-bucket-name-9 nil
   "Blog9 google cloud storage bucket name."
+  :group 'easy-jekyll
+  :type 'string)
+
+(defcustom easy-jekyll-image-dirctory-9 "images"
+  "Blog9 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
 
@@ -698,7 +753,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 		  (not (equal (process-exit-status easy-jekyll--server-process) 0)))
 	     (progn
 	       (switch-to-buffer easy-jekyll--preview-buffer)
-	       (error "Hugo error look at %s buffer" easy-jekyll--preview-buffer))))
+	       (error "Jekyll error look at %s buffer" easy-jekyll--preview-buffer))))
        (setq easy-jekyll--preview-loop t)
        (run-at-time easy-jekyll-previewtime nil 'easy-jekyll--preview-end)))))
 
