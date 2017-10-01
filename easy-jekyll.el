@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.9.3
+;; Version: 0.9.4
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -693,7 +693,12 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 	     (progn
 	       (setq easy-jekyll--preview-loop nil)
 	       (browse-url easy-jekyll-preview-url)))
-	 (sleep-for 0 100))
+	 (sleep-for 0 100)
+	 (if (and (eq (process-status easy-jekyll--server-process) 'exit)
+		  (not (equal (process-exit-status easy-jekyll--server-process) 0)))
+	     (progn
+	       (switch-to-buffer easy-jekyll--preview-buffer)
+	       (error "Hugo error look at %s buffer" easy-jekyll--preview-buffer))))
        (setq easy-jekyll--preview-loop t)
        (run-at-time easy-jekyll-previewtime nil 'easy-jekyll--preview-end)))))
 
