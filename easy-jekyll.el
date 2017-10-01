@@ -1355,7 +1355,8 @@ Optional prefix ARG says how many lines to move; default is one line."
         easy-jekyll-root easy-jekyll--root-0
 	easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0)
+	easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
+	easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
   (easy-jekyll--preview-end)
   (easy-jekyll))
 
@@ -1370,7 +1371,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-root easy-jekyll-root-1
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-1
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-1
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-1)
+	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-1
+	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-1)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1385,7 +1387,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-root easy-jekyll--root-0
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0)
+	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
+	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1394,7 +1397,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-root easy-jekyll-root-2
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-2
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-2
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-2)
+	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-2
+	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-2)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1409,7 +1413,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-root easy-jekyll--root-0
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0)
+	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
+	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1418,7 +1423,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-root easy-jekyll-root-3
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-3
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-3
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-3)
+	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-3
+	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-3)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1433,7 +1439,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-root easy-jekyll--root-0
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0)
+	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
+	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1442,7 +1449,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-root easy-jekyll-root-4
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-4
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-4
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-4)
+	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-4
+	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-4)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1457,7 +1465,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-root easy-jekyll--root-0
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0)
+	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
+	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1466,7 +1475,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-root easy-jekyll-root-5
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-5
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-5
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-5)
+	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-5
+	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-5)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1481,7 +1491,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-root easy-jekyll--root-0
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0)
+	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
+	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1490,7 +1501,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-root easy-jekyll-root-6
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-6
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-6
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-6)
+	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-6
+	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-6)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1505,7 +1517,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-root easy-jekyll--root-0
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0)
+	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
+	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1514,7 +1527,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-root easy-jekyll-root-7
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-7
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-7
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-7)
+	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-7
+	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-7)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1529,7 +1543,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-root easy-jekyll--root-0
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0)
+	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
+	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1538,7 +1553,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-root easy-jekyll-root-8
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-8
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-8
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-8)
+	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-8
+	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-8)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1553,7 +1569,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-root easy-jekyll--root-0
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0)
+	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
+	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1562,7 +1579,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-root easy-jekyll-root-9
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-9
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-9
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-9)
+	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-9
+	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-9)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
