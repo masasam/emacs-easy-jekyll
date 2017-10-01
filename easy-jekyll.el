@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.9.5
+;; Version: 0.9.6
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -644,13 +644,13 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (interactive
    (let ((file (read-file-name "Image file: " nil
 			       (expand-file-name
-				(concat easy-jekyll-basedir "static/" easy-jekyll-image-dirctory "/"))
+				(concat easy-jekyll-basedir easy-jekyll-image-dirctory "/"))
 			       t
 			       (expand-file-name
-				(concat easy-jekyll-basedir "static/" easy-jekyll-image-dirctory "/")))))
+				(concat easy-jekyll-basedir easy-jekyll-image-dirctory "/")))))
      (insert (concat (format "<img src=\"%s%s\""
 			     easy-jekyll-url
-			     (replace-regexp-in-string ".*/static/\\(.*\\)" "/\\1" file))
+			     (concat "/" easy-jekyll-image-dirctory "/" (file-name-nondirectory file)))
 		     " alt=\"\" width=\"100%\"/>")))))
 
 ;;;###autoload
@@ -661,7 +661,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 			       (expand-file-name easy-jekyll-default-picture-directory)
 			       t
 			       (expand-file-name easy-jekyll-default-picture-directory))))
-     (copy-file file (concat easy-jekyll-basedir "static/" easy-jekyll-image-dirctory "/" (file-name-nondirectory file)))
+     (copy-file file (concat easy-jekyll-basedir easy-jekyll-image-dirctory "/" (file-name-nondirectory file)))
      (insert (concat (format "<img src=\"%s%s\""
 			     easy-jekyll-url
 			     (concat "/" easy-jekyll-image-dirctory "/" (file-name-nondirectory file)))
@@ -673,7 +673,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (interactive
    (let ((url (read-string "URL: " (if (fboundp 'gui-get-selection) (gui-get-selection))))
 	 (file (read-file-name "Save as: "
-			       (concat easy-jekyll-basedir "static/" easy-jekyll-image-dirctory "/")
+			       (concat easy-jekyll-basedir easy-jekyll-image-dirctory "/")
 			       (car (last (split-string (substring-no-properties (gui-get-selection)) "/")))
 			       nil)))
      (url-copy-file url file t)
