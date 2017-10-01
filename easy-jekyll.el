@@ -639,6 +639,21 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
        ,@body)))
 
 ;;;###autoload
+(defun easy-jekyll-image ()
+  "Generate image link."
+  (interactive
+   (let ((file (read-file-name "Image file: " nil
+			       (expand-file-name
+				(concat easy-jekyll-basedir "static/" easy-jekyll-image-dirctory "/"))
+			       t
+			       (expand-file-name
+				(concat easy-jekyll-basedir "static/" easy-jekyll-image-dirctory "/")))))
+     (insert (concat (format "<img src=\"%s%s\""
+			     easy-jekyll-url
+			     (replace-regexp-in-string ".*/static/\\(.*\\)" "/\\1" file))
+		     " alt=\"\" width=\"100%\"/>")))))
+
+;;;###autoload
 (defun easy-jekyll-publish ()
   "Adapt local change to the server with jekyll."
   (interactive)
