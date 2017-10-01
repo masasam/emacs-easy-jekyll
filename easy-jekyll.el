@@ -668,6 +668,21 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 		     " alt=\"\" width=\"100%\"/>")))))
 
 ;;;###autoload
+(defun easy-jekyll-pull-image ()
+  "Pull image from internet to image directory and generate image link."
+  (interactive
+   (let ((url (read-string "URL: " (if (fboundp 'gui-get-selection) (gui-get-selection))))
+	 (file (read-file-name "Save as: "
+			       (concat easy-jekyll-basedir "static/" easy-jekyll-image-dirctory "/")
+			       (car (last (split-string (substring-no-properties (gui-get-selection)) "/")))
+			       nil)))
+     (url-copy-file url file t)
+     (insert (concat (format "<img src=\"%s%s\""
+			     easy-jekyll-url
+			     (concat "/" easy-jekyll-image-dirctory "/" (file-name-nondirectory file)))
+		     " alt=\"\" width=\"100%\"/>")))))
+
+;;;###autoload
 (defun easy-jekyll-publish ()
   "Adapt local change to the server with jekyll."
   (interactive)
