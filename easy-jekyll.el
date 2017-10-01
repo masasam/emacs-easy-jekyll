@@ -610,6 +610,9 @@
 (defconst easy-jekyll--google-cloud-storage-bucket-name-0 easy-jekyll-google-cloud-storage-bucket-name
   "Default blog google cloud storage bucket name.")
 
+(defconst easy-jekyll--image-dirctory-0 easy-jekyll-image-dirctory
+  "Default image file directory under 'static' directory.")
+
 (defconst easy-jekyll--buffer-name "*Easy-jekyll*"
   "Buffer name of easy-jekyll.")
 
