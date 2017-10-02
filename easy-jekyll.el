@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.9.6
+;; Version: 0.9.7
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -98,7 +98,7 @@
   :group 'easy-jekyll
   :type 'integer)
 
-(defcustom easy-jekyll-sort-default-char nil
+(defcustom easy-jekyll-sort-default-char t
   "Default setting to sort with charactor."
   :group 'easy-jekyll
   :type 'integer)
@@ -577,10 +577,10 @@
 (defvar easy-jekyll--line nil
   "Line of easy-jekyll.")
 
-(defvar easy-jekyll--sort-time-flg 1
+(defvar easy-jekyll--sort-time-flg nil
   "Sort time flg of easy-jekyll.")
 
-(defvar easy-jekyll--sort-char-flg nil
+(defvar easy-jekyll--sort-char-flg 2
   "Sort char flg of easy-jekyll.")
 
 (defvar easy-jekyll--refresh nil
