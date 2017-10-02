@@ -750,7 +750,6 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
      "\nlayout: post"
      "\ntitle:  " file
      "\ndate:   " datetimezone
-     "\ncategories: "
      "\n---\n")))
 
 ;;;###autoload
