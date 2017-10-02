@@ -984,21 +984,21 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 (defconst easy-jekyll--help
   (if (null easy-jekyll-sort-default-char)
       (progn
-	"n .. New blog post    R .. Rename file   G .. Deploy GitHub     D .. Draft list
-p .. Preview          g .. Refresh       A .. Deploy AWS S3     u .. Undraft file
-v .. Open view-mode   s .. Sort time     T .. Publish timer     N .. No help-mode
-d .. Delete post      c .. Open config   ? .. Help easy-jekyll  I .. Deploy GCS timer
-P .. Publish server   C .. Deploy GCS    a .. Search helm-ag    H .. Deploy GitHub timer
-< .. Previous blog    > .. Next blog     q .. Quit easy-jekyll  W .. Deploy AWS S3 timer
+	"n .. New blog post    R .. Rename file   G .. Deploy GitHub    ? .. Help easy-jekyll
+p .. Preview          g .. Refresh       A .. Deploy AWS S3    u .. Undraft file
+v .. Open view-mode   s .. Sort time     T .. Publish timer    q .. Quit easy-jekyll
+d .. Delete post      c .. Open config   D .. Draft list       I .. Deploy GCS timer
+P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. Deploy GitHub timer
+< .. Previous blog    > .. Next blog     N .. No help-mode     W .. Deploy AWS S3 timer
 
 ")
     (progn
-      "n .. New blog post    R .. Rename file   G .. Deploy GitHub     D .. Draft list
-p .. Preview          g .. Refresh       A .. Deploy AWS S3     s .. Sort character
-v .. Open view-mode   u .. Undraft file  T .. Publish timer     N .. No help-mode
-d .. Delete post      c .. Open config   ? .. Help easy-jekyll  I .. Deploy GCS timer
-P .. Publish server   C .. Deploy GCS    a .. Search helm-ag    H .. Deploy GitHub timer
-< .. Previous blog    > .. Next blog     q .. Quit easy-jekyll  W .. Deploy AWS S3 timer
+      "n .. New blog post    R .. Rename file   G .. Deploy GitHub    ? .. Help easy-jekyll
+p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
+v .. Open view-mode   D .. Draft list    T .. Publish timer    q .. Quit easy-jekyll
+d .. Delete post      c .. Open config   u .. Undraft file     I .. Deploy GCS timer
+P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. Deploy GitHub timer
+< .. Previous blog    > .. Next blog     N .. No help-mode     W .. Deploy AWS S3 timer
 
 "))
   "Help of easy-jekyll.")
