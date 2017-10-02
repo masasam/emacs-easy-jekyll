@@ -294,7 +294,10 @@ Because only markdown is supported by jekyll. If not set markdown filename exten
 
 ## Preparation for using this package
 
-Install jekyll
+Install jekyll and bundler
+
+	gem install jekyll bundler
+	jekyll new my-awesome-site
 
 See https://jekyllrb.com/
 
