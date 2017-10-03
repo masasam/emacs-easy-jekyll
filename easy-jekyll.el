@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.9.7
+;; Version: 0.9.8
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -697,7 +697,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (easy-jekyll-with-env
    (when (file-directory-p "_site")
      (delete-directory "_site" t nil))
-   (shell-command-to-string "jekyll build --destination _site")
+   (shell-command-to-string "bundle exec jekyll build --destination _site")
    (shell-command-to-string (concat "rsync -rtpl --chmod=" easy-jekyll-publish-chmod " --delete _site/ " easy-jekyll-sshdomain ":" (shell-quote-argument easy-jekyll-root)))
    (message "Blog published")
    (when easy-jekyll-url
@@ -775,7 +775,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   "Return the version of jekyll."
   (let ((source (split-string
 		 (with-temp-buffer
-		   (shell-command-to-string "jekyll --version"))
+		   (shell-command-to-string "bundle exec jekyll --version"))
 		 " ")))
     (string-to-number (nth 1 source))))
 
@@ -875,7 +875,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
      (error "Please set 'easy-jekyll-amazon-s3-bucket-name' variable"))
    (when (file-directory-p "_site")
      (delete-directory "_site" t nil))
-   (shell-command-to-string "jekyll build --destination _site")
+   (shell-command-to-string "bundle exec jekyll build --destination _site")
    (shell-command-to-string (concat "aws s3 sync --delete _site s3://" easy-jekyll-amazon-s3-bucket-name "/"))
    (message "Blog deployed")
    (when easy-jekyll-url
@@ -924,7 +924,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
      (error "Please set 'easy-jekyll-google-cloud-storage-bucket-name' variable"))
    (when (file-directory-p "_site")
      (delete-directory "_site" t nil))
-   (shell-command-to-string "jekyll build --destination _site")
+   (shell-command-to-string "bundle exec jekyll build --destination _site")
    (shell-command-to-string (concat "gsutil -m rsync -d -r _site gs://" easy-jekyll-google-cloud-storage-bucket-name "/"))
    (message "Blog deployed")
    (when easy-jekyll-url
