@@ -177,8 +177,7 @@ The file is saved in 'easy-jekyll-image-dirctory' and generate image link.
 
 ## Installation
 
-You can install `easy-jekyll.el` from [MELPA](http://melpa.org) with package.el
-(`M-x package-install easy-jekyll`).
+
 
 ## Sample Configuration
 
