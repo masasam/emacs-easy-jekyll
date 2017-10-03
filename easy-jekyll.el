@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 0.9.8
+;; Version: 0.9.9
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -676,6 +676,8 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 			       (concat easy-jekyll-basedir easy-jekyll-image-dirctory "/")
 			       (car (last (split-string (substring-no-properties (gui-get-selection)) "/")))
 			       nil)))
+     (when (file-exists-p (file-truename file))
+       (error "%s already exists!" (file-truename file)))
      (url-copy-file url file t)
      (insert (concat (format "<img src=\"%s%s\""
 			     easy-jekyll-url
