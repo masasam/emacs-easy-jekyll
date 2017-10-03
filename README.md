@@ -1,6 +1,6 @@
-# emacs-easy-jekyll
+# easy-jekyll
 
-Emacs major mode for jekyll
+Emacs major mode for managing jekyll blogs
 
 ## Screencast
 
