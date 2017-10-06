@@ -1083,8 +1083,8 @@ Enjoy!
 (defun easy-jekyll-quit ()
   "Quit easy jekyll."
   (interactive)
-  (setq easy-jekyll--sort-time-flg 1)
-  (setq easy-jekyll--sort-char-flg nil)
+  (setq easy-jekyll--sort-time-flg nil)
+  (setq easy-jekyll--sort-char-flg 2)
   (easy-jekyll--preview-end)
   (when (buffer-live-p easy-jekyll--mode-buffer)
     (kill-buffer easy-jekyll--mode-buffer)))
