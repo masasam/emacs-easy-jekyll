@@ -838,7 +838,12 @@ POST-FILE needs to have and extension '.md' or '.textile'."
    (let ((deployscript (file-truename (concat easy-jekyll-basedir easy-jekyll-github-deploy-script))))
      (unless (executable-find deployscript)
        (error "%s do not execute" deployscript))
-     (shell-command-to-string (shell-quote-argument deployscript))
+     (let ((ret (call-process (shell-quote-argument deployscript) nil "*jekyll-github-deploy*" t)))
+       (unless (zerop ret)
+	 (switch-to-buffer (get-buffer "*jekyll-github-deploy*"))
+	 (error "%s command does not end normally" deployscript)))
+     (when (get-buffer "*jekyll-github-deploy*")
+       (kill-buffer "*jekyll-github-deploy*"))
      (message "Blog deployed")
      (when easy-jekyll-url
        (browse-url easy-jekyll-url)))))
