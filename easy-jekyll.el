@@ -887,7 +887,12 @@ POST-FILE needs to have and extension '.md' or '.textile'."
      (error "Please set 'easy-jekyll-amazon-s3-bucket-name' variable"))
    (when (file-directory-p "_site")
      (delete-directory "_site" t nil))
-   (shell-command-to-string "bundle exec jekyll build --destination _site")
+   (let ((ret (call-process "bundle" nil "*jekyll-amazon-s3-deploy*" t "exec" "jekyll" "build" "--destination" "_site")))
+     (unless (zerop ret)
+       (switch-to-buffer (get-buffer "*jekyll-amazon-s3-deploy*"))
+       (error "'bundle exec jekyll build' command does not end normally")))
+   (when (get-buffer "*jekyll-amazon-s3-deploy*")
+     (kill-buffer "*jekyll-amazon-s3-deploy*"))
    (shell-command-to-string (concat "aws s3 sync --delete _site s3://" easy-jekyll-amazon-s3-bucket-name "/"))
    (message "Blog deployed")
    (when easy-jekyll-url
