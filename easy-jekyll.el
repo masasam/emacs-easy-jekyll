@@ -699,7 +699,12 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (easy-jekyll-with-env
    (when (file-directory-p "_site")
      (delete-directory "_site" t nil))
-   (shell-command-to-string "bundle exec jekyll build --destination _site")
+   (let ((ret (call-process "bundle" nil "*jekyll-publish*" t "exec" "jekyll" "build" "--destination" "_site")))
+     (unless (zerop ret)
+       (switch-to-buffer (get-buffer "*jekyll-publish*"))
+       (error "'bundle exec jekyll build' command does not end normally")))
+   (when (get-buffer "*jekyll-publish*")
+     (kill-buffer "*jekyll-publish*"))
    (shell-command-to-string (concat "rsync -rtpl --chmod=" easy-jekyll-publish-chmod " --delete _site/ " easy-jekyll-sshdomain ":" (shell-quote-argument easy-jekyll-root)))
    (message "Blog published")
    (when easy-jekyll-url
