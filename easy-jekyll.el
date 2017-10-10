@@ -1664,7 +1664,7 @@ Optional prefix ARG says how many lines to move; default is one line."
   (interactive)
   (easy-jekyll-with-env
    (unless (file-directory-p (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
-     (error "Did you execute jekyll new my-awesome-site?"))
+     (error "%s%s doesn't exist!" easy-jekyll-basedir easy-jekyll-postdir))
    (setq easy-jekyll--mode-buffer (get-buffer-create easy-jekyll--buffer-name))
    (setq easy-jekyll--draft-list nil)
    (switch-to-buffer easy-jekyll--mode-buffer)
