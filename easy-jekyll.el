@@ -124,12 +124,12 @@
   :type 'string)
 
 (defcustom easy-jekyll-postdir "_posts"
-  "Directory where the theme store it's posts."
+  "Directory where stores its posts."
   :group 'easy-jekyll
   :type 'string)
 
 (defcustom easy-jekyll-blog-number nil
-  "Number of your blog which you managed."
+  "Number of blogs you want to manage."
   :group 'easy-jekyll
   :type 'integer)
 
