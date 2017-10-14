@@ -68,7 +68,7 @@
   :group 'easy-jekyll
   :type 'integer)
 
-(defcustom easy-jekyll-image-dirctory "images"
+(defcustom easy-jekyll-image-directory "images"
   "Image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
@@ -163,7 +163,7 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-image-dirctory-1 "images"
+(defcustom easy-jekyll-image-directory-1 "images"
   "Blog1 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
@@ -198,7 +198,7 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-image-dirctory-2 "images"
+(defcustom easy-jekyll-image-directory-2 "images"
   "Blog2 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
@@ -233,7 +233,7 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-image-dirctory-3 "images"
+(defcustom easy-jekyll-image-directory-3 "images"
   "Blog3 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
@@ -268,7 +268,7 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-image-dirctory-4 "images"
+(defcustom easy-jekyll-image-directory-4 "images"
   "Blog4 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
@@ -303,7 +303,7 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-image-dirctory-5 "images"
+(defcustom easy-jekyll-image-directory-5 "images"
   "Blog5 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
@@ -338,7 +338,7 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-image-dirctory-6 "images"
+(defcustom easy-jekyll-image-directory-6 "images"
   "Blog6 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
@@ -373,7 +373,7 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-image-dirctory-7 "images"
+(defcustom easy-jekyll-image-directory-7 "images"
   "Blog7 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
@@ -408,7 +408,7 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-image-dirctory-8 "images"
+(defcustom easy-jekyll-image-directory-8 "images"
   "Blog8 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
@@ -443,7 +443,7 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-image-dirctory-9 "images"
+(defcustom easy-jekyll-image-directory-9 "images"
   "Blog9 image file directory under 'static' directory."
   :group 'easy-jekyll
   :type 'string)
@@ -610,7 +610,7 @@
 (defconst easy-jekyll--google-cloud-storage-bucket-name-0 easy-jekyll-google-cloud-storage-bucket-name
   "Default blog google cloud storage bucket name.")
 
-(defconst easy-jekyll--image-dirctory-0 easy-jekyll-image-dirctory
+(defconst easy-jekyll--image-directory-0 easy-jekyll-image-directory
   "Default image file directory under 'static' directory.")
 
 (defconst easy-jekyll--buffer-name "*Easy-jekyll*"
@@ -644,13 +644,13 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (interactive
    (let ((file (read-file-name "Image file: " nil
 			       (expand-file-name
-				(concat easy-jekyll-basedir easy-jekyll-image-dirctory "/"))
+				(concat easy-jekyll-basedir easy-jekyll-image-directory "/"))
 			       t
 			       (expand-file-name
-				(concat easy-jekyll-basedir easy-jekyll-image-dirctory "/")))))
+				(concat easy-jekyll-basedir easy-jekyll-image-directory "/")))))
      (insert (concat (format "<img src=\"%s%s\""
 			     easy-jekyll-url
-			     (concat "/" easy-jekyll-image-dirctory "/" (file-name-nondirectory file)))
+			     (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
 		     " alt=\"\" width=\"100%\"/>")))))
 
 ;;;###autoload
@@ -661,10 +661,10 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 			       (expand-file-name easy-jekyll-default-picture-directory)
 			       t
 			       (expand-file-name easy-jekyll-default-picture-directory))))
-     (copy-file file (concat easy-jekyll-basedir easy-jekyll-image-dirctory "/" (file-name-nondirectory file)))
+     (copy-file file (concat easy-jekyll-basedir easy-jekyll-image-directory "/" (file-name-nondirectory file)))
      (insert (concat (format "<img src=\"%s%s\""
 			     easy-jekyll-url
-			     (concat "/" easy-jekyll-image-dirctory "/" (file-name-nondirectory file)))
+			     (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
 		     " alt=\"\" width=\"100%\"/>")))))
 
 ;;;###autoload
@@ -673,7 +673,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (interactive
    (let ((url (read-string "URL: " (if (fboundp 'gui-get-selection) (gui-get-selection))))
 	 (file (read-file-name "Save as: "
-			       (concat easy-jekyll-basedir easy-jekyll-image-dirctory "/")
+			       (concat easy-jekyll-basedir easy-jekyll-image-directory "/")
 			       (car (last (split-string (substring-no-properties (gui-get-selection)) "/")))
 			       nil)))
      (when (file-exists-p (file-truename file))
@@ -681,7 +681,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
      (url-copy-file url file t)
      (insert (concat (format "<img src=\"%s%s\""
 			     easy-jekyll-url
-			     (concat "/" easy-jekyll-image-dirctory "/" (file-name-nondirectory file)))
+			     (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
 		     " alt=\"\" width=\"100%\"/>")))))
 
 ;;;###autoload
@@ -1377,7 +1377,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
 	easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
+	easy-jekyll-image-directory easy-jekyll--image-directory-0)
   (easy-jekyll--preview-end)
   (easy-jekyll))
 
@@ -1393,7 +1393,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-1
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-1
 	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-1
-	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-1)
+	    easy-jekyll-image-directory easy-jekyll-image-directory-1)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1409,7 +1409,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
 	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
+	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1419,7 +1419,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-2
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-2
 	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-2
-	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-2)
+	    easy-jekyll-image-directory easy-jekyll-image-directory-2)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1435,7 +1435,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
 	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
+	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1445,7 +1445,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-3
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-3
 	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-3
-	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-3)
+	    easy-jekyll-image-directory easy-jekyll-image-directory-3)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1461,7 +1461,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
 	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
+	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1471,7 +1471,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-4
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-4
 	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-4
-	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-4)
+	    easy-jekyll-image-directory easy-jekyll-image-directory-4)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1487,7 +1487,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
 	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
+	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1497,7 +1497,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-5
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-5
 	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-5
-	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-5)
+	    easy-jekyll-image-directory easy-jekyll-image-directory-5)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1513,7 +1513,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
 	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
+	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1523,7 +1523,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-6
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-6
 	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-6
-	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-6)
+	    easy-jekyll-image-directory easy-jekyll-image-directory-6)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1539,7 +1539,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
 	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
+	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1549,7 +1549,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-7
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-7
 	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-7
-	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-7)
+	    easy-jekyll-image-directory easy-jekyll-image-directory-7)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1565,7 +1565,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
 	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
+	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1575,7 +1575,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-8
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-8
 	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-8
-	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-8)
+	    easy-jekyll-image-directory easy-jekyll-image-directory-8)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
@@ -1591,7 +1591,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
 	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
 	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-dirctory easy-jekyll--image-dirctory-0)
+	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
 	(easy-jekyll--preview-end)
 	(easy-jekyll))
     (progn
@@ -1601,7 +1601,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    easy-jekyll-sshdomain easy-jekyll-sshdomain-9
 	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-9
 	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-9
-	    easy-jekyll-image-dirctory easy-jekyll-image-dirctory-9)
+	    easy-jekyll-image-directory easy-jekyll-image-directory-9)
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
