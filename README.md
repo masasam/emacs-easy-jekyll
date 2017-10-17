@@ -77,9 +77,9 @@ Deploy jekyll source at Google Cloud Storage.
 
 	M-x easy-jekyll-image
 
-Generate link of image from image file directory under 'easy-jekyll-image-dirctory' directory.
+Generate link of image from image file directory under 'easy-jekyll-image-directory' directory.
 
-'easy-jekyll-image-dirctory' default is 'images'.
+'easy-jekyll-image-directory' default is 'images'.
 
 ![easy-jekyll-image1](image/easy-jekyll-image1.png)
 
@@ -89,7 +89,7 @@ When you select the image file you want to use, a link will be inserted.
 
 	M-x easy-jekyll-put-image
 
-Move image to 'easy-jekyll-image-dirctory' and generate image link.
+Move image to 'easy-jekyll-image-directory' and generate image link.
 
 You can change the initial launch position with 'easy-jekyll-default-picture-directory'.
 
@@ -111,7 +111,7 @@ If you press enter without deciding the file name, the file name can be used as 
 
 ![easy-jekyll-pull-image1](image/easy-jekyll-pull-image1.png)
 
-The file is saved in 'easy-jekyll-image-dirctory' and generate image link.
+The file is saved in 'easy-jekyll-image-directory' and generate image link.
 
 ![easy-jekyll-pull-image2](image/easy-jekyll-pull-image2.png)
 
@@ -177,7 +177,8 @@ The file is saved in 'easy-jekyll-image-dirctory' and generate image link.
 
 ## Installation
 
-
+You can install `easy-jekyll.el` from [MELPA](http://melpa.org) with package.el
+(`M-x package-install easy-jekyll`).
 
 ## Sample Configuration
 
@@ -229,13 +230,13 @@ If you want customise color, write the following in the init.el or .emacs.
 	""
 	:group 'easy-jekyll-faces)
 
-In order to generate link of image from image file directory under 'easy-jekyll-image-dirctory' directory,
+In order to generate link of image from image file directory under 'easy-jekyll-image-directory' directory,
 
 If you want to change image file directory under 'images' directory.
 
 If not set the default image file directory will be 'images'.
 
-	(setq easy-jekyll-image-dirctory "img")
+	(setq easy-jekyll-image-directory "img")
 
 Setting the picture directory of your PC, it is easy to execute M-x easy-jekyll-put-image
 
@@ -274,7 +275,7 @@ Please set necessary variables and use.
 	easy-jekyll-sshdomain-1
 	easy-jekyll-amazon-s3-bucket-name-1
 	easy-jekyll-google-cloud-storage-bucket-name-1
-	easy-jekyll-image-dirctory-1
+	easy-jekyll-image-directory-1
 
 	..............
 
@@ -284,7 +285,7 @@ Please set necessary variables and use.
 	easy-jekyll-sshdomain-9
 	easy-jekyll-amazon-s3-bucket-name-9
 	easy-jekyll-google-cloud-storage-bucket-name-9
-	easy-jekyll-image-dirctory-9
+	easy-jekyll-image-directory-9
 
 If you want change markdown filename extension, please select markdown.
 Because only markdown is supported by jekyll. If not set markdown filename extension will be 'md'.
