@@ -661,7 +661,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 			       (expand-file-name easy-jekyll-default-picture-directory)
 			       t
 			       (expand-file-name easy-jekyll-default-picture-directory))))
-     (copy-file file (concat easy-jekyll-basedir easy-jekyll-image-directory "/" (file-name-nondirectory file)))
+     (copy-file file (expand-file-name (concat easy-jekyll-basedir easy-jekyll-image-directory "/" (file-name-nondirectory file))))
      (insert (concat (format "<img src=\"%s%s\""
 			     easy-jekyll-url
 			     (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
