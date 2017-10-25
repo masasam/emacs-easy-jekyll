@@ -1241,8 +1241,8 @@ Optional prefix ARG says how many lines to move; default is one line."
   "Renames file on the pointer to POST-FILE."
   (interactive (list (read-from-minibuffer "Rename: " `(,easy-jekyll-default-ext . 1) nil nil nil)))
   (let ((filename (if easy-jekyll--draft-list
-		      (expand-file-name (concat "_drafts/" post-file))
-		    (expand-file-name (concat easy-jekyll-postdir "/" post-file))))
+		      (expand-file-name post-file "_drafts/")
+		    (expand-file-name post-file easy-jekyll-postdir)))
         (file-ext (file-name-extension post-file)))
     (when (not (member file-ext easy-jekyll--formats))
       (error "Please enter .%s file name or .%s file name" easy-jekyll-markdown-extension easy-jekyll-textile-extension))
