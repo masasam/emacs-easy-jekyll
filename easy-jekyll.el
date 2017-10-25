@@ -835,7 +835,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   "Execute `easy-jekyll-github-deploy-script' script locate at `easy-jekyll-basedir'."
   (interactive)
   (easy-jekyll-with-env
-   (let ((deployscript (file-truename (concat easy-jekyll-basedir easy-jekyll-github-deploy-script))))
+   (let ((deployscript (file-truename (expand-file-name easy-jekyll-github-deploy-script easy-jekyll-basedir))))
      (unless (executable-find deployscript)
        (error "%s do not execute" deployscript))
      (let ((ret (call-process (shell-quote-argument deployscript) nil "*jekyll-github-deploy*" t)))
