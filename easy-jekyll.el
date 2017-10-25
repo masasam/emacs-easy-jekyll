@@ -1232,24 +1232,25 @@ Optional prefix ARG says how many lines to move; default is one line."
   "Renames file on the pointer to POST-FILE."
   (interactive (list (read-from-minibuffer "Rename: " `(,easy-jekyll-default-ext . 1) nil nil nil)))
   (let ((filename (if easy-jekyll--draft-list
-		      (concat "_drafts/" post-file)
-		    (concat easy-jekyll-postdir "/" post-file)))
+		      (expand-file-name (concat "_drafts/" post-file))
+		    (expand-file-name (concat easy-jekyll-postdir "/" post-file))))
         (file-ext (file-name-extension post-file)))
     (when (not (member file-ext easy-jekyll--formats))
       (error "Please enter .%s file name or .%s file name" easy-jekyll-markdown-extension easy-jekyll-textile-extension))
-    (easy-jekyll-with-env
-     (when (file-exists-p (file-truename filename))
-       (error "%s already exists!" (concat easy-jekyll-basedir filename)))
-     (unless (or (string-match "^$" (thing-at-point 'line))
-		 (eq (point) (point-max))
-		 (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
-       (let ((name (expand-file-name
-		    (if easy-jekyll--draft-list
-			(concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
-		      (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
-		    easy-jekyll-basedir)))
-	 (rename-file name filename 1)
-	 (easy-jekyll-refresh))))))
+    (when (equal (buffer-name (current-buffer)) easy-jekyll--buffer-name)
+      (easy-jekyll-with-env
+       (when (file-exists-p (file-truename filename))
+	 (error "%s already exists!" (concat easy-jekyll-basedir filename)))
+       (unless (or (string-match "^$" (thing-at-point 'line))
+		   (eq (point) (point-max))
+		   (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
+	 (let ((name (expand-file-name
+		      (if easy-jekyll--draft-list
+			  (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+			(concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
+		      easy-jekyll-basedir)))
+	   (rename-file name filename 1)
+	   (easy-jekyll-refresh)))))))
 
 (defun easy-jekyll-undraft ()
   "Undraft file on the pointer."
