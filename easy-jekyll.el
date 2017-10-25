@@ -673,7 +673,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (interactive
    (let ((url (read-string "URL: " (if (fboundp 'gui-get-selection) (gui-get-selection))))
 	 (file (read-file-name "Save as: "
-			       (concat easy-jekyll-basedir easy-jekyll-image-directory "/")
+			       (expand-file-name (concat easy-jekyll-basedir easy-jekyll-image-directory "/"))
 			       (car (last (split-string (substring-no-properties (gui-get-selection)) "/")))
 			       nil)))
      (when (file-exists-p (file-truename file))
