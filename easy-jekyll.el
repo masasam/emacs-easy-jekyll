@@ -1255,23 +1255,24 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-undraft ()
   "Undraft file on the pointer."
   (interactive)
-  (easy-jekyll-with-env
-   (unless (or (string-match "^$" (thing-at-point 'line))
-	       (eq (point) (point-max))
-	       (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
-     (let ((file (expand-file-name
-		  (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
-		  easy-jekyll-basedir)))
-       (when (and (file-exists-p file)
-		  (not (file-directory-p file)))
-	 (unless (file-directory-p (expand-file-name "_drafts" easy-jekyll-basedir))
-	   (make-directory (expand-file-name "_drafts" easy-jekyll-basedir) t))
-	 (rename-file file (expand-file-name
-			    (concat easy-jekyll-postdir "/"
-				    (format-time-string "%Y-%m-%d-" (current-time))
-				    (file-name-nondirectory file)))
-		      1)
-	 (easy-jekyll-refresh))))))
+  (when (equal (buffer-name (current-buffer)) easy-jekyll--buffer-name)
+    (easy-jekyll-with-env
+     (unless (or (string-match "^$" (thing-at-point 'line))
+		 (eq (point) (point-max))
+		 (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
+       (let ((file (expand-file-name
+		    (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		    easy-jekyll-basedir)))
+	 (when (and (file-exists-p file)
+		    (not (file-directory-p file)))
+	   (unless (file-directory-p (expand-file-name "_drafts" easy-jekyll-basedir))
+	     (make-directory (expand-file-name "_drafts" easy-jekyll-basedir) t))
+	   (rename-file file (expand-file-name
+			      (concat easy-jekyll-postdir "/"
+				      (format-time-string "%Y-%m-%d-" (current-time))
+				      (file-name-nondirectory file)))
+			1)
+	   (easy-jekyll-refresh)))))))
 
 (defun easy-jekyll-open ()
   "Open the file on the pointer."
