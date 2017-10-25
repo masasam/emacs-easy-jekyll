@@ -765,8 +765,8 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 POST-FILE needs to have and extension '.md' or '.textile'."
   (interactive (list (read-from-minibuffer "Filename: " `(,easy-jekyll-default-ext . 1) nil nil nil)))
   (let ((filename (if easy-jekyll--draft-list
-		      (concat "_drafts/" post-file)
-		    (concat easy-jekyll-postdir "/" (format-time-string "%Y-%m-%d-" (current-time)) post-file)))
+		      (expand-file-name (concat "_drafts/" post-file))
+		    (expand-file-name (concat easy-jekyll-postdir "/" (format-time-string "%Y-%m-%d-" (current-time)) post-file))))
 	(file-ext (file-name-extension post-file)))
     (when (not (member file-ext easy-jekyll--formats))
       (error "Please enter .%s file name or .%s file name" easy-jekyll-markdown-extension easy-jekyll-textile-extension))
