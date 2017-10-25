@@ -1300,17 +1300,21 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-view ()
   "Open the file on the pointer with 'view-mode'."
   (interactive)
-  (unless (or (string-match "^$" (thing-at-point 'line))
-	      (eq (point) (point-max))
-	      (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
-    (let ((file (expand-file-name
-		 (if easy-jekyll--draft-list
-		     (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
-		   (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
-		 easy-jekyll-basedir)))
-      (when (and (file-exists-p file)
-		 (not (file-directory-p file)))
-	(view-file file)))))
+  (easy-jekyll-with-env
+   (if (equal (buffer-name (current-buffer)) easy-jekyll--buffer-name)
+       (progn
+	 (unless (or (string-match "^$" (thing-at-point 'line))
+		     (eq (point) (point-max))
+		     (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
+	   (let ((file (expand-file-name
+			(if easy-jekyll--draft-list
+			    (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+			  (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
+			easy-jekyll-basedir)))
+	     (when (and (file-exists-p file)
+			(not (file-directory-p file)))
+	       (view-file file)))))
+     (view-file buffer-file-name))))
 
 (defun easy-jekyll-delete ()
   "Delete the file on the pointer."
