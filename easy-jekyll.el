@@ -642,47 +642,56 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 (defun easy-jekyll-image ()
   "Generate image link."
   (interactive
-   (let ((file (read-file-name "Image file: " nil
-			       (expand-file-name
-				(concat easy-jekyll-basedir easy-jekyll-image-directory "/"))
-			       t
-			       (expand-file-name
-				(concat easy-jekyll-basedir easy-jekyll-image-directory "/")))))
-     (insert (concat (format "<img src=\"%s%s\""
-			     easy-jekyll-url
-			     (expand-file-name (file-name-nondirectory file) (concat "/" easy-jekyll-image-directory "/")))
-		     " alt=\"\" width=\"100%\"/>")))))
+   (easy-jekyll-with-env
+    (unless (file-directory-p (expand-file-name easy-jekyll-image-directory easy-jekyll-basedir))
+      (error "%s does not exist" (expand-file-name easy-jekyll-image-directory easy-jekyll-basedir)))
+    (let ((file (read-file-name "Image file: " nil
+				(expand-file-name
+				 (concat easy-jekyll-basedir easy-jekyll-image-directory "/"))
+				t
+				(expand-file-name
+				 (concat easy-jekyll-basedir easy-jekyll-image-directory "/")))))
+      (insert (concat (format "<img src=\"%s%s\""
+			      easy-jekyll-url
+			      (expand-file-name (file-name-nondirectory file) (concat "/" easy-jekyll-image-directory "/")))
+		      " alt=\"\" width=\"100%\"/>"))))))
 
 ;;;###autoload
 (defun easy-jekyll-put-image ()
   "Move image to image directory and generate image link."
   (interactive
-   (let ((file (read-file-name "Image file: " nil
-			       (expand-file-name easy-jekyll-default-picture-directory)
-			       t
-			       (expand-file-name easy-jekyll-default-picture-directory))))
-     (copy-file file (expand-file-name (concat easy-jekyll-basedir easy-jekyll-image-directory "/" (file-name-nondirectory file))))
-     (insert (concat (format "<img src=\"%s%s\""
-			     easy-jekyll-url
-			     (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
-		     " alt=\"\" width=\"100%\"/>")))))
+   (easy-jekyll-with-env
+    (unless (file-directory-p (expand-file-name easy-jekyll-image-directory easy-jekyll-basedir))
+      (error "%s does not exist" (expand-file-name easy-jekyll-image-directory easy-jekyll-basedir)))
+    (let ((file (read-file-name "Image file: " nil
+				(expand-file-name easy-jekyll-default-picture-directory)
+				t
+				(expand-file-name easy-jekyll-default-picture-directory))))
+      (copy-file file (expand-file-name (concat easy-jekyll-basedir easy-jekyll-image-directory "/" (file-name-nondirectory file))))
+      (insert (concat (format "<img src=\"%s%s\""
+			      easy-jekyll-url
+			      (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
+		      " alt=\"\" width=\"100%\"/>"))))))
 
 ;;;###autoload
 (defun easy-jekyll-pull-image ()
   "Pull image from internet to image directory and generate image link."
   (interactive
-   (let ((url (read-string "URL: " (if (fboundp 'gui-get-selection) (gui-get-selection))))
-	 (file (read-file-name "Save as: "
-			       (expand-file-name (concat easy-jekyll-basedir easy-jekyll-image-directory "/"))
-			       (car (last (split-string (substring-no-properties (gui-get-selection)) "/")))
-			       nil)))
-     (when (file-exists-p (file-truename file))
-       (error "%s already exists!" (file-truename file)))
-     (url-copy-file url file t)
-     (insert (concat (format "<img src=\"%s%s\""
-			     easy-jekyll-url
-			     (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
-		     " alt=\"\" width=\"100%\"/>")))))
+   (easy-jekyll-with-env
+    (unless (file-directory-p (expand-file-name easy-jekyll-image-directory easy-jekyll-basedir))
+      (error "%s does not exist" (expand-file-name easy-jekyll-image-directory easy-jekyll-basedir)))
+    (let ((url (read-string "URL: " (if (fboundp 'gui-get-selection) (gui-get-selection))))
+	  (file (read-file-name "Save as: "
+				(expand-file-name (concat easy-jekyll-basedir easy-jekyll-image-directory "/"))
+				(car (last (split-string (substring-no-properties (gui-get-selection)) "/")))
+				nil)))
+      (when (file-exists-p (file-truename file))
+	(error "%s already exists!" (file-truename file)))
+      (url-copy-file url file t)
+      (insert (concat (format "<img src=\"%s%s\""
+			      easy-jekyll-url
+			      (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
+		      " alt=\"\" width=\"100%\"/>"))))))
 
 ;;;###autoload
 (defun easy-jekyll-publish ()
@@ -1319,27 +1328,29 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-delete ()
   "Delete the file on the pointer."
   (interactive)
-  (unless (or (string-match "^$" (thing-at-point 'line))
-	      (eq (point) (point-max))
-	      (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
-    (let ((file (expand-file-name
-		 (if easy-jekyll--draft-list
-		     (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
-		   (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
-		 easy-jekyll-basedir)))
-      (when (and (file-exists-p file)
-		 (not (file-directory-p file)))
-	(when (y-or-n-p (concat "Delete " file))
-	  (if easy-jekyll-no-help
-	      (setq easy-jekyll--line (- (line-number-at-pos) 4))
-	    (setq easy-jekyll--line (- (line-number-at-pos) easy-jekyll--delete-line)))
-	  (delete-file file)
-	  (if easy-jekyll--draft-list
-	      (easy-jekyll-draft-list)
-	    (easy-jekyll))
-	  (when (> easy-jekyll--line 0)
-	    (forward-line easy-jekyll--line)
-	    (forward-char easy-jekyll--forward-char)))))))
+  (when (equal (buffer-name (current-buffer)) easy-jekyll--buffer-name)
+    (easy-jekyll-with-env
+     (unless (or (string-match "^$" (thing-at-point 'line))
+		 (eq (point) (point-max))
+		 (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
+       (let ((file (expand-file-name
+		    (if easy-jekyll--draft-list
+			(concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		      (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
+		    easy-jekyll-basedir)))
+	 (when (and (file-exists-p file)
+		    (not (file-directory-p file)))
+	   (when (y-or-n-p (concat "Delete " file))
+	     (if easy-jekyll-no-help
+		 (setq easy-jekyll--line (- (line-number-at-pos) 4))
+	       (setq easy-jekyll--line (- (line-number-at-pos) easy-jekyll--delete-line)))
+	     (delete-file file)
+	     (if easy-jekyll--draft-list
+		 (easy-jekyll-draft-list)
+	       (easy-jekyll))
+	     (when (> easy-jekyll--line 0)
+	       (forward-line easy-jekyll--line)
+	       (forward-char easy-jekyll--forward-char)))))))))
 
 (defun easy-jekyll-next-blog ()
   "Go to next blog."
