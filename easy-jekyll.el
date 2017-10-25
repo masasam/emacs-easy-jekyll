@@ -650,7 +650,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 				(concat easy-jekyll-basedir easy-jekyll-image-directory "/")))))
      (insert (concat (format "<img src=\"%s%s\""
 			     easy-jekyll-url
-			     (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
+			     (expand-file-name (file-name-nondirectory file) (concat "/" easy-jekyll-image-directory "/")))
 		     " alt=\"\" width=\"100%\"/>")))))
 
 ;;;###autoload
