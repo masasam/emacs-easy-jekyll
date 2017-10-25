@@ -1277,17 +1277,19 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-open ()
   "Open the file on the pointer."
   (interactive)
-  (unless (or (string-match "^$" (thing-at-point 'line))
-	      (eq (point) (point-max))
-	      (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
-    (let ((file (expand-file-name
-		 (if easy-jekyll--draft-list
-		     (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
-		   (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
-		 easy-jekyll-basedir)))
-      (when (and (file-exists-p file)
-		 (not (file-directory-p file)))
-	(find-file file)))))
+  (when (equal (buffer-name (current-buffer)) easy-jekyll--buffer-name)
+    (easy-jekyll-with-env
+     (unless (or (string-match "^$" (thing-at-point 'line))
+		 (eq (point) (point-max))
+		 (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
+       (let ((file (expand-file-name
+		    (if easy-jekyll--draft-list
+			(concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
+		      (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
+		    easy-jekyll-basedir)))
+	 (when (and (file-exists-p file)
+		    (not (file-directory-p file)))
+	   (find-file file)))))))
 
 (defun easy-jekyll-open-basedir ()
   "Open `easy-jekyll-basedir' with dired."
