@@ -775,7 +775,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   (interactive (list (read-from-minibuffer "Filename: " `(,easy-jekyll-default-ext . 1) nil nil nil)))
   (easy-jekyll-with-env
    (let ((filename (if easy-jekyll--draft-list
-		       (expand-file-name post-file "_drafts/")
+		       (expand-file-name post-file "_drafts")
 		     (expand-file-name (concat (format-time-string "%Y-%m-%d-" (current-time)) post-file) easy-jekyll-postdir)))
 	 (file-ext (file-name-extension post-file)))
      (when (not (member file-ext easy-jekyll--formats))
@@ -1241,7 +1241,7 @@ Optional prefix ARG says how many lines to move; default is one line."
   "Renames file on the pointer to POST-FILE."
   (interactive (list (read-from-minibuffer "Rename: " `(,easy-jekyll-default-ext . 1) nil nil nil)))
   (let ((newname (if easy-jekyll--draft-list
-		     (expand-file-name post-file "_drafts/")
+		     (expand-file-name post-file "_drafts")
 		   (expand-file-name post-file easy-jekyll-postdir)))
         (file-ext (file-name-extension post-file)))
     (when (not (member file-ext easy-jekyll--formats))
@@ -1256,7 +1256,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	 (let ((oldname (if easy-jekyll--draft-list
 			    (expand-file-name
 			     (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
-			     "_drafts/")
+			     "_drafts")
 			  (expand-file-name
 			   (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
 			   easy-jekyll-postdir))))
