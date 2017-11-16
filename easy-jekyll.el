@@ -647,13 +647,13 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
       (error "%s does not exist" (expand-file-name easy-jekyll-image-directory easy-jekyll-basedir)))
     (let ((file (read-file-name "Image file: " nil
 				(expand-file-name
-				 (concat easy-jekyll-basedir easy-jekyll-image-directory "/"))
+				 easy-jekyll-image-directory easy-jekyll-basedir)
 				t
 				(expand-file-name
-				 (concat easy-jekyll-basedir easy-jekyll-image-directory "/")))))
+				 easy-jekyll-image-directory easy-jekyll-basedir))))
       (insert (concat (format "<img src=\"%s%s\""
 			      easy-jekyll-url
-			      (expand-file-name (file-name-nondirectory file) (concat "/" easy-jekyll-image-directory "/")))
+			      (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
 		      " alt=\"\" width=\"100%\"/>"))))))
 
 ;;;###autoload
@@ -667,7 +667,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 				(expand-file-name easy-jekyll-default-picture-directory)
 				t
 				(expand-file-name easy-jekyll-default-picture-directory))))
-      (copy-file file (expand-file-name (concat easy-jekyll-basedir easy-jekyll-image-directory "/" (file-name-nondirectory file))))
+      (copy-file file (expand-file-name (file-name-nondirectory file) easy-jekyll-image-directory))
       (insert (concat (format "<img src=\"%s%s\""
 			      easy-jekyll-url
 			      (concat "/" easy-jekyll-image-directory "/" (file-name-nondirectory file)))
@@ -682,7 +682,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
       (error "%s does not exist" (expand-file-name easy-jekyll-image-directory easy-jekyll-basedir)))
     (let ((url (read-string "URL: " (if (fboundp 'gui-get-selection) (gui-get-selection))))
 	  (file (read-file-name "Save as: "
-				(expand-file-name (concat easy-jekyll-basedir easy-jekyll-image-directory "/"))
+				(expand-file-name easy-jekyll-image-directory easy-jekyll-basedir)
 				(car (last (split-string (substring-no-properties (gui-get-selection)) "/")))
 				nil)))
       (when (file-exists-p (file-truename file))
@@ -1272,16 +1272,17 @@ Optional prefix ARG says how many lines to move; default is one line."
 		 (eq (point) (point-max))
 		 (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
        (let ((file (expand-file-name
-		    (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
-		    easy-jekyll-basedir)))
+		    (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+		    (expand-file-name "_drafts" easy-jekyll-basedir))))
 	 (when (and (file-exists-p file)
 		    (not (file-directory-p file)))
 	   (unless (file-directory-p (expand-file-name "_drafts" easy-jekyll-basedir))
 	     (make-directory (expand-file-name "_drafts" easy-jekyll-basedir) t))
-	   (rename-file file (expand-file-name
-			      (concat easy-jekyll-postdir "/"
-				      (format-time-string "%Y-%m-%d-" (current-time))
-				      (file-name-nondirectory file)))
+	   (rename-file file
+			(expand-file-name
+			 (concat (format-time-string "%Y-%m-%d-" (current-time))
+				 (file-name-nondirectory file))
+			 easy-jekyll-postdir)
 			1)
 	   (easy-jekyll-refresh)))))))
 
@@ -1295,8 +1296,12 @@ Optional prefix ARG says how many lines to move; default is one line."
 		 (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
        (let ((file (expand-file-name
 		    (if easy-jekyll--draft-list
-			(concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
-		      (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
+			(expand-file-name
+			 (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+			 "_drafts")
+		      (expand-file-name
+		       (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+		       easy-jekyll-postdir))
 		    easy-jekyll-basedir)))
 	 (when (and (file-exists-p file)
 		    (not (file-directory-p file)))
@@ -1319,8 +1324,12 @@ Optional prefix ARG says how many lines to move; default is one line."
 		     (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
 	   (let ((file (expand-file-name
 			(if easy-jekyll--draft-list
-			    (concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
-			  (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
+			    (expand-file-name
+			     (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+			     "_drafts")
+			  (expand-file-name
+			   (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+			   easy-jekyll-postdir))
 			easy-jekyll-basedir)))
 	     (when (and (file-exists-p file)
 			(not (file-directory-p file)))
@@ -1337,8 +1346,12 @@ Optional prefix ARG says how many lines to move; default is one line."
 		 (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
        (let ((file (expand-file-name
 		    (if easy-jekyll--draft-list
-			(concat "_drafts/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1))
-		      (concat easy-jekyll-postdir "/" (substring (thing-at-point 'line) easy-jekyll--forward-char -1)))
+			(expand-file-name
+			 (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+			 "_drafts")
+		      (expand-file-name
+		       (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+		       easy-jekyll-postdir))
 		    easy-jekyll-basedir)))
 	 (when (and (file-exists-p file)
 		    (not (file-directory-p file)))
@@ -1658,8 +1671,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      (concat
 	       (format-time-string "%Y-%m-%d %H:%M:%S " (nth 5 (file-attributes
 								(expand-file-name
-								 (concat easy-jekyll-postdir "/" (car files))
-								 easy-jekyll-basedir))))
+								 (car files)
+								 easy-jekyll-postdir))))
 	       (car files))
 	      lists))
 	   (pop files))
@@ -1714,8 +1727,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	      (concat
 	       (format-time-string "%Y-%m-%d %H:%M:%S " (nth 5 (file-attributes
 								(expand-file-name
-								 (concat easy-jekyll-postdir "/" (car files))
-								 easy-jekyll-basedir))))
+								 (car files)
+								 easy-jekyll-postdir))))
 	       (car files))
 	      lists))
 	   (pop files))
