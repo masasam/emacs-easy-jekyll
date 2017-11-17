@@ -448,13 +448,19 @@
   :group 'easy-jekyll
   :type 'string)
 
+(defvar easy-jekyll--current-postdir 0
+  "Easy-jekyll current postdir.")
+
+(defvar easy-jekyll--postdir-list nil
+  "Easy-jekyll postdir list.")
+
 (defvar easy-jekyll--preview-loop t
   "Preview loop flg.")
 
 (defvar easy-jekyll--server-process nil
   "Jekyll process.")
 
-(defvar easy-jekyll--unmovable-line 10
+(defvar easy-jekyll--unmovable-line 11
   "Impossible to move below this line.")
 
 (defvar easy-jekyll--draft-list nil
@@ -550,7 +556,7 @@
 (defconst easy-jekyll--unmovable-line-default easy-jekyll--unmovable-line
   "Default value of impossible to move below this line.")
 
-(defconst easy-jekyll--delete-line 11
+(defconst easy-jekyll--delete-line 12
   "Easy-jekyll-delete line number.")
 
 (defconst easy-jekyll--buffer-name "*Jekyll Serve*"
@@ -1016,19 +1022,21 @@ POST-FILE needs to have and extension '.md' or '.textile'."
       (progn
 	"n .. New blog post    R .. Rename file   G .. Deploy GitHub    ? .. Help easy-jekyll
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    u .. Undraft file
-v .. Open view-mode   s .. Sort time     T .. Publish timer    q .. Quit easy-jekyll
-d .. Delete post      c .. Open config   D .. Draft list       I .. Deploy GCS timer
-P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. Deploy GitHub timer
-< .. Previous blog    > .. Next blog     N .. No help-mode     W .. Deploy AWS S3 timer
+v .. Open view-mode   s .. Sort time     T .. Publish timer    W .. AWS S3 timer
+d .. Delete post      c .. Open config   D .. Draft list       I .. GCS timer
+P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. GitHub timer
+< .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
+O .. Open basedir     S .. Sort char     N .. No help-mode     q .. Quit easy-jekyll
 
 ")
     (progn
       "n .. New blog post    R .. Rename file   G .. Deploy GitHub    ? .. Help easy-jekyll
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
 v .. Open view-mode   D .. Draft list    T .. Publish timer    q .. Quit easy-jekyll
-d .. Delete post      c .. Open config   u .. Undraft file     I .. Deploy GCS timer
-P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. Deploy GitHub timer
-< .. Previous blog    > .. Next blog     N .. No help-mode     W .. Deploy AWS S3 timer
+d .. Delete post      c .. Open config   u .. Undraft file     I .. GCS timer
+P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. GitHub timer
+< .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
+O .. Open basedir     W .. AWS S3 timer  N .. No help-mode     q .. Quit easy-jekyll
 
 "))
   "Help of easy-jekyll.")
@@ -1048,6 +1056,10 @@ Enjoy!
 
 (defvar easy-jekyll-mode-map
   (let ((map (make-keymap)))
+    (define-key map "." 'easy-jekyll-next-postdir)
+    (define-key map "," 'easy-jekyll-previous-postdir)
+    (define-key map "+" 'easy-jekyll-next-postdir)
+    (define-key map "-" 'easy-jekyll-previous-postdir)
     (define-key map "n" 'easy-jekyll-newpost)
     (define-key map "w" 'easy-jekyll-newpost)
     (define-key map "a" 'easy-jekyll-helm-ag)
@@ -1373,6 +1385,7 @@ Optional prefix ARG says how many lines to move; default is one line."
   (if (eq easy-jekyll--blog-maximum-number easy-jekyll--current-blog)
       (setq easy-jekyll--current-blog 0)
     (setq easy-jekyll--current-blog (+ easy-jekyll--current-blog 1)))
+  (setq easy-jekyll--postdir-list nil)
   (cond ((eq easy-jekyll--current-blog 1) (easy-jekyll-1))
 	((eq easy-jekyll--current-blog 2) (easy-jekyll-2))
 	((eq easy-jekyll--current-blog 3) (easy-jekyll-3))
@@ -1391,6 +1404,7 @@ Optional prefix ARG says how many lines to move; default is one line."
       (when easy-jekyll-blog-number
 	(setq easy-jekyll--current-blog (- easy-jekyll-blog-number 1)))
     (setq easy-jekyll--current-blog (- easy-jekyll--current-blog 1)))
+  (setq easy-jekyll--postdir-list nil)
   (cond ((eq easy-jekyll--current-blog 1) (easy-jekyll-1))
 	((eq easy-jekyll--current-blog 2) (easy-jekyll-2))
 	((eq easy-jekyll--current-blog 3) (easy-jekyll-3))
@@ -1639,6 +1653,28 @@ Optional prefix ARG says how many lines to move; default is one line."
       (easy-jekyll--preview-end)
       (easy-jekyll))))
 
+(defun easy-jekyll-next-postdir ()
+  "Go to next postdir."
+  (interactive)
+  (add-to-list 'easy-jekyll--postdir-list (expand-file-name easy-jekyll-basedir) t)
+  (add-to-list 'easy-jekyll--postdir-list (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
+  (if (eq (- (length easy-jekyll--postdir-list) 1) easy-jekyll--current-postdir)
+      (setq easy-jekyll--current-postdir 0)
+    (setq easy-jekyll--current-postdir (+ easy-jekyll--current-postdir 1)))
+  (setq easy-jekyll-postdir (file-relative-name (nth easy-jekyll--current-postdir easy-jekyll--postdir-list) easy-jekyll-basedir))
+  (easy-jekyll))
+
+(defun easy-jekyll-previous-postdir ()
+  "Go to previous postdir."
+  (interactive)
+  (add-to-list 'easy-jekyll--postdir-list (expand-file-name easy-jekyll-basedir) t)
+  (add-to-list 'easy-jekyll--postdir-list (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
+  (setq easy-jekyll--current-postdir (- easy-jekyll--current-postdir 1))
+  (when (> 0 easy-jekyll--current-postdir)
+    (setq easy-jekyll--current-postdir (- (length easy-jekyll--postdir-list) 1)))
+  (setq easy-jekyll-postdir (file-relative-name (nth easy-jekyll--current-postdir easy-jekyll--postdir-list) easy-jekyll-basedir))
+  (easy-jekyll))
+
 (defun easy-jekyll-draft-list ()
   "List drafts."
   (easy-jekyll-with-env
@@ -1666,7 +1702,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	       ((eq 2 easy-jekyll--sort-char-flg) (setq files (sort files 'string<))))
 	 (while files
 	   (unless (or (string= (car files) ".")
-		       (string= (car files) ".."))
+		       (string= (car files) "..")
+		       (not (member (file-name-extension (car files)) easy-jekyll--formats)))
 	     (push
 	      (concat
 	       (format-time-string "%Y-%m-%d %H:%M:%S " (nth 5 (file-attributes
@@ -1722,7 +1759,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 	       ((eq 2 easy-jekyll--sort-char-flg) (setq files (sort files 'string<))))
 	 (while files
 	   (unless (or (string= (car files) ".")
-		       (string= (car files) ".."))
+		       (string= (car files) "..")
+		       (not (member (file-name-extension (car files)) easy-jekyll--formats)))
 	     (push
 	      (concat
 	       (format-time-string "%Y-%m-%d %H:%M:%S " (nth 5 (file-attributes
