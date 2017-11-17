@@ -625,6 +625,9 @@
 (defconst easy-jekyll--forward-char 20
   "Forward-char of easy-jekyll.")
 
+(defconst easy-jekyll--default-postdir easy-jekyll-postdir
+  "Default easy-jekyll-postdir.")
+
 ;;;###autoload
 (defun easy-jekyll-article ()
   "Open a list of articles written in jekyll with dired."
@@ -1385,7 +1388,9 @@ Optional prefix ARG says how many lines to move; default is one line."
   (if (eq easy-jekyll--blog-maximum-number easy-jekyll--current-blog)
       (setq easy-jekyll--current-blog 0)
     (setq easy-jekyll--current-blog (+ easy-jekyll--current-blog 1)))
+  (setq easy-jekyll-postdir easy-jekyll--default-postdir)
   (setq easy-jekyll--postdir-list nil)
+  (setq easy-jekyll--current-postdir 0)
   (cond ((eq easy-jekyll--current-blog 1) (easy-jekyll-1))
 	((eq easy-jekyll--current-blog 2) (easy-jekyll-2))
 	((eq easy-jekyll--current-blog 3) (easy-jekyll-3))
@@ -1404,7 +1409,9 @@ Optional prefix ARG says how many lines to move; default is one line."
       (when easy-jekyll-blog-number
 	(setq easy-jekyll--current-blog (- easy-jekyll-blog-number 1)))
     (setq easy-jekyll--current-blog (- easy-jekyll--current-blog 1)))
+  (setq easy-jekyll-postdir easy-jekyll--default-postdir)
   (setq easy-jekyll--postdir-list nil)
+  (setq easy-jekyll--current-postdir 0)
   (cond ((eq easy-jekyll--current-blog 1) (easy-jekyll-1))
 	((eq easy-jekyll--current-blog 2) (easy-jekyll-2))
 	((eq easy-jekyll--current-blog 3) (easy-jekyll-3))
@@ -1656,8 +1663,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-next-postdir ()
   "Go to next postdir."
   (interactive)
-  (add-to-list 'easy-jekyll--postdir-list (expand-file-name easy-jekyll-basedir) t)
-  (add-to-list 'easy-jekyll--postdir-list (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
+  (add-to-list 'easy-jekyll--postdir-list (expand-file-name easy-jekyll-basedir))
+  (add-to-list 'easy-jekyll--postdir-list (expand-file-name "_posts" easy-jekyll-basedir))
   (if (eq (- (length easy-jekyll--postdir-list) 1) easy-jekyll--current-postdir)
       (setq easy-jekyll--current-postdir 0)
     (setq easy-jekyll--current-postdir (+ easy-jekyll--current-postdir 1)))
@@ -1667,8 +1674,8 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-previous-postdir ()
   "Go to previous postdir."
   (interactive)
-  (add-to-list 'easy-jekyll--postdir-list (expand-file-name easy-jekyll-basedir) t)
-  (add-to-list 'easy-jekyll--postdir-list (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
+  (add-to-list 'easy-jekyll--postdir-list (expand-file-name easy-jekyll-basedir))
+  (add-to-list 'easy-jekyll--postdir-list (expand-file-name "_posts" easy-jekyll-basedir))
   (setq easy-jekyll--current-postdir (- easy-jekyll--current-postdir 1))
   (when (> 0 easy-jekyll--current-postdir)
     (setq easy-jekyll--current-postdir (- (length easy-jekyll--postdir-list) 1)))
@@ -1742,7 +1749,9 @@ Optional prefix ARG says how many lines to move; default is one line."
    (setq-local default-directory easy-jekyll-basedir)
    (setq buffer-read-only nil)
    (erase-buffer)
-   (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url "\n\n") 'face 'easy-jekyll-help-face))
+   (if (equal easy-jekyll-postdir "./")
+       (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url "\n\n") 'face 'easy-jekyll-help-face))
+     (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url "/" easy-jekyll-postdir "\n\n") 'face 'easy-jekyll-help-face)))
    (unless easy-jekyll-no-help
      (insert (propertize easy-jekyll--help 'face 'easy-jekyll-help-face)))
    (unless easy-jekyll--refresh
