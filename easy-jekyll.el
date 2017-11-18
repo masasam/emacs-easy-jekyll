@@ -1069,42 +1069,42 @@ Optional prefix ARG says how many lines to move; default is one line."
   (when (< 1 (length easy-jekyll-bloglist))
     (if (eq (- (length easy-jekyll-bloglist) 1) easy-jekyll--current-blog)
 	(setq easy-jekyll--current-blog 0)
-      (setq easy-jekyll--current-blog (+ easy-jekyll--current-blog 1))))
-  (setq easy-jekyll-postdir easy-jekyll--default-postdir)
-  (setq easy-jekyll--postdir-list nil)
-  (setq easy-jekyll--current-postdir 0)
-  (setq easy-jekyll-basedir
-	(cdr (assoc 'easy-jekyll-basedir
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-url
-	(cdr (assoc 'easy-jekyll-url
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-root
-	(cdr (assoc 'easy-jekyll-root
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-sshdomain
-	(cdr (assoc 'easy-jekyll-domain
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-amazon-s3-bucket-name
-	(cdr (assoc 'easy-jekyll-amazon-s3-bucket-name
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-google-cloud-storage-bucket-name
-	(cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
-		    (nth 1 easy-jekyll-bloglist))))
-  (setq easy-jekyll-github-deploy-script
-	(cdr (assoc 'easy-jekyll-github-deploy-script
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-image-directory
-	(cdr (assoc 'easy-jekyll-image-directory
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-default-picture-directory
-	(cdr (assoc 'easy-jekyll-default-picture-directory
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-publish-chmod
-	(cdr (assoc 'easy-jekyll-publish-chmod
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (easy-jekyll--preview-end)
-  (easy-jekyll))
+      (setq easy-jekyll--current-blog (+ easy-jekyll--current-blog 1)))
+    (setq easy-jekyll-postdir easy-jekyll--default-postdir)
+    (setq easy-jekyll--postdir-list nil)
+    (setq easy-jekyll--current-postdir 0)
+    (setq easy-jekyll-basedir
+	  (cdr (assoc 'easy-jekyll-basedir
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-url
+	  (cdr (assoc 'easy-jekyll-url
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-root
+	  (cdr (assoc 'easy-jekyll-root
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-sshdomain
+	  (cdr (assoc 'easy-jekyll-domain
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-amazon-s3-bucket-name
+	  (cdr (assoc 'easy-jekyll-amazon-s3-bucket-name
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-google-cloud-storage-bucket-name
+	  (cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
+		      (nth 1 easy-jekyll-bloglist))))
+    (setq easy-jekyll-github-deploy-script
+	  (cdr (assoc 'easy-jekyll-github-deploy-script
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-image-directory
+	  (cdr (assoc 'easy-jekyll-image-directory
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-default-picture-directory
+	  (cdr (assoc 'easy-jekyll-default-picture-directory
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-publish-chmod
+	  (cdr (assoc 'easy-jekyll-publish-chmod
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (easy-jekyll--preview-end)
+    (easy-jekyll)))
 
 (defun easy-jekyll-previous-blog ()
   "Go to previous blog."
@@ -1112,42 +1112,42 @@ Optional prefix ARG says how many lines to move; default is one line."
   (when (< 1 (length easy-jekyll-bloglist))
     (if (= 0 easy-jekyll--current-blog)
 	(setq easy-jekyll--current-blog (- (length easy-jekyll-bloglist) 1))
-      (setq easy-jekyll--current-blog (- easy-jekyll--current-blog 1))))
-  (setq easy-jekyll-postdir easy-jekyll--default-postdir)
-  (setq easy-jekyll--postdir-list nil)
-  (setq easy-jekyll--current-postdir 0)
-  (setq easy-jekyll-basedir
-	(cdr (assoc 'easy-jekyll-basedir
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-url
-	(cdr (assoc 'easy-jekyll-url
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-root
-	(cdr (assoc 'easy-jekyll-root
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-sshdomain
-	(cdr (assoc 'easy-jekyll-domain
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-amazon-s3-bucket-name
-	(cdr (assoc 'easy-jekyll-amazon-s3-bucket-name
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-google-cloud-storage-bucket-name
-	(cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
-		    (nth 1 easy-jekyll-bloglist))))
-  (setq easy-jekyll-github-deploy-script
-	(cdr (assoc 'easy-jekyll-github-deploy-script
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-image-directory
-	(cdr (assoc 'easy-jekyll-image-directory
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-default-picture-directory
-	(cdr (assoc 'easy-jekyll-default-picture-directory
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (setq easy-jekyll-publish-chmod
-	(cdr (assoc 'easy-jekyll-publish-chmod
-		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-  (easy-jekyll--preview-end)
-  (easy-jekyll))
+      (setq easy-jekyll--current-blog (- easy-jekyll--current-blog 1)))
+    (setq easy-jekyll-postdir easy-jekyll--default-postdir)
+    (setq easy-jekyll--postdir-list nil)
+    (setq easy-jekyll--current-postdir 0)
+    (setq easy-jekyll-basedir
+	  (cdr (assoc 'easy-jekyll-basedir
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-url
+	  (cdr (assoc 'easy-jekyll-url
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-root
+	  (cdr (assoc 'easy-jekyll-root
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-sshdomain
+	  (cdr (assoc 'easy-jekyll-domain
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-amazon-s3-bucket-name
+	  (cdr (assoc 'easy-jekyll-amazon-s3-bucket-name
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-google-cloud-storage-bucket-name
+	  (cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
+		      (nth 1 easy-jekyll-bloglist))))
+    (setq easy-jekyll-github-deploy-script
+	  (cdr (assoc 'easy-jekyll-github-deploy-script
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-image-directory
+	  (cdr (assoc 'easy-jekyll-image-directory
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-default-picture-directory
+	  (cdr (assoc 'easy-jekyll-default-picture-directory
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (setq easy-jekyll-publish-chmod
+	  (cdr (assoc 'easy-jekyll-publish-chmod
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (easy-jekyll--preview-end)
+    (easy-jekyll)))
 
 (defun easy-jekyll-next-postdir ()
   "Go to next postdir."
