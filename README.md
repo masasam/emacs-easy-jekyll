@@ -182,6 +182,10 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 You can install `easy-jekyll.el` from [MELPA](http://melpa.org) with package.el
 (`M-x package-install easy-jekyll`).
 
+Confirm that PATH passes from emacs to jekyll.
+
+I recommend you are going to install [exec-path-from-shell]( https://github.com/purcell/exec-path-from-shell).
+
 ## Sample Configuration
 
 	(setq easy-jekyll-basedir "~/my-awesome-site/")
@@ -348,10 +352,6 @@ sample nginx.conf
 	index   index.html index.htm;
 		}
 	}
-
-Confirm that PATH passes from emacs to jekyll.
-
-I recommend you [exec-path-from-shell]( https://github.com/purcell/exec-path-from-shell).
 
 PPAP blog source code sample for jekyll
 
