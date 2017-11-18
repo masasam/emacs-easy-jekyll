@@ -1083,7 +1083,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	  (cdr (assoc 'easy-jekyll-root
 		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
     (setq easy-jekyll-sshdomain
-	  (cdr (assoc 'easy-jekyll-domain
+	  (cdr (assoc 'easy-jekyll-sshdomain
 		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
     (setq easy-jekyll-amazon-s3-bucket-name
 	  (cdr (assoc 'easy-jekyll-amazon-s3-bucket-name
