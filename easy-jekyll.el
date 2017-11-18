@@ -275,9 +275,6 @@
 (defvar easy-jekyll--current-blog 0
   "Current blog number.")
 
-(defconst easy-jekyll--blog-maximum-number 10
-  "Maximum number of blogs.")
-
 (defcustom easy-jekyll-bloglist nil
   "Multiple blog setting."
   :group 'easy-jekyll
