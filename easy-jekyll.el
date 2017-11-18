@@ -1119,38 +1119,71 @@ Optional prefix ARG says how many lines to move; default is one line."
     (setq easy-jekyll-google-cloud-storage-bucket-name
 	  (cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
 		      (nth 1 easy-jekyll-bloglist))))
-    (unless (cdr (assoc 'easy-jekyll-github-deploy-script
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-github-deploy-script
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-github-deploy-script
+	      (cdr (assoc 'easy-jekyll-github-deploy-script
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-github-deploy-script easy-jekyll--default-github-deploy-script))
-    (unless (cdr (assoc 'easy-jekyll-image-directory
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-image-directory
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-image-directory
+	      (cdr (assoc 'easy-jekyll-image-directory
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-image-directory easy-jekyll--default-image-directory))
-    (unless (cdr (assoc 'easy-jekyll-default-picture-directory
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-default-picture-directory
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-default-picture-directory
+	      (cdr (assoc 'easy-jekyll-default-picture-directory
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-default-picture-directory easy-jekyll--default-picture-directory))
-    (unless (cdr (assoc 'easy-jekyll-publish-chmod
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-publish-chmod
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-publish-chmod
+	      (cdr (assoc 'easy-jekyll-publish-chmod
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-publish-chmod easy-jekyll--default-publish-chmod))
-    (unless (cdr (assoc 'easy-jekyll-previewtime
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-previewtime
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-previewtime
+	      (cdr (assoc 'easy-jekyll-previewtime
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-previewtime easy-jekyll--default-previewtime))
-    (unless (cdr (assoc 'easy-jekyll-preview-url
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-preview-url
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-preview-url
+	      (cdr (assoc 'easy-jekyll-preview-url
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-preview-url easy-jekyll--default-preview-url))
-    (unless (cdr (assoc 'easy-jekyll-sort-default-char
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-sort-default-char
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-sort-default-char
+	      (cdr (assoc 'easy-jekyll-sort-default-char
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-sort-default-char easy-jekyll--default-sort-default-char))
-    (unless (cdr (assoc 'easy-jekyll-textile-extension
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-textile-extension
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-textile-extension
+	      (cdr (assoc 'easy-jekyll-textile-extension
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-textile-extension easy-jekyll--default-textile-extension))
-    (unless (cdr (assoc 'easy-jekyll-markdown-extension
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-markdown-extension
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-markdown-extension
+	      (cdr (assoc 'easy-jekyll-markdown-extension
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-markdown-extension easy-jekyll--default-markdown-extension))
-    (unless (cdr (assoc 'easy-jekyll-default-ext
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-default-ext
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-default-ext
+	      (cdr (assoc 'easy-jekyll-default-ext
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-default-ext easy-jekyll--default-ext))
-    (unless (cdr (assoc 'easy-jekyll-postdir
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-postdir
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-postdir
+	      (cdr (assoc 'easy-jekyll-postdir
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-postdir easy-jekyll--default-postdir))
     (easy-jekyll--preview-end)
     (easy-jekyll)))
@@ -1182,38 +1215,71 @@ Optional prefix ARG says how many lines to move; default is one line."
     (setq easy-jekyll-google-cloud-storage-bucket-name
 	  (cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
 		      (nth 1 easy-jekyll-bloglist))))
-    (unless (cdr (assoc 'easy-jekyll-github-deploy-script
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-github-deploy-script
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-github-deploy-script
+	      (cdr (assoc 'easy-jekyll-github-deploy-script
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-github-deploy-script easy-jekyll--default-github-deploy-script))
-    (unless (cdr (assoc 'easy-jekyll-image-directory
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-image-directory
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-image-directory
+	      (cdr (assoc 'easy-jekyll-image-directory
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-image-directory easy-jekyll--default-image-directory))
-    (unless (cdr (assoc 'easy-jekyll-default-picture-directory
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-default-picture-directory
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-default-picture-directory
+	      (cdr (assoc 'easy-jekyll-default-picture-directory
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-default-picture-directory easy-jekyll--default-picture-directory))
-    (unless (cdr (assoc 'easy-jekyll-publish-chmod
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-publish-chmod
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-publish-chmod
+	      (cdr (assoc 'easy-jekyll-publish-chmod
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-publish-chmod easy-jekyll--default-publish-chmod))
-    (unless (cdr (assoc 'easy-jekyll-previewtime
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-previewtime
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-previewtime
+	      (cdr (assoc 'easy-jekyll-previewtime
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-previewtime easy-jekyll--default-previewtime))
-    (unless (cdr (assoc 'easy-jekyll-preview-url
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-preview-url
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-preview-url
+	      (cdr (assoc 'easy-jekyll-preview-url
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-preview-url easy-jekyll--default-preview-url))
-    (unless (cdr (assoc 'easy-jekyll-sort-default-char
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-sort-default-char
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-sort-default-char
+	      (cdr (assoc 'easy-jekyll-sort-default-char
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-sort-default-char easy-jekyll--default-sort-default-char))
-    (unless (cdr (assoc 'easy-jekyll-textile-extension
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-textile-extension
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-textile-extension
+	      (cdr (assoc 'easy-jekyll-textile-extension
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-textile-extension easy-jekyll--default-textile-extension))
-    (unless (cdr (assoc 'easy-jekyll-markdown-extension
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-markdown-extension
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-markdown-extension
+	      (cdr (assoc 'easy-jekyll-markdown-extension
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-markdown-extension easy-jekyll--default-markdown-extension))
-    (unless (cdr (assoc 'easy-jekyll-default-ext
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-default-ext
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-default-ext
+	      (cdr (assoc 'easy-jekyll-default-ext
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-default-ext easy-jekyll--default-ext))
-    (unless (cdr (assoc 'easy-jekyll-postdir
-			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+    (if (cdr (assoc 'easy-jekyll-postdir
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+	(setq easy-jekyll-postdir
+	      (cdr (assoc 'easy-jekyll-postdir
+			  (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
       (setq easy-jekyll-postdir easy-jekyll--default-postdir))
     (easy-jekyll--preview-end)
     (easy-jekyll)))
