@@ -128,11 +128,6 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-blog-number nil
-  "Number of blogs you want to manage."
-  :group 'easy-jekyll
-  :type 'integer)
-
 (defvar easy-jekyll--current-postdir 0
   "Easy-jekyll current postdir.")
 
