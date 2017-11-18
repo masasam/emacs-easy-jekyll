@@ -133,321 +133,6 @@
   :group 'easy-jekyll
   :type 'integer)
 
-(defcustom easy-jekyll-basedir-1 nil
-  "Blog1 base directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-url-1 nil
-  "Blog1 url."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-root-1 nil
-  "Blog1 root."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-sshdomain-1 nil
-  "Blog1 sshdomain."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-amazon-s3-bucket-name-1 nil
-  "Blog1 amazon s3 bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-google-cloud-storage-bucket-name-1 nil
-  "Blog1 google cloud storage bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-image-directory-1 "images"
-  "Blog1 image file directory under 'static' directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-basedir-2 nil
-  "Blog2 base directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-url-2 nil
-  "Blog2 url."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-root-2 nil
-  "Blog2 root."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-sshdomain-2 nil
-  "Blog2 sshdomain."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-amazon-s3-bucket-name-2 nil
-  "Blog2 amazon s3 bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-google-cloud-storage-bucket-name-2 nil
-  "Blog2 google cloud storage bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-image-directory-2 "images"
-  "Blog2 image file directory under 'static' directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-basedir-3 nil
-  "Blog3 base directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-url-3 nil
-  "Blog3 url."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-root-3 nil
-  "Blog3 root."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-sshdomain-3 nil
-  "Blog3 sshdomain."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-amazon-s3-bucket-name-3 nil
-  "Blog3 amazon s3 bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-google-cloud-storage-bucket-name-3 nil
-  "Blog3 google cloud storage bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-image-directory-3 "images"
-  "Blog3 image file directory under 'static' directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-basedir-4 nil
-  "Blog4 base directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-url-4 nil
-  "Blog4 url."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-root-4 nil
-  "Blog4 root."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-sshdomain-4 nil
-  "Blog4 sshdomain."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-amazon-s3-bucket-name-4 nil
-  "Blog4 amazon s3 bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom  easy-jekyll-google-cloud-storage-bucket-name-4 nil
-  "Blog4 google cloud storage bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-image-directory-4 "images"
-  "Blog4 image file directory under 'static' directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-basedir-5 nil
-  "Blog5 base directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-url-5 nil
-  "Blog5 url."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-root-5 nil
-  "Blog5 root."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-sshdomain-5 nil
-  "Blog5 sshdomain."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-amazon-s3-bucket-name-5 nil
-  "Blog5 amazon s3 bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-google-cloud-storage-bucket-name-5 nil
-  "Blog5 google cloud storage bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-image-directory-5 "images"
-  "Blog5 image file directory under 'static' directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-basedir-6 nil
-  "Blog6 base directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-url-6 nil
-  "Blog6 url."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-root-6 nil
-  "Blog6 root."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-sshdomain-6 nil
-  "Blog6 sshdomain."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-amazon-s3-bucket-name-6 nil
-  "Blog6 amazon s3 bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-google-cloud-storage-bucket-name-6 nil
-  "Blog6 google cloud storage bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-image-directory-6 "images"
-  "Blog6 image file directory under 'static' directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-basedir-7 nil
-  "Blog7 base directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-url-7 nil
-  "Blog7 url."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-root-7 nil
-  "Blog7 root."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-sshdomain-7 nil
-  "Blog7 sshdomain."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-amazon-s3-bucket-name-7 nil
-  "Blog7 amazon s3 bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-google-cloud-storage-bucket-name-7 nil
-  "Blog7 google cloud storage bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-image-directory-7 "images"
-  "Blog7 image file directory under 'static' directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-basedir-8 nil
-  "Blog8 base directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-url-8 nil
-  "Blog8 url."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-root-8 nil
-  "Blog8 root."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-sshdomain-8 nil
-  "Blog8 sshdomain."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom  easy-jekyll-amazon-s3-bucket-name-8 nil
-  "Blog8 amazon s3 bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-google-cloud-storage-bucket-name-8 nil
-  "Blog8 google cloud storage bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-image-directory-8 "images"
-  "Blog8 image file directory under 'static' directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-basedir-9 nil
-  "Blog9 base directory."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-url-9 nil
-  "Blog9 url."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-root-9 nil
-  "Blog9 root."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-sshdomain-9 nil
-  "Blog9 sshdomain."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-amazon-s3-bucket-name-9 nil
-  "Blog9 amazon s3 bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-google-cloud-storage-bucket-name-9 nil
-  "Blog9 google cloud storage bucket name."
-  :group 'easy-jekyll
-  :type 'string)
-
-(defcustom easy-jekyll-image-directory-9 "images"
-  "Blog9 image file directory under 'static' directory."
-  :group 'easy-jekyll
-  :type 'string)
-
 (defvar easy-jekyll--current-postdir 0
   "Easy-jekyll current postdir.")
 
@@ -598,26 +283,22 @@
 (defconst easy-jekyll--blog-maximum-number 10
   "Maximum number of blogs.")
 
-(defconst easy-jekyll--basedir-0 easy-jekyll-basedir
-  "Default blog base directory.")
+(defcustom easy-jekyll-bloglist nil
+  "Multiple blog setting."
+  :group 'easy-jekyll
+  :type 'string)
 
-(defconst easy-jekyll--url-0 easy-jekyll-url
-  "Default blog url.")
-
-(defconst easy-jekyll--root-0 easy-jekyll-root
-  "Default blog root.")
-
-(defconst easy-jekyll--sshdomain-0 easy-jekyll-sshdomain
-  "Default blog sshdomain.")
-
-(defconst easy-jekyll--amazon-s3-bucket-name-0 easy-jekyll-amazon-s3-bucket-name
-  "Default blog amazon s3 bucket name.")
-
-(defconst easy-jekyll--google-cloud-storage-bucket-name-0 easy-jekyll-google-cloud-storage-bucket-name
-  "Default blog google cloud storage bucket name.")
-
-(defconst easy-jekyll--image-directory-0 easy-jekyll-image-directory
-  "Default image file directory under 'static' directory.")
+(push `((easy-jekyll-basedir . ,easy-jekyll-basedir)
+	(easy-jekyll-url . ,easy-jekyll-url)
+	(easy-jekyll-root . ,easy-jekyll-root)
+	(easy-jekyll-sshdomain . ,easy-jekyll-sshdomain)
+	(easy-jekyll-amazon-s3-bucket-name . ,easy-jekyll-amazon-s3-bucket-name)
+	(easy-jekyll-google-cloud-storage-bucket-name . ,easy-jekyll-google-cloud-storage-bucket-name)
+	(easy-jekyll-github-deploy-script . ,easy-jekyll-github-deploy-script)
+	(easy-jekyll-image-directory . ,easy-jekyll-image-directory)
+	(easy-jekyll-default-picture-directory . ,easy-jekyll-default-picture-directory)
+	(easy-jekyll-publish-chmod . ,easy-jekyll-publish-chmod))
+      easy-jekyll-bloglist)
 
 (defconst easy-jekyll--buffer-name "*Easy-jekyll*"
   "Buffer name of easy-jekyll.")
@@ -1385,280 +1066,88 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-next-blog ()
   "Go to next blog."
   (interactive)
-  (if (eq easy-jekyll--blog-maximum-number easy-jekyll--current-blog)
-      (setq easy-jekyll--current-blog 0)
-    (setq easy-jekyll--current-blog (+ easy-jekyll--current-blog 1)))
+  (when (< 1 (length easy-jekyll-bloglist))
+    (if (eq (- (length easy-jekyll-bloglist) 1) easy-jekyll--current-blog)
+	(setq easy-jekyll--current-blog 0)
+      (setq easy-jekyll--current-blog (+ easy-jekyll--current-blog 1))))
   (setq easy-jekyll-postdir easy-jekyll--default-postdir)
   (setq easy-jekyll--postdir-list nil)
   (setq easy-jekyll--current-postdir 0)
-  (cond ((eq easy-jekyll--current-blog 1) (easy-jekyll-1))
-	((eq easy-jekyll--current-blog 2) (easy-jekyll-2))
-	((eq easy-jekyll--current-blog 3) (easy-jekyll-3))
-	((eq easy-jekyll--current-blog 4) (easy-jekyll-4))
-	((eq easy-jekyll--current-blog 5) (easy-jekyll-5))
-	((eq easy-jekyll--current-blog 6) (easy-jekyll-6))
-	((eq easy-jekyll--current-blog 7) (easy-jekyll-7))
-	((eq easy-jekyll--current-blog 8) (easy-jekyll-8))
-	((eq easy-jekyll--current-blog 9) (easy-jekyll-9))
-	((eq easy-jekyll--current-blog 0) (easy-jekyll-0))))
+  (setq easy-jekyll-basedir
+	(cdr (assoc 'easy-jekyll-basedir
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-url
+	(cdr (assoc 'easy-jekyll-url
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-root
+	(cdr (assoc 'easy-jekyll-root
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-sshdomain
+	(cdr (assoc 'easy-jekyll-domain
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-amazon-s3-bucket-name
+	(cdr (assoc 'easy-jekyll-amazon-s3-bucket-name
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-google-cloud-storage-bucket-name
+	(cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
+		    (nth 1 easy-jekyll-bloglist))))
+  (setq easy-jekyll-github-deploy-script
+	(cdr (assoc 'easy-jekyll-github-deploy-script
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-image-directory
+	(cdr (assoc 'easy-jekyll-image-directory
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-default-picture-directory
+	(cdr (assoc 'easy-jekyll-default-picture-directory
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-publish-chmod
+	(cdr (assoc 'easy-jekyll-publish-chmod
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (easy-jekyll--preview-end)
+  (easy-jekyll))
 
 (defun easy-jekyll-previous-blog ()
   "Go to previous blog."
   (interactive)
-  (if (> 0 (- easy-jekyll--current-blog 1))
-      (when easy-jekyll-blog-number
-	(setq easy-jekyll--current-blog (- easy-jekyll-blog-number 1)))
-    (setq easy-jekyll--current-blog (- easy-jekyll--current-blog 1)))
+  (when (< 1 (length easy-jekyll-bloglist))
+    (if (= 0 easy-jekyll--current-blog)
+	(setq easy-jekyll--current-blog (- (length easy-jekyll-bloglist) 1))
+      (setq easy-jekyll--current-blog (- easy-jekyll--current-blog 1))))
   (setq easy-jekyll-postdir easy-jekyll--default-postdir)
   (setq easy-jekyll--postdir-list nil)
   (setq easy-jekyll--current-postdir 0)
-  (cond ((eq easy-jekyll--current-blog 1) (easy-jekyll-1))
-	((eq easy-jekyll--current-blog 2) (easy-jekyll-2))
-	((eq easy-jekyll--current-blog 3) (easy-jekyll-3))
-	((eq easy-jekyll--current-blog 4) (easy-jekyll-4))
-	((eq easy-jekyll--current-blog 5) (easy-jekyll-5))
-	((eq easy-jekyll--current-blog 6) (easy-jekyll-6))
-	((eq easy-jekyll--current-blog 7) (easy-jekyll-7))
-	((eq easy-jekyll--current-blog 8) (easy-jekyll-8))
-	((eq easy-jekyll--current-blog 9) (easy-jekyll-9))
-	((eq easy-jekyll--current-blog 0) (easy-jekyll-0))))
-
-(defun easy-jekyll-0 ()
-  "Default blog."
-  (interactive)
-  (setq easy-jekyll-basedir easy-jekyll--basedir-0
-        easy-jekyll-url easy-jekyll--url-0
-        easy-jekyll-root easy-jekyll--root-0
-	easy-jekyll-sshdomain easy-jekyll--sshdomain-0
-	easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	easy-jekyll-image-directory easy-jekyll--image-directory-0)
+  (setq easy-jekyll-basedir
+	(cdr (assoc 'easy-jekyll-basedir
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-url
+	(cdr (assoc 'easy-jekyll-url
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-root
+	(cdr (assoc 'easy-jekyll-root
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-sshdomain
+	(cdr (assoc 'easy-jekyll-domain
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-amazon-s3-bucket-name
+	(cdr (assoc 'easy-jekyll-amazon-s3-bucket-name
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-google-cloud-storage-bucket-name
+	(cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
+		    (nth 1 easy-jekyll-bloglist))))
+  (setq easy-jekyll-github-deploy-script
+	(cdr (assoc 'easy-jekyll-github-deploy-script
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-image-directory
+	(cdr (assoc 'easy-jekyll-image-directory
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-default-picture-directory
+	(cdr (assoc 'easy-jekyll-default-picture-directory
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+  (setq easy-jekyll-publish-chmod
+	(cdr (assoc 'easy-jekyll-publish-chmod
+		    (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
   (easy-jekyll--preview-end)
   (easy-jekyll))
-
-(defun easy-jekyll-1 ()
-  "Blog1."
-  (interactive)
-  (if (or (null easy-jekyll-basedir-1) (null easy-jekyll-url-1))
-      (setq easy-jekyll--current-blog 0)
-    (progn
-      (setq easy-jekyll-basedir easy-jekyll-basedir-1
-	    easy-jekyll-url easy-jekyll-url-1
-	    easy-jekyll-root easy-jekyll-root-1
-	    easy-jekyll-sshdomain easy-jekyll-sshdomain-1
-	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-1
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-1
-	    easy-jekyll-image-directory easy-jekyll-image-directory-1)
-      (easy-jekyll--preview-end)
-      (easy-jekyll))))
-
-(defun easy-jekyll-2 ()
-  "Blog2."
-  (interactive)
-  (if (or (null easy-jekyll-basedir-2) (null easy-jekyll-url-2))
-      (progn
-	(setq easy-jekyll--current-blog 0)
-	(setq easy-jekyll-basedir easy-jekyll--basedir-0
-	      easy-jekyll-url easy-jekyll--url-0
-	      easy-jekyll-root easy-jekyll--root-0
-	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
-	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
-	(easy-jekyll--preview-end)
-	(easy-jekyll))
-    (progn
-      (setq easy-jekyll-basedir easy-jekyll-basedir-2
-	    easy-jekyll-url easy-jekyll-url-2
-	    easy-jekyll-root easy-jekyll-root-2
-	    easy-jekyll-sshdomain easy-jekyll-sshdomain-2
-	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-2
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-2
-	    easy-jekyll-image-directory easy-jekyll-image-directory-2)
-      (easy-jekyll--preview-end)
-      (easy-jekyll))))
-
-(defun easy-jekyll-3 ()
-  "Blog3."
-  (interactive)
-  (if (or (null easy-jekyll-basedir-3) (null easy-jekyll-url-3))
-      (progn
-	(setq easy-jekyll--current-blog 0)
-	(setq easy-jekyll-basedir easy-jekyll--basedir-0
-	      easy-jekyll-url easy-jekyll--url-0
-	      easy-jekyll-root easy-jekyll--root-0
-	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
-	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
-	(easy-jekyll--preview-end)
-	(easy-jekyll))
-    (progn
-      (setq easy-jekyll-basedir easy-jekyll-basedir-3
-	    easy-jekyll-url easy-jekyll-url-3
-	    easy-jekyll-root easy-jekyll-root-3
-	    easy-jekyll-sshdomain easy-jekyll-sshdomain-3
-	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-3
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-3
-	    easy-jekyll-image-directory easy-jekyll-image-directory-3)
-      (easy-jekyll--preview-end)
-      (easy-jekyll))))
-
-(defun easy-jekyll-4 ()
-  "Blog4."
-  (interactive)
-  (if (or (null easy-jekyll-basedir-4) (null easy-jekyll-url-4))
-      (progn
-	(setq easy-jekyll--current-blog 0)
-	(setq easy-jekyll-basedir easy-jekyll--basedir-0
-	      easy-jekyll-url easy-jekyll--url-0
-	      easy-jekyll-root easy-jekyll--root-0
-	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
-	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
-	(easy-jekyll--preview-end)
-	(easy-jekyll))
-    (progn
-      (setq easy-jekyll-basedir easy-jekyll-basedir-4
-	    easy-jekyll-url easy-jekyll-url-4
-	    easy-jekyll-root easy-jekyll-root-4
-	    easy-jekyll-sshdomain easy-jekyll-sshdomain-4
-	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-4
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-4
-	    easy-jekyll-image-directory easy-jekyll-image-directory-4)
-      (easy-jekyll--preview-end)
-      (easy-jekyll))))
-
-(defun easy-jekyll-5 ()
-  "Blog5."
-  (interactive)
-  (if (or (null easy-jekyll-basedir-5) (null easy-jekyll-url-5))
-      (progn
-	(setq easy-jekyll--current-blog 0)
-	(setq easy-jekyll-basedir easy-jekyll--basedir-0
-	      easy-jekyll-url easy-jekyll--url-0
-	      easy-jekyll-root easy-jekyll--root-0
-	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
-	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
-	(easy-jekyll--preview-end)
-	(easy-jekyll))
-    (progn
-      (setq easy-jekyll-basedir easy-jekyll-basedir-5
-	    easy-jekyll-url easy-jekyll-url-5
-	    easy-jekyll-root easy-jekyll-root-5
-	    easy-jekyll-sshdomain easy-jekyll-sshdomain-5
-	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-5
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-5
-	    easy-jekyll-image-directory easy-jekyll-image-directory-5)
-      (easy-jekyll--preview-end)
-      (easy-jekyll))))
-
-(defun easy-jekyll-6 ()
-  "Blog6."
-  (interactive)
-  (if (or (null easy-jekyll-basedir-6) (null easy-jekyll-url-6))
-      (progn
-	(setq easy-jekyll--current-blog 0)
-	(setq easy-jekyll-basedir easy-jekyll--basedir-0
-	      easy-jekyll-url easy-jekyll--url-0
-	      easy-jekyll-root easy-jekyll--root-0
-	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
-	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
-	(easy-jekyll--preview-end)
-	(easy-jekyll))
-    (progn
-      (setq easy-jekyll-basedir easy-jekyll-basedir-6
-	    easy-jekyll-url easy-jekyll-url-6
-	    easy-jekyll-root easy-jekyll-root-6
-	    easy-jekyll-sshdomain easy-jekyll-sshdomain-6
-	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-6
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-6
-	    easy-jekyll-image-directory easy-jekyll-image-directory-6)
-      (easy-jekyll--preview-end)
-      (easy-jekyll))))
-
-(defun easy-jekyll-7 ()
-  "Blog7."
-  (interactive)
-  (if (or (null easy-jekyll-basedir-7) (null easy-jekyll-url-7))
-      (progn
-	(setq easy-jekyll--current-blog 0)
-	(setq easy-jekyll-basedir easy-jekyll--basedir-0
-	      easy-jekyll-url easy-jekyll--url-0
-	      easy-jekyll-root easy-jekyll--root-0
-	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
-	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
-	(easy-jekyll--preview-end)
-	(easy-jekyll))
-    (progn
-      (setq easy-jekyll-basedir easy-jekyll-basedir-7
-	    easy-jekyll-url easy-jekyll-url-7
-	    easy-jekyll-root easy-jekyll-root-7
-	    easy-jekyll-sshdomain easy-jekyll-sshdomain-7
-	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-7
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-7
-	    easy-jekyll-image-directory easy-jekyll-image-directory-7)
-      (easy-jekyll--preview-end)
-      (easy-jekyll))))
-
-(defun easy-jekyll-8 ()
-  "Blog8."
-  (interactive)
-  (if (or (null easy-jekyll-basedir-8) (null easy-jekyll-url-8))
-      (progn
-	(setq easy-jekyll--current-blog 0)
-	(setq easy-jekyll-basedir easy-jekyll--basedir-0
-	      easy-jekyll-url easy-jekyll--url-0
-	      easy-jekyll-root easy-jekyll--root-0
-	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
-	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
-	(easy-jekyll--preview-end)
-	(easy-jekyll))
-    (progn
-      (setq easy-jekyll-basedir easy-jekyll-basedir-8
-	    easy-jekyll-url easy-jekyll-url-8
-	    easy-jekyll-root easy-jekyll-root-8
-	    easy-jekyll-sshdomain easy-jekyll-sshdomain-8
-	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-8
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-8
-	    easy-jekyll-image-directory easy-jekyll-image-directory-8)
-      (easy-jekyll--preview-end)
-      (easy-jekyll))))
-
-(defun easy-jekyll-9 ()
-  "Blog9."
-  (interactive)
-  (if (or (null easy-jekyll-basedir-9) (null easy-jekyll-url-9))
-      (progn
-	(setq easy-jekyll--current-blog 0)
-	(setq easy-jekyll-basedir easy-jekyll--basedir-0
-	      easy-jekyll-url easy-jekyll--url-0
-	      easy-jekyll-root easy-jekyll--root-0
-	      easy-jekyll-sshdomain easy-jekyll--sshdomain-0
-	      easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-0
-	      easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-0
-	      easy-jekyll-image-directory easy-jekyll--image-directory-0)
-	(easy-jekyll--preview-end)
-	(easy-jekyll))
-    (progn
-      (setq easy-jekyll-basedir easy-jekyll-basedir-9
-	    easy-jekyll-url easy-jekyll-url-9
-	    easy-jekyll-root easy-jekyll-root-9
-	    easy-jekyll-sshdomain easy-jekyll-sshdomain-9
-	    easy-jekyll-amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name-9
-	    easy-jekyll-google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name-9
-	    easy-jekyll-image-directory easy-jekyll-image-directory-9)
-      (easy-jekyll--preview-end)
-      (easy-jekyll))))
 
 (defun easy-jekyll-next-postdir ()
   "Go to next postdir."
