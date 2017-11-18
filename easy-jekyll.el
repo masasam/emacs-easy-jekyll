@@ -295,7 +295,8 @@
 	(easy-jekyll-sort-default-char . ,easy-jekyll-sort-default-char)
 	(easy-jekyll-textile-extension . ,easy-jekyll-textile-extension)
 	(easy-jekyll-markdown-extension . ,easy-jekyll-markdown-extension)
-	(easy-jekyll-default-ext . ,easy-jekyll-default-ext))
+	(easy-jekyll-default-ext . ,easy-jekyll-default-ext)
+	(easy-jekyll-postdir . ,easy-jekyll-postdir))
       easy-jekyll-bloglist)
 
 (defconst easy-jekyll--buffer-name "*Easy-jekyll*"
