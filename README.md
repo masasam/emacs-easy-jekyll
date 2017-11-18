@@ -28,8 +28,6 @@ You can write a blog with markdown.
 
 If you enter '.textile' file name in the minibuffer, textile file is automatically generated and you can write a blog with textile.
 
-![easy-jekyll-textile](image/textile.png)
-
     M-x easy-jekyll-preview
 
 ![easy-jekyll2](image/easy-jekyll2.png)
