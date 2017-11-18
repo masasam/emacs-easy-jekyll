@@ -298,6 +298,18 @@
 (defconst easy-jekyll--forward-char 20
   "Forward-char of easy-jekyll.")
 
+(defconst easy-jekyll--default-github-deploy-script easy-jekyll-github-deploy-script
+  "Default easy-jekyll github-deploy-script.")
+
+(defconst easy-jekyll--default-image-directory easy-jekyll-image-directory
+  "Default easy-jekyll image-directory.")
+
+(defconst easy-jekyll--default-picture-directory easy-jekyll-default-picture-directory
+  "Default easy-jekyll picture-directory.")
+
+(defconst easy-jekyll--default-publish-chmod easy-jekyll-publish-chmod
+  "Default easy-jekyll publish-chmod.")
+
 (defconst easy-jekyll--default-postdir easy-jekyll-postdir
   "Default easy-jekyll-postdir.")
 
@@ -1083,18 +1095,18 @@ Optional prefix ARG says how many lines to move; default is one line."
     (setq easy-jekyll-google-cloud-storage-bucket-name
 	  (cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
 		      (nth 1 easy-jekyll-bloglist))))
-    (setq easy-jekyll-github-deploy-script
-	  (cdr (assoc 'easy-jekyll-github-deploy-script
-		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-    (setq easy-jekyll-image-directory
-	  (cdr (assoc 'easy-jekyll-image-directory
-		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-    (setq easy-jekyll-default-picture-directory
-	  (cdr (assoc 'easy-jekyll-default-picture-directory
-		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-    (setq easy-jekyll-publish-chmod
-	  (cdr (assoc 'easy-jekyll-publish-chmod
-		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (unless (cdr (assoc 'easy-jekyll-github-deploy-script
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-github-deploy-script easy-jekyll--default-github-deploy-script))
+    (unless (cdr (assoc 'easy-jekyll-image-directory
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-image-directory easy-jekyll--default-image-directory))
+    (unless (cdr (assoc 'easy-jekyll-default-picture-directory
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-default-picture-directory easy-jekyll--default-picture-directory))
+    (unless (cdr (assoc 'easy-jekyll-publish-chmod
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-publish-chmod easy-jekyll--default-publish-chmod))
     (easy-jekyll--preview-end)
     (easy-jekyll)))
 
@@ -1126,18 +1138,18 @@ Optional prefix ARG says how many lines to move; default is one line."
     (setq easy-jekyll-google-cloud-storage-bucket-name
 	  (cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
 		      (nth 1 easy-jekyll-bloglist))))
-    (setq easy-jekyll-github-deploy-script
-	  (cdr (assoc 'easy-jekyll-github-deploy-script
-		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-    (setq easy-jekyll-image-directory
-	  (cdr (assoc 'easy-jekyll-image-directory
-		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-    (setq easy-jekyll-default-picture-directory
-	  (cdr (assoc 'easy-jekyll-default-picture-directory
-		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
-    (setq easy-jekyll-publish-chmod
-	  (cdr (assoc 'easy-jekyll-publish-chmod
-		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+    (unless (cdr (assoc 'easy-jekyll-github-deploy-script
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-github-deploy-script easy-jekyll--default-github-deploy-script))
+    (unless (cdr (assoc 'easy-jekyll-image-directory
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-image-directory easy-jekyll--default-image-directory))
+    (unless (cdr (assoc 'easy-jekyll-default-picture-directory
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-default-picture-directory easy-jekyll--default-picture-directory))
+    (unless (cdr (assoc 'easy-jekyll-publish-chmod
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-publish-chmod easy-jekyll--default-publish-chmod))
     (easy-jekyll--preview-end)
     (easy-jekyll)))
 
