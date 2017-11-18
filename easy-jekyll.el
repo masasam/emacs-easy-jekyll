@@ -254,8 +254,8 @@
 				 ,easy-jekyll-textile-extension))
 
 (defface easy-jekyll-help-face
-  '((((class color) (background light)) (:bold t :foreground "#ff3030" :background "#f0f8ff"))
-    (((class color) (background dark)) (:bold t :foreground "#ff3030" :background "#2f4f4f")))
+  '((((class color) (background light)) (:inherit font-lock-function-name-face :background "#f0f8ff"))
+    (((class color) (background dark)) (:inherit font-lock-function-name-face :background "#2f4f4f")))
   ""
   :group 'easy-jekyll-faces)
 
