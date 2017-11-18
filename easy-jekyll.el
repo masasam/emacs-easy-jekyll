@@ -289,7 +289,13 @@
 	(easy-jekyll-github-deploy-script . ,easy-jekyll-github-deploy-script)
 	(easy-jekyll-image-directory . ,easy-jekyll-image-directory)
 	(easy-jekyll-default-picture-directory . ,easy-jekyll-default-picture-directory)
-	(easy-jekyll-publish-chmod . ,easy-jekyll-publish-chmod))
+	(easy-jekyll-publish-chmod . ,easy-jekyll-publish-chmod)
+	(easy-jekyll-previewtime . ,easy-jekyll-previewtime)
+	(easy-jekyll-preview-url . ,easy-jekyll-preview-url)
+	(easy-jekyll-sort-default-char . ,easy-jekyll-sort-default-char)
+	(easy-jekyll-textile-extension . ,easy-jekyll-textile-extension)
+	(easy-jekyll-markdown-extension . ,easy-jekyll-markdown-extension)
+	(easy-jekyll-default-ext . ,easy-jekyll-default-ext))
       easy-jekyll-bloglist)
 
 (defconst easy-jekyll--buffer-name "*Easy-jekyll*"
@@ -312,6 +318,24 @@
 
 (defconst easy-jekyll--default-postdir easy-jekyll-postdir
   "Default easy-jekyll-postdir.")
+
+(defconst easy-jekyll--default-previewtime easy-jekyll-previewtime
+  "Default easy-jekyll previewtime.")
+
+(defconst easy-jekyll--default-preview-url easy-jekyll-preview-url
+  "Default easy-jekyll preview-url.")
+
+(defconst easy-jekyll--default-sort-default-char easy-jekyll-sort-default-char
+  "Default easy-jekyll sort-default-char.")
+
+(defconst easy-jekyll--default-textile-extension easy-jekyll-textile-extension
+  "Default easy-jekyll textile-extension.")
+
+(defconst easy-jekyll--default-markdown-extension easy-jekyll-markdown-extension
+  "Default easy-jekyll markdown-extension.")
+
+(defconst easy-jekyll--default-ext easy-jekyll-default-ext
+  "Default easy-jekyll default-ext.")
 
 ;;;###autoload
 (defun easy-jekyll-article ()
@@ -1074,7 +1098,6 @@ Optional prefix ARG says how many lines to move; default is one line."
     (if (eq (- (length easy-jekyll-bloglist) 1) easy-jekyll--current-blog)
 	(setq easy-jekyll--current-blog 0)
       (setq easy-jekyll--current-blog (+ easy-jekyll--current-blog 1)))
-    (setq easy-jekyll-postdir easy-jekyll--default-postdir)
     (setq easy-jekyll--postdir-list nil)
     (setq easy-jekyll--current-postdir 0)
     (setq easy-jekyll-basedir
@@ -1107,6 +1130,27 @@ Optional prefix ARG says how many lines to move; default is one line."
     (unless (cdr (assoc 'easy-jekyll-publish-chmod
 			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
       (setq easy-jekyll-publish-chmod easy-jekyll--default-publish-chmod))
+    (unless (cdr (assoc 'easy-jekyll-previewtime
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-previewtime easy-jekyll--default-previewtime))
+    (unless (cdr (assoc 'easy-jekyll-preview-url
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-preview-url easy-jekyll--default-preview-url))
+    (unless (cdr (assoc 'easy-jekyll-sort-default-char
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-sort-default-char easy-jekyll--default-sort-default-char))
+    (unless (cdr (assoc 'easy-jekyll-textile-extension
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-textile-extension easy-jekyll--default-textile-extension))
+    (unless (cdr (assoc 'easy-jekyll-markdown-extension
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-markdown-extension easy-jekyll--default-markdown-extension))
+    (unless (cdr (assoc 'easy-jekyll-default-ext
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-default-ext easy-jekyll--default-ext))
+    (unless (cdr (assoc 'easy-jekyll-postdir
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-postdir easy-jekyll--default-postdir))
     (easy-jekyll--preview-end)
     (easy-jekyll)))
 
@@ -1117,7 +1161,6 @@ Optional prefix ARG says how many lines to move; default is one line."
     (if (= 0 easy-jekyll--current-blog)
 	(setq easy-jekyll--current-blog (- (length easy-jekyll-bloglist) 1))
       (setq easy-jekyll--current-blog (- easy-jekyll--current-blog 1)))
-    (setq easy-jekyll-postdir easy-jekyll--default-postdir)
     (setq easy-jekyll--postdir-list nil)
     (setq easy-jekyll--current-postdir 0)
     (setq easy-jekyll-basedir
@@ -1150,6 +1193,27 @@ Optional prefix ARG says how many lines to move; default is one line."
     (unless (cdr (assoc 'easy-jekyll-publish-chmod
 			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
       (setq easy-jekyll-publish-chmod easy-jekyll--default-publish-chmod))
+    (unless (cdr (assoc 'easy-jekyll-previewtime
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-previewtime easy-jekyll--default-previewtime))
+    (unless (cdr (assoc 'easy-jekyll-preview-url
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-preview-url easy-jekyll--default-preview-url))
+    (unless (cdr (assoc 'easy-jekyll-sort-default-char
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-sort-default-char easy-jekyll--default-sort-default-char))
+    (unless (cdr (assoc 'easy-jekyll-textile-extension
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-textile-extension easy-jekyll--default-textile-extension))
+    (unless (cdr (assoc 'easy-jekyll-markdown-extension
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-markdown-extension easy-jekyll--default-markdown-extension))
+    (unless (cdr (assoc 'easy-jekyll-default-ext
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-default-ext easy-jekyll--default-ext))
+    (unless (cdr (assoc 'easy-jekyll-postdir
+			(nth easy-jekyll--current-blog easy-jekyll-bloglist)))
+      (setq easy-jekyll-postdir easy-jekyll--default-postdir))
     (easy-jekyll--preview-end)
     (easy-jekyll)))
 
