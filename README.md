@@ -265,7 +265,7 @@ Example of multiple blogs setting
 		'(((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll2/")
 		(easy-jekyll-url . "http://example2.com")
 		(easy-jekyll-sshdomain . "myblogdomain")
-		(easy-jekyll-root . "/home/jekyll"))
+		(easy-jekyll-root . "/home/jekyll/"))
 		;; blog3 setting
 		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll3/")
 		(easy-jekyll-url . "http://example3.net")
