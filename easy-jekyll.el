@@ -299,12 +299,6 @@
 	(easy-jekyll-postdir . ,easy-jekyll-postdir))
       easy-jekyll-bloglist)
 
-(defconst easy-jekyll--buffer-name "*Easy-jekyll*"
-  "Buffer name of easy-jekyll.")
-
-(defconst easy-jekyll--forward-char 20
-  "Forward-char of easy-jekyll.")
-
 (defconst easy-jekyll--default-github-deploy-script easy-jekyll-github-deploy-script
   "Default easy-jekyll github-deploy-script.")
 
@@ -316,9 +310,6 @@
 
 (defconst easy-jekyll--default-publish-chmod easy-jekyll-publish-chmod
   "Default easy-jekyll publish-chmod.")
-
-(defconst easy-jekyll--default-postdir easy-jekyll-postdir
-  "Default easy-jekyll-postdir.")
 
 (defconst easy-jekyll--default-previewtime easy-jekyll-previewtime
   "Default easy-jekyll previewtime.")
@@ -337,6 +328,15 @@
 
 (defconst easy-jekyll--default-ext easy-jekyll-default-ext
   "Default easy-jekyll default-ext.")
+
+(defconst easy-jekyll--default-postdir easy-jekyll-postdir
+  "Default easy-jekyll-postdir.")
+
+(defconst easy-jekyll--buffer-name "*Easy-jekyll*"
+  "Buffer name of easy-jekyll.")
+
+(defconst easy-jekyll--forward-char 20
+  "Forward-char of easy-jekyll.")
 
 ;;;###autoload
 (defun easy-jekyll-article ()
