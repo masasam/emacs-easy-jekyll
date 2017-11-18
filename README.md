@@ -119,6 +119,10 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 
 |key    |function      |
 |-------|--------------|
+|.      | easy-jekyll-next-postdir|
+|,      |easy-jekyll-previous-postdir|
+|+      |easy-jekyll-next-postdir|
+|-      |easy-jekyll-previous-postdir|
 |o		|easy-jekyll-open|
 |e      |easy-jekyll-open|
 |f		|easy-jekyll-open|
