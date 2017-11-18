@@ -244,7 +244,7 @@ Setting the picture directory of your PC, it is easy to execute M-x easy-jekyll-
 
 If you want to manage multiple blogs.
 
-Example of setting when adding two blogs and managing a total of three blogs.
+Example of multiple blogs setting
 
 	;; Main blog
 	(setq easy-jekyll-basedir "~/my-awesome-site/")
@@ -253,39 +253,24 @@ Example of setting when adding two blogs and managing a total of three blogs.
 	(setq easy-jekyll-root "/home/blog/")
 	(setq easy-jekyll-previewtime "300")
 	(define-key global-map (kbd "C-c C-e") 'easy-jekyll)
-	;; Total number of blogs
-	(setq easy-jekyll-blog-number 3)
-	;; Blog1
-	(setq easy-jekyll-basedir-1 "~/src/github.com/masasam/jekyll1/")
-	(setq easy-jekyll-url-1 "http://example1.com")
-	(setq easy-jekyll-root-1 "/home/blog/")
-	(setq easy-jekyll-sshdomain-1 "blog1domain")
-	;; Blog2
-	(setq easy-jekyll-basedir-2 "~/src/github.com/masasam/jekyll2/")
-	(setq easy-jekyll-url-2 "http://example2.com")
-	(setq easy-jekyll-amazon-s3-bucket-name-2 "blogbucket")
 
-A total of until 10 blogs can be managed.
+	(setq easy-jekyll-bloglist
+		;; blog2 setting
+		'(((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll2/")
+		(easy-jekyll-url . "http://example2.com")
+		(easy-jekyll-sshdomain . "myblogdomain")
+		(easy-jekyll-root . "/home/jekyll"))
+		;; blog3 setting
+		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll3/")
+		(easy-jekyll-url . "http://example3.net")
+		(easy-jekyll-amazon-s3-bucket-name . "yours3bucketname"))
+		;; blog4 setting
+		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll4/")
+		(easy-jekyll-url . "http://example4.net")
+		(easy-jekyll-google-cloud-storage-bucket-name . "yourGCPbucketname")
+		(easy-jekyll-image-directory . "img"))))
 
-Please set necessary variables and use.
-
-	easy-jekyll-basedir-1
-	easy-jekyll-url-1
-	easy-jekyll-root-1
-	easy-jekyll-sshdomain-1
-	easy-jekyll-amazon-s3-bucket-name-1
-	easy-jekyll-google-cloud-storage-bucket-name-1
-	easy-jekyll-image-directory-1
-
-	..............
-
-	easy-jekyll-basedir-9
-	easy-jekyll-url-9
-	easy-jekyll-root-9
-	easy-jekyll-sshdomain-9
-	easy-jekyll-amazon-s3-bucket-name-9
-	easy-jekyll-google-cloud-storage-bucket-name-9
-	easy-jekyll-image-directory-9
+You can manage as many blogs as you like.
 
 If you want change markdown filename extension, please select markdown.
 Because only markdown is supported by jekyll. If not set markdown filename extension will be 'md'.
@@ -298,6 +283,8 @@ Install jekyll and bundler
 
 	gem install jekyll bundler
 	jekyll new my-awesome-site
+	cd my-awesome-site
+	bundle install --path vendor/bundle
 
 See https://jekyllrb.com/
 
