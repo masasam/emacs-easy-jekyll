@@ -73,6 +73,15 @@ Deploy jekyll source at Amazon S3.
 
 Deploy jekyll source at Google Cloud Storage.
 
+	M-x easy-jekyll-next-postdir
+	M-x easy-jekyll-previous-postdir
+
+With this you can go to a directory other than _post.
+
+	M-x easy-jekyll-nth-blog
+
+You can move to a blog with the specified number.
+
 	M-x easy-jekyll-image
 
 Generate link of image from image file directory under 'easy-jekyll-image-directory' directory.
