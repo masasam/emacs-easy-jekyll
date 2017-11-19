@@ -147,6 +147,7 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |c		|easy-jekyll-open-config|
 |d		|easy-jekyll-delete|
 |g		|easy-jekyll-refresh|
+|J		|easy-jekyll-nth-blog|
 |h		|easy-jekyll-backward-char|
 |j		|easy-jekyll-next-line|
 |k		|easy-jekyll-previous-line|
