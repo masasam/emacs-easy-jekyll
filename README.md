@@ -248,7 +248,7 @@ If you want customise color, write the following in the init.el or .emacs.
 
 In order to generate link of image from image file directory under 'easy-jekyll-image-directory' directory,
 
-If you want to change image file directory under 'images' directory.
+If you want to change image file directory.
 
 If not set the default image file directory will be 'images'.
 
