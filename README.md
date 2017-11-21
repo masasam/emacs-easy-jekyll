@@ -205,7 +205,7 @@ I recommend you are going to install [exec-path-from-shell]( https://github.com/
 	(setq easy-jekyll-previewtime "300")
 	(define-key global-map (kbd "C-c C-e") 'easy-jekyll)
 
-If you use use-package, Please write them all in :init.
+If you use [use-package](https://github.com/jwiegley/use-package), please write them all in :init.
 
 	(use-package easy-jekyll
 	:init
@@ -297,7 +297,7 @@ Example of multiple blogs setting
 		(easy-jekyll-google-cloud-storage-bucket-name . "yourGCPbucketname")
 		(easy-jekyll-image-directory . "img"))))
 
-If you use use-package, Please write them all in :init.
+If you use [use-package](https://github.com/jwiegley/use-package), please write them all in :init.
 
 	(use-package easy-jekyll
 	:init
