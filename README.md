@@ -205,6 +205,17 @@ I recommend you are going to install [exec-path-from-shell]( https://github.com/
 	(setq easy-jekyll-previewtime "300")
 	(define-key global-map (kbd "C-c C-e") 'easy-jekyll)
 
+If you use use-package, Please write them all in :init.
+
+	(use-package easy-jekyll
+	:init
+	(setq easy-jekyll-basedir "~/my-awesome-site/")
+	(setq easy-jekyll-url "https://yourblogdomain")
+	(setq easy-jekyll-sshdomain "blogdomain")
+	(setq easy-jekyll-root "/home/blog/")
+	(setq easy-jekyll-previewtime "300")
+	:bind ("C-c C-e" . easy-jekyll))
+
 easy-jekyll-basedir "Directory where jekyll html source code is placed on your PC."
 
 easy-jekyll-url "Url of the blog."
@@ -285,6 +296,35 @@ Example of multiple blogs setting
 		(easy-jekyll-url . "http://example4.net")
 		(easy-jekyll-google-cloud-storage-bucket-name . "yourGCPbucketname")
 		(easy-jekyll-image-directory . "img"))))
+
+If you use use-package, Please write them all in :init.
+
+	(use-package easy-jekyll
+	:init
+	;; Main blog
+	(setq easy-jekyll-basedir "~/my-awesome-site/")
+	(setq easy-jekyll-url "https://yourblogdomain")
+	(setq easy-jekyll-sshdomain "blogdomain")
+	(setq easy-jekyll-root "/home/blog/")
+	(setq easy-jekyll-previewtime "300")
+	(define-key global-map (kbd "C-c C-e") 'easy-jekyll)
+
+	(setq easy-jekyll-bloglist
+		;; blog2 setting
+		'(((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll2/")
+		(easy-jekyll-url . "http://example2.com")
+		(easy-jekyll-sshdomain . "myblogdomain")
+		(easy-jekyll-root . "/home/jekyll/"))
+		;; blog3 setting
+		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll3/")
+		(easy-jekyll-url . "http://example3.net")
+		(easy-jekyll-amazon-s3-bucket-name . "yours3bucketname"))
+		;; blog4 setting
+		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll4/")
+		(easy-jekyll-url . "http://example4.net")
+		(easy-jekyll-google-cloud-storage-bucket-name . "yourGCPbucketname")
+		(easy-jekyll-image-directory . "img"))))
+	:bind ("C-c C-e" . easy-jekyll))
 
 You can manage as many blogs as you like.
 
