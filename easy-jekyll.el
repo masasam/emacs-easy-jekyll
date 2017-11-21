@@ -745,7 +745,7 @@ O .. Open basedir     S .. Sort char     N .. No help-mode     q .. Quit easy-je
     (progn
       "n .. New blog post    R .. Rename file   G .. Deploy GitHub    ? .. Help easy-jekyll
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
-v .. Open view-mode   D .. Draft list    T .. Publish timer    q .. Quit easy-jekyll
+v .. Open view-mode   D .. Draft list    T .. Publish timer    S .. Sort time
 d .. Delete post      c .. Open config   u .. Undraft file     I .. GCS timer
 P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
