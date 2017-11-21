@@ -730,7 +730,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 	  (find-file (expand-file-name "_config.yml" easy-jekyll-basedir)))
 	 (t (error "Jekyll config file not found at %s" easy-jekyll-basedir)))))
 
-(defconst easy-jekyll--help
+(defcustom easy-jekyll-help
   (if (null easy-jekyll-sort-default-char)
       (progn
 	"n .. New blog post    R .. Rename file   G .. Deploy GitHub    ? .. Help easy-jekyll
@@ -752,7 +752,9 @@ P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. GitHub timer
 O .. Open basedir     W .. AWS S3 timer  N .. No help-mode     q .. Quit easy-jekyll
 
 "))
-  "Help of easy-jekyll.")
+  "Help of easy-jekyll."
+  :group 'easy-jekyll
+  :type 'string)
 
 (defconst easy-jekyll--first-help
   "Welcome to Easy-jekyll
@@ -1418,7 +1420,7 @@ Optional prefix ARG says how many lines to move; default is one line."
    (erase-buffer)
    (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url easy-jekyll--draft-mode "\n\n") 'face 'easy-jekyll-help-face))
    (unless easy-jekyll-no-help
-     (insert (propertize easy-jekyll--help 'face 'easy-jekyll-help-face)))
+     (insert (propertize easy-jekyll-help 'face 'easy-jekyll-help-face)))
    (unless easy-jekyll--refresh
      (setq easy-jekyll--cursor (point)))
    (let ((files (directory-files (expand-file-name "_drafts" easy-jekyll-basedir)))
@@ -1476,7 +1478,7 @@ Optional prefix ARG says how many lines to move; default is one line."
        (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url "\n\n") 'face 'easy-jekyll-help-face))
      (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url "/" easy-jekyll-postdir "\n\n") 'face 'easy-jekyll-help-face)))
    (unless easy-jekyll-no-help
-     (insert (propertize easy-jekyll--help 'face 'easy-jekyll-help-face)))
+     (insert (propertize easy-jekyll-help 'face 'easy-jekyll-help-face)))
    (unless easy-jekyll--refresh
      (setq easy-jekyll--cursor (point)))
    (let ((files (directory-files (expand-file-name easy-jekyll-postdir easy-jekyll-basedir)))
