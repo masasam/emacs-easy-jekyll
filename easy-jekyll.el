@@ -98,7 +98,7 @@
   :group 'easy-jekyll
   :type 'integer)
 
-(defcustom easy-jekyll-sort-default-char 1
+(defcustom easy-jekyll-sort-default-char t
   "Default setting to sort with charactor."
   :group 'easy-jekyll
   :type 'integer)
