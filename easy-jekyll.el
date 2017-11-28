@@ -98,7 +98,7 @@
   :group 'easy-jekyll
   :type 'integer)
 
-(defcustom easy-jekyll-sort-default-char t
+(defcustom easy-jekyll-sort-default-char 1
   "Default setting to sort with charactor."
   :group 'easy-jekyll
   :type 'integer)
@@ -740,7 +740,6 @@ d .. Delete post      c .. Open config   D .. Draft list       I .. GCS timer
 P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
 O .. Open basedir     S .. Sort char     N .. No help-mode     q .. Quit easy-jekyll
-
 ")
     (progn
       "n .. New blog post    R .. Rename file   G .. Deploy GitHub    ? .. Help easy-jekyll
@@ -750,7 +749,6 @@ d .. Delete post      c .. Open config   u .. Undraft file     I .. GCS timer
 P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
 O .. Open basedir     W .. AWS S3 timer  N .. No help-mode     q .. Quit easy-jekyll
-
 "))
   "Help of easy-jekyll."
   :group 'easy-jekyll
