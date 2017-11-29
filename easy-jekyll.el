@@ -921,7 +921,7 @@ w .. Write post       o .. Open file     - .. Pre postdir      + .. Next postdir
   (setq easy-jekyll--refresh nil))
 
 (defun easy-jekyll-sort-time ()
-  "Sort by time on easy-jekyll-mode."
+  "Sort article by time on easy-jekyll-mode."
   (interactive)
   (if easy-jekyll--draft-list
       (progn
@@ -938,7 +938,7 @@ w .. Write post       o .. Open file     - .. Pre postdir      + .. Next postdir
       (easy-jekyll))))
 
 (defun easy-jekyll-sort-char ()
-  "Sort by char on easy-jekyll-mode."
+  "Sort article by characters on easy-jekyll-mode."
   (interactive)
   (if easy-jekyll--draft-list
       (progn
