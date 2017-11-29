@@ -134,12 +134,15 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |e      |easy-jekyll-open|
 |f		|easy-jekyll-open|
 |RET	|easy-jekyll-open|
+|Tab	|easy-jekyll-full-help|
+|Shift-Tab|easy-jekyll-no-help|
 |<		|easy-jekyll-previous-blog|
 |>		|easy-jekyll-next-blog|
 |?		|describe-mode|
 |A		|easy-jekyll-amazon-s3-deploy|
 |C		|easy-jekyll-google-cloud-storage-deploy|
 |D		|easy-jekyll-list-draft|
+|F		|easy-jekyll-full-help|
 |G		|easy-jekyll-github-deploy|
 |H		|easy-jekyll-github-deploy-timer|
 |I		|easy-jekyll-google-cloud-storage-deploy-timer|
@@ -172,7 +175,7 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |v		|easy-jekyll-view|
 |w		|easy-jekyll-newpost|
 |SPC	|easy-jekyll-next-line|
-|S-SPC	|easy-jekyll-previous-line|
+|Shift-SPC|easy-jekyll-previous-line|
 |←	    |easy-jekyll-backward-char|
 |→     |easy-jekyll-forward-char|
 |C-b	|easy-jekyll-backward-char|
