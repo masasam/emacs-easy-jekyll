@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.0.9
+;; Version: 1.1.9
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -98,13 +98,18 @@
   :group 'easy-jekyll
   :type 'integer)
 
+(defcustom easy-jekyll-additional-help nil
+  "Additional help flg of easy-jekyll."
+  :group 'easy-jekyll
+  :type 'integer)
+
 (defcustom easy-jekyll-sort-default-char t
   "Default setting to sort with charactor."
   :group 'easy-jekyll
   :type 'integer)
 
 (defcustom easy-jekyll-publish-chmod "Du=rwx,Dgo=rx,Fu=rw,Fog=r"
-  "Permission when publish.The default is drwxr-xr-x."
+  "Permission when publish.  The default is drwxr-xr-x."
   :group 'easy-jekyll
   :type 'string)
 
@@ -235,9 +240,6 @@
 
 (defconst easy-jekyll--unmovable-line-default easy-jekyll--unmovable-line
   "Default value of impossible to move below this line.")
-
-(defconst easy-jekyll--delete-line 12
-  "Easy-jekyll-delete line number.")
 
 (defconst easy-jekyll--buffer-name "*Jekyll Serve*"
   "Easy-jekyll buffer name.")
@@ -453,10 +455,12 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 (defun easy-jekyll-cancel-publish-timer ()
   "Cancel timer that publish after the specified number of minutes has elapsed."
   (interactive)
-  (when easy-jekyll--publish-timer
-    (cancel-timer easy-jekyll--publish-timer)
-    (setq easy-jekyll--publish-timer nil)
-    (message "Easy-jekyll-publish-timer canceled")))
+  (if easy-jekyll--publish-timer
+      (progn
+	(cancel-timer easy-jekyll--publish-timer)
+	(setq easy-jekyll--publish-timer nil)
+	(message "Publish-timer canceled"))
+    (message "There is no reserved publish-timer")))
 
 (defun easy-jekyll-publish-on-timer ()
   "Adapt local change to the server with jekyll on timer."
@@ -589,10 +593,12 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 (defun easy-jekyll-cancel-github-deploy-timer ()
   "Cancel timer that github-deploy after the specified number of minutes has elapsed."
   (interactive)
-  (when easy-jekyll--github-deploy-timer
-    (cancel-timer easy-jekyll--github-deploy-timer)
-    (setq easy-jekyll--github-deploy-timer nil)
-    (message "Easy-jekyll-github-deploy-timer canceled")))
+  (if easy-jekyll--github-deploy-timer
+      (progn
+	(cancel-timer easy-jekyll--github-deploy-timer)
+	(setq easy-jekyll--github-deploy-timer nil)
+	(message "Github-deploy-timer canceled"))
+    (message "There is no reserved github-deploy-timer")))
 
 (defun easy-jekyll-github-deploy-on-timer ()
   "Execute `easy-jekyll-github-deploy-script' script on timer locate at `easy-jekyll-basedir'."
@@ -640,10 +646,12 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 (defun easy-jekyll-cancel-amazon-s3-deploy-timer ()
   "Cancel timer that amazon-s3-deploy after the specified number of minutes has elapsed."
   (interactive)
-  (when easy-jekyll--amazon-s3-timer
-    (cancel-timer easy-jekyll--amazon-s3-timer)
-    (setq easy-jekyll--amazon-s3-timer nil)
-    (message "Easy-jekyll-amazon-s3-deploy-timer canceled")))
+  (if easy-jekyll--amazon-s3-timer
+      (progn
+	(cancel-timer easy-jekyll--amazon-s3-timer)
+	(setq easy-jekyll--amazon-s3-timer nil)
+	(message "AWS-s3-deploy-timer canceled"))
+    (message "There is no reserved AWS-s3-deploy-timer")))
 
 (defun easy-jekyll-amazon-s3-deploy-on-timer ()
   "Deploy jekyll source at Amazon S3 on timer."
@@ -694,10 +702,12 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 (defun easy-jekyll-cancel-google-cloud-storage-deploy-timer ()
   "Cancel timer that google-cloud-storage-deploy after the specified number of minutes has elapsed."
   (interactive)
-  (when easy-jekyll--google-cloud-storage-timer
-    (cancel-timer easy-jekyll--google-cloud-storage-timer)
-    (setq easy-jekyll--google-cloud-storage-timer nil)
-    (message "Easy-jekyll-google-cloud-storage-deploy-timer canceled")))
+  (if easy-jekyll--google-cloud-storage-timer
+      (progn
+	(cancel-timer easy-jekyll--google-cloud-storage-timer)
+	(setq easy-jekyll--google-cloud-storage-timer nil)
+	(message "GCS-timer canceled"))
+    (message "There is no reserved GCS-timer")))
 
 (defun easy-jekyll-google-cloud-storage-deploy-on-timer ()
   "Deploy jekyll source at Google Cloud Storage on timer."
@@ -739,16 +749,16 @@ v .. Open view-mode   s .. Sort time     T .. Publish timer    W .. AWS S3 timer
 d .. Delete post      c .. Open config   D .. Draft list       I .. GCS timer
 P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
-O .. Open basedir     S .. Sort char     N .. No help-mode     q .. Quit easy-jekyll
+F .. Full help [tab]  S .. Sort char     ? .. Describe-mode    q .. Quit easy-jekyll
 ")
     (progn
-      "n .. New blog post    R .. Rename file   G .. Deploy GitHub    ? .. Help easy-jekyll
+      "n .. New blog post    R .. Rename file   G .. Deploy GitHub    N .. No help-mode
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
 v .. Open view-mode   D .. Draft list    T .. Publish timer    S .. Sort time
 d .. Delete post      c .. Open config   u .. Undraft file     I .. GCS timer
 P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
-O .. Open basedir     W .. AWS S3 timer  N .. No help-mode     q .. Quit easy-jekyll
+F .. Full help [tab]  W .. AWS S3 timer  ? .. Describe-mode    q .. Quit easy-jekyll
 "))
   "Help of easy-jekyll."
   :group 'easy-jekyll
@@ -766,6 +776,16 @@ Enjoy!
 
 "
   "Help of easy-jekyll first time.")
+
+(defcustom easy-jekyll-add-help
+  "O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
+m .. X s3-timer       i .. X GCS timer   f .. File open        J .. Jump blog-number
+k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
+w .. Write post       o .. Open file     - .. Pre postdir      + .. Next postdir
+"
+  "Add help of easy-jekyll."
+  :group 'easy-jekyll
+  :type 'string)
 
 (defvar easy-jekyll-mode-map
   (let ((map (make-keymap)))
@@ -790,6 +810,9 @@ Enjoy!
     (define-key map "d" 'easy-jekyll-delete)
     (define-key map "e" 'easy-jekyll-open)
     (define-key map "f" 'easy-jekyll-open)
+    (define-key map "F" 'easy-jekyll-full-help)
+    (define-key map [tab] 'easy-jekyll-full-help)
+    (define-key map [backtab] 'easy-jekyll-no-help)
     (define-key map "N" 'easy-jekyll-no-help)
     (define-key map "J" 'easy-jekyll-nth-blog)
     (define-key map "j" 'easy-jekyll-next-line)
@@ -853,7 +876,23 @@ Enjoy!
 	(setq easy-jekyll--unmovable-line easy-jekyll--unmovable-line-default))
     (progn
       (setq easy-jekyll-no-help 1)
+      (setq easy-jekyll-additional-help nil)
       (setq easy-jekyll--unmovable-line 3)))
+  (if easy-jekyll--draft-list
+      (easy-jekyll-draft-list)
+    (easy-jekyll)))
+
+(defun easy-jekyll-full-help ()
+  "Full help mode of easy jekyll."
+  (interactive)
+  (if easy-jekyll-additional-help
+      (progn
+	(setq easy-jekyll-additional-help nil)
+	(setq easy-jekyll--unmovable-line easy-jekyll--unmovable-line-default))
+    (progn
+      (setq easy-jekyll-additional-help 1)
+      (setq easy-jekyll-no-help nil)
+      (setq easy-jekyll--unmovable-line 15)))
   (if easy-jekyll--draft-list
       (easy-jekyll-draft-list)
     (easy-jekyll)))
@@ -872,7 +911,7 @@ Enjoy!
       (easy-jekyll-draft-list))))
 
 (defun easy-jekyll-refresh ()
-  "Refresh easy jekyll."
+  "Refresh easy-jekyll-mode."
   (interactive)
   (setq easy-jekyll--cursor (point))
   (setq easy-jekyll--refresh 1)
@@ -882,7 +921,7 @@ Enjoy!
   (setq easy-jekyll--refresh nil))
 
 (defun easy-jekyll-sort-time ()
-  "Sort time easy jekyll."
+  "Sort by time on easy-jekyll-mode."
   (interactive)
   (if easy-jekyll--draft-list
       (progn
@@ -899,7 +938,7 @@ Enjoy!
       (easy-jekyll))))
 
 (defun easy-jekyll-sort-char ()
-  "Sort char easy jekyll."
+  "Sort by char on easy-jekyll-mode."
   (interactive)
   (if easy-jekyll--draft-list
       (progn
@@ -916,13 +955,17 @@ Enjoy!
       (easy-jekyll))))
 
 (defun easy-jekyll-forward-char (arg)
-  "Forward-char as ARG."
+  "Forward-char on easy-jekyll-mode.
+Optional prefix ARG says how many lines to move.
+default is one line."
   (interactive "^p")
   (when (not (eolp))
     (forward-char (or arg 1))))
 
 (defun easy-jekyll-backward-char (arg)
-  "Backward-char as ARG."
+  "Backward-char on easy-jekyll-mode.
+Optional prefix ARG says how many lines to move.
+default is one line."
   (interactive "^p")
   (when (not (bolp))
     (backward-char (or arg 1))))
@@ -935,7 +978,9 @@ Enjoy!
   (forward-char easy-jekyll--forward-char))
 
 (defun easy-jekyll-backward-word (&optional arg)
-  "Easy-jekyll backward-word as ARG."
+  "Easy-jekyll backward-word.
+Optional prefix ARG says how many lines to move.
+default is one line."
   (interactive "^p")
   (forward-word (- (or arg 1)))
   (if (< (line-number-at-pos) easy-jekyll--unmovable-line)
@@ -1084,7 +1129,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 	   (when (y-or-n-p (concat "Delete " file))
 	     (if easy-jekyll-no-help
 		 (setq easy-jekyll--line (- (line-number-at-pos) 4))
-	       (setq easy-jekyll--line (- (line-number-at-pos) easy-jekyll--delete-line)))
+	       (setq easy-jekyll--line (- (line-number-at-pos) (+ easy-jekyll--unmovable-line 1))))
 	     (delete-file file)
 	     (if easy-jekyll--draft-list
 		 (easy-jekyll-draft-list)
@@ -1286,7 +1331,7 @@ Optional prefix ARG says how many lines to move; default is one line."
     (easy-jekyll)))
 
 (defun easy-jekyll-nth-blog (n)
-  "Go to nth blog as N."
+  "Go to blog of number N."
   (interactive "nBlog number:")
   (when (or (< n 0)
 	    (>= n (length easy-jekyll-bloglist)))
@@ -1406,7 +1451,7 @@ Optional prefix ARG says how many lines to move; default is one line."
   (easy-jekyll))
 
 (defun easy-jekyll-draft-list ()
-  "List drafts."
+  "Drafts list mode of easy-jekyll."
   (easy-jekyll-with-env
    (unless (file-directory-p (expand-file-name "_drafts" easy-jekyll-basedir))
      (make-directory (expand-file-name "_drafts" easy-jekyll-basedir) t))
@@ -1418,7 +1463,10 @@ Optional prefix ARG says how many lines to move; default is one line."
    (erase-buffer)
    (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url easy-jekyll--draft-mode "\n\n") 'face 'easy-jekyll-help-face))
    (unless easy-jekyll-no-help
-     (insert (propertize easy-jekyll-help 'face 'easy-jekyll-help-face)))
+     (insert (propertize easy-jekyll-help 'face 'easy-jekyll-help-face))
+     (when easy-jekyll-additional-help
+       (insert (propertize easy-jekyll-add-help 'face 'easy-jekyll-help-face)))
+     (insert (propertize (concat "\n")'face 'easy-jekyll-help-face)))
    (unless easy-jekyll--refresh
      (setq easy-jekyll--cursor (point)))
    (let ((files (directory-files (expand-file-name "_drafts" easy-jekyll-basedir)))
@@ -1461,7 +1509,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 
 ;;;###autoload
 (defun easy-jekyll ()
-  "Easy jekyll."
+  "Easy jekyll mode."
   (interactive)
   (easy-jekyll-with-env
    (unless (file-directory-p (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
@@ -1476,7 +1524,10 @@ Optional prefix ARG says how many lines to move; default is one line."
        (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url "\n\n") 'face 'easy-jekyll-help-face))
      (insert (propertize (concat "Easy-jekyll  " easy-jekyll-url "/" easy-jekyll-postdir "\n\n") 'face 'easy-jekyll-help-face)))
    (unless easy-jekyll-no-help
-     (insert (propertize easy-jekyll-help 'face 'easy-jekyll-help-face)))
+     (insert (propertize easy-jekyll-help 'face 'easy-jekyll-help-face))
+     (when easy-jekyll-additional-help
+       (insert (propertize easy-jekyll-add-help 'face 'easy-jekyll-help-face)))
+     (insert (propertize (concat "\n")'face 'easy-jekyll-help-face)))
    (unless easy-jekyll--refresh
      (setq easy-jekyll--cursor (point)))
    (let ((files (directory-files (expand-file-name easy-jekyll-postdir easy-jekyll-basedir)))
