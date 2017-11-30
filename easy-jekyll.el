@@ -109,7 +109,8 @@
   :type 'integer)
 
 (defcustom easy-jekyll-publish-chmod "Du=rwx,Dgo=rx,Fu=rw,Fog=r"
-  "Permission when publish.  The default is drwxr-xr-x."
+  "Permission when publish.
+The default is drwxr-xr-x."
   :group 'easy-jekyll
   :type 'string)
 
@@ -133,6 +134,16 @@
   :group 'easy-jekyll
   :type 'string)
 
+(defcustom easy-jekyll-help-line 7
+  "Number of lines of `easy-jekyll-help'."
+  :group 'easy-jekyll
+  :type 'integer)
+
+(defcustom easy-jekyll-add-help-line 4
+  "Number of lines of `easy-jekyll-add-help'."
+  :group 'easy-jekyll
+  :type 'integer)
+
 (defvar easy-jekyll--current-postdir 0
   "Easy-jekyll current postdir.")
 
@@ -145,7 +156,7 @@
 (defvar easy-jekyll--server-process nil
   "Jekyll process.")
 
-(defvar easy-jekyll--unmovable-line 11
+(defvar easy-jekyll--unmovable-line (+ easy-jekyll-help-line 4)
   "Impossible to move below this line.")
 
 (defvar easy-jekyll--draft-list nil
@@ -892,7 +903,7 @@ w .. Write post       o .. Open file     - .. Pre postdir      + .. Next postdir
     (progn
       (setq easy-jekyll-additional-help 1)
       (setq easy-jekyll-no-help nil)
-      (setq easy-jekyll--unmovable-line 15)))
+      (setq easy-jekyll--unmovable-line (+ easy-jekyll-help-line easy-jekyll-add-help-line 4))))
   (if easy-jekyll--draft-list
       (easy-jekyll-draft-list)
     (easy-jekyll)))
