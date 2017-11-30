@@ -470,8 +470,10 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (setq easy-jekyll--sshdomain-timer easy-jekyll-sshdomain)
   (setq easy-jekyll--root-timer easy-jekyll-root)
   (setq easy-jekyll--url-timer easy-jekyll-url)
-  (setq easy-jekyll--publish-timer
-	(run-at-time (* n 60) nil #'easy-jekyll-publish-on-timer)))
+  (if easy-jekyll--publish-timer
+      (message "There is already reserved publish-timer")
+    (setq easy-jekyll--publish-timer
+	  (run-at-time (* n 60) nil #'easy-jekyll-publish-on-timer))))
 
 ;;;###autoload
 (defun easy-jekyll-cancel-publish-timer ()
@@ -495,6 +497,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (setq easy-jekyll--publish-url easy-jekyll-url)
   (setq easy-jekyll-url easy-jekyll--url-timer)
   (easy-jekyll-publish)
+  (setq easy-jekyll--publish-timer nil)
   (setq easy-jekyll-basedir easy-jekyll--publish-basedir)
   (setq easy-jekyll-sshdomain easy-jekyll--publish-sshdomain)
   (setq easy-jekyll-root easy-jekyll--publish-root)
@@ -608,8 +611,10 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   (interactive "nMinute:")
   (setq easy-jekyll--github-deploy-basedir-timer easy-jekyll-basedir)
   (setq easy-jekyll--github-deploy-url-timer easy-jekyll-url)
-  (setq easy-jekyll--github-deploy-timer
-	(run-at-time (* n 60) nil #'easy-jekyll-github-deploy-on-timer)))
+  (if easy-jekyll--github-deploy-timer
+      (message "There is already reserved github-deploy-timer")
+    (setq easy-jekyll--github-deploy-timer
+	  (run-at-time (* n 60) nil #'easy-jekyll-github-deploy-on-timer))))
 
 ;;;###autoload
 (defun easy-jekyll-cancel-github-deploy-timer ()
@@ -629,6 +634,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   (setq easy-jekyll--github-deploy-url easy-jekyll-url)
   (setq easy-jekyll-url easy-jekyll--github-deploy-url-timer)
   (easy-jekyll-github-deploy)
+  (setq easy-jekyll--github-deploy-timer nil)
   (setq easy-jekyll-basedir easy-jekyll--github-deploy-basedir)
   (setq easy-jekyll-url easy-jekyll--github-deploy-url))
 
@@ -661,8 +667,10 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   (setq easy-jekyll--amazon-s3-basedir-timer easy-jekyll-basedir)
   (setq easy-jekyll--amazon-s3-url-timer easy-jekyll-url)
   (setq easy-jekyll--amazon-s3-bucket-name-timer easy-jekyll-amazon-s3-bucket-name)
-  (setq easy-jekyll--amazon-s3-timer
-	(run-at-time (* n 60) nil #'easy-jekyll-amazon-s3-deploy-on-timer)))
+  (if easy-jekyll--amazon-s3-timer
+      (message "There is already reserved AWS-s3-deploy-timer")
+    (setq easy-jekyll--amazon-s3-timer
+	  (run-at-time (* n 60) nil #'easy-jekyll-amazon-s3-deploy-on-timer))))
 
 ;;;###autoload
 (defun easy-jekyll-cancel-amazon-s3-deploy-timer ()
@@ -684,6 +692,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   (setq easy-jekyll--amazon-s3-bucket-name easy-jekyll-amazon-s3-bucket-name)
   (setq easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name-timer)
   (easy-jekyll-amazon-s3-deploy)
+  (setq easy-jekyll--amazon-s3-timer nil)
   (setq easy-jekyll-basedir easy-jekyll--amazon-s3-basedir)
   (setq easy-jekyll-url easy-jekyll--amazon-s3-url)
   (setq easy-jekyll-amazon-s3-bucket-name easy-jekyll--amazon-s3-bucket-name))
@@ -717,8 +726,10 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   (setq easy-jekyll--google-cloud-storage-basedir-timer easy-jekyll-basedir)
   (setq easy-jekyll--google-cloud-storage-url-timer easy-jekyll-url)
   (setq easy-jekyll--google-cloud-storage-bucket-name-timer easy-jekyll-google-cloud-storage-bucket-name)
-  (setq easy-jekyll--google-cloud-storage-timer
-	(run-at-time (* n 60) nil #'easy-jekyll-google-cloud-storage-deploy-on-timer)))
+  (if easy-jekyll--google-cloud-storage-timer
+      (message "There is already reserved GCS-timer")
+    (setq easy-jekyll--google-cloud-storage-timer
+	  (run-at-time (* n 60) nil #'easy-jekyll-google-cloud-storage-deploy-on-timer))))
 
 ;;;###autoload
 (defun easy-jekyll-cancel-google-cloud-storage-deploy-timer ()
@@ -740,6 +751,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   (setq easy-jekyll--google-cloud-storage-bucket-name easy-jekyll-google-cloud-storage-bucket-name)
   (setq easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name-timer)
   (easy-jekyll-google-cloud-storage-deploy)
+  (setq easy-jekyll--google-cloud-storage-timer nil)
   (setq easy-jekyll-basedir easy-jekyll--google-cloud-storage-basedir)
   (setq easy-jekyll-url easy-jekyll--google-cloud-storage-url)
   (setq easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name))
