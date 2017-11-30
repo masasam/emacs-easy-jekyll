@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.1.9
+;; Version: 1.1.10
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -1175,7 +1175,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
     (setq easy-jekyll-google-cloud-storage-bucket-name
 	  (cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
-		      (nth 1 easy-jekyll-bloglist))))
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
     (if (cdr (assoc 'easy-jekyll-github-deploy-script
 		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
 	(setq easy-jekyll-github-deploy-script
@@ -1271,7 +1271,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
     (setq easy-jekyll-google-cloud-storage-bucket-name
 	  (cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
-		      (nth 1 easy-jekyll-bloglist))))
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
     (if (cdr (assoc 'easy-jekyll-github-deploy-script
 		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
 	(setq easy-jekyll-github-deploy-script
@@ -1369,7 +1369,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
     (setq easy-jekyll-google-cloud-storage-bucket-name
 	  (cdr (assoc 'easy-jekyll-google-cloud-storage-bucket-name
-		      (nth 1 easy-jekyll-bloglist))))
+		      (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
     (if (cdr (assoc 'easy-jekyll-github-deploy-script
 		    (nth easy-jekyll--current-blog easy-jekyll-bloglist)))
 	(setq easy-jekyll-github-deploy-script
