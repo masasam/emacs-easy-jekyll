@@ -351,14 +351,6 @@ The default is drwxr-xr-x."
 (defconst easy-jekyll--forward-char 20
   "Forward-char of easy-jekyll.")
 
-;;;###autoload
-(defun easy-jekyll-article ()
-  "Open a list of articles written in jekyll with dired."
-  (interactive)
-  (unless easy-jekyll-basedir
-    (error "Please set easy-jekyll-basedir variable"))
-  (find-file (expand-file-name easy-jekyll-postdir easy-jekyll-basedir)))
-
 (defmacro easy-jekyll-with-env (&rest body)
   "Evaluate BODY with `default-directory' set to `easy-jekyll-basedir'.
 Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset."
@@ -369,6 +361,25 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
        (error "'jekyll' is not installed"))
      (let ((default-directory easy-jekyll-basedir))
        ,@body)))
+
+(defmacro easy-jekyll-set-bloglist (body)
+  "Macros to set variables to `easy-jekyll-bloglist' as BODY."
+  `(setq ,body
+	 (cdr (assoc ',body
+		     (nth easy-jekyll--current-blog easy-jekyll-bloglist)))))
+
+(defmacro easy-jekyll-eval-bloglist (body)
+  "Macros to eval variables of BODY from `easy-jekyll-bloglist'."
+  `(cdr (assoc ',body
+	       (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+
+;;;###autoload
+(defun easy-jekyll-article ()
+  "Open a list of articles written in jekyll with dired."
+  (interactive)
+  (unless easy-jekyll-basedir
+    (error "Please set easy-jekyll-basedir variable"))
+  (find-file (expand-file-name easy-jekyll-postdir easy-jekyll-basedir)))
 
 ;;;###autoload
 (defun easy-jekyll-image ()
