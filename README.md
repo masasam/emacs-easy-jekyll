@@ -1,4 +1,4 @@
-# easy-jekyll
+# easy-jekyll [![melpa badge][melpa-badge]][melpa-link] [![melpa stable badge][melpa-stable-badge]][melpa-stable-link]
 
 Emacs major mode for managing jekyll blogs
 
