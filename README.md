@@ -43,11 +43,13 @@ Since the process of jekyll running in the PC disappears in 300 seconds, you do 
 
 You can publish your blog to the server and the browser opens automatically.
 
-	M-x easy-jekyll-helm-ag
+	M-x easy-jekyll-ag
 
 ![easy-jekyll-helm-ag](image/easy-jekyll-helm-ag.png)
 
-You can search blog article with [helm-ag](https://github.com/syohex/emacs-helm-ag).
+You can search blog article with [counsel-ag](https://github.com/abo-abo/swiper) or [helm-ag](https://github.com/syohex/emacs-helm-ag).
+
+If both are installed, counsel-ag takes precedence.
 
 	M-x easy-jekyll-github-deploy
 

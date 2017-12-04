@@ -757,13 +757,15 @@ POST-FILE needs to have and extension '.md' or '.textile'."
   (setq easy-jekyll-google-cloud-storage-bucket-name easy-jekyll--google-cloud-storage-bucket-name))
 
 ;;;###autoload
-(defun easy-jekyll-helm-ag ()
-  "Search for blog article with helm-ag."
+(defun easy-jekyll-ag ()
+  "Search for blog article with counsel-ag or helm-ag."
   (interactive)
   (easy-jekyll-with-env
-   (if (package-installed-p 'helm-ag)
-       (helm-ag (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
-     (error "'helm-ag' is not installed"))))
+   (if (package-installed-p 'counsel)
+       (counsel-ag nil (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
+     (if (package-installed-p 'helm-ag)
+	 (helm-ag (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
+       (error "'counsel' or 'helm-ag' is not installed")))))
 
 ;;;###autoload
 (defun easy-jekyll-open-config ()
@@ -781,7 +783,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    u .. Undraft file
 v .. Open view-mode   s .. Sort time     T .. Publish timer    W .. AWS S3 timer
 d .. Delete post      c .. Open config   D .. Draft list       I .. GCS timer
-P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. GitHub timer
+P .. Publish server   C .. Deploy GCS    a .. Search blog ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
 F .. Full help [tab]  S .. Sort char     ? .. Describe-mode    q .. Quit easy-jekyll
 ")
@@ -790,7 +792,7 @@ F .. Full help [tab]  S .. Sort char     ? .. Describe-mode    q .. Quit easy-je
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
 v .. Open view-mode   D .. Draft list    T .. Publish timer    S .. Sort time
 d .. Delete post      c .. Open config   u .. Undraft file     I .. GCS timer
-P .. Publish server   C .. Deploy GCS    a .. Search helm-ag   H .. GitHub timer
+P .. Publish server   C .. Deploy GCS    a .. Search blog ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
 F .. Full help [tab]  W .. AWS S3 timer  ? .. Describe-mode    q .. Quit easy-jekyll
 "))
@@ -829,7 +831,7 @@ w .. Write post       o .. Open file     - .. Pre postdir      + .. Next postdir
     (define-key map "-" 'easy-jekyll-previous-postdir)
     (define-key map "n" 'easy-jekyll-newpost)
     (define-key map "w" 'easy-jekyll-newpost)
-    (define-key map "a" 'easy-jekyll-helm-ag)
+    (define-key map "a" 'easy-jekyll-ag)
     (define-key map "c" 'easy-jekyll-open-config)
     (define-key map "p" 'easy-jekyll-preview)
     (define-key map "P" 'easy-jekyll-publish)
