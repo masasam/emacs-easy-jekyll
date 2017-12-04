@@ -156,7 +156,7 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |s		|easy-jekyll-sort-char|
 |T		|easy-jekyll-publish-timer|
 |W		|easy-jekyll-amazon-s3-deploy-timer|
-|a		|easy-jekyll-helm-ag|
+|a		|easy-jekyll-ag|
 |b		|easy-jekyll-cancel-github-deploy-timer|
 |c		|easy-jekyll-open-config|
 |d		|easy-jekyll-delete|
