@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.1.10
+;; Version: 1.2.10
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -817,7 +817,7 @@ Enjoy!
   "O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
 m .. X s3-timer       i .. X GCS timer   f .. File open        J .. Jump blog-number
 k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
-w .. Write post       o .. Open file     - .. Pre postdir      + .. Next postdir
+- .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
 "
   "Add help of easy-jekyll."
   :group 'easy-jekyll
@@ -838,7 +838,7 @@ w .. Write post       o .. Open file     - .. Pre postdir      + .. Next postdir
     (define-key map "T" 'easy-jekyll-publish-timer)
     (define-key map "W" 'easy-jekyll-amazon-s3-deploy-timer)
     (define-key map "t" 'easy-jekyll-cancel-publish-timer)
-    (define-key map "o" 'easy-jekyll-open)
+    (define-key map "o" 'easy-jekyll-open-other-window)
     (define-key map "O" 'easy-jekyll-open-basedir)
     (define-key map "R" 'easy-jekyll-rename)
     (define-key map "\C-m" 'easy-jekyll-open)
@@ -1113,6 +1113,27 @@ Optional prefix ARG says how many lines to move; default is one line."
 	 (when (and (file-exists-p file)
 		    (not (file-directory-p file)))
 	   (find-file file)))))))
+
+(defun easy-jekyll-open-other-window ()
+  "Open the file on the pointer at other window."
+  (interactive)
+  (when (equal (buffer-name (current-buffer)) easy-jekyll--buffer-name)
+    (easy-jekyll-with-env
+     (unless (or (string-match "^$" (thing-at-point 'line))
+		 (eq (point) (point-max))
+		 (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
+       (let ((file (expand-file-name
+		    (if easy-jekyll--draft-list
+			(expand-file-name
+			 (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+			 "_drafts")
+		      (expand-file-name
+		       (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+		       easy-jekyll-postdir))
+		    easy-jekyll-basedir)))
+	 (when (and (file-exists-p file)
+		    (not (file-directory-p file)))
+	   (find-file-other-window file)))))))
 
 (defun easy-jekyll-open-basedir ()
   "Open `easy-jekyll-basedir' with dired."
