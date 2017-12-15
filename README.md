@@ -128,54 +128,9 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 
 |key    |function      |
 |-------|--------------|
-|.      | easy-jekyll-next-postdir|
-|,      |easy-jekyll-previous-postdir|
-|+      |easy-jekyll-next-postdir|
-|-      |easy-jekyll-previous-postdir|
-|o		|easy-jekyll-open-other-window|
-|e      |easy-jekyll-open|
-|f		|easy-jekyll-open|
 |RET	|easy-jekyll-open|
 |Tab	|easy-jekyll-full-help|
 |Shift-Tab|easy-jekyll-no-help|
-|<		|easy-jekyll-previous-blog|
-|>		|easy-jekyll-next-blog|
-|?		|describe-mode|
-|A		|easy-jekyll-amazon-s3-deploy|
-|C		|easy-jekyll-google-cloud-storage-deploy|
-|D		|easy-jekyll-list-draft|
-|F		|easy-jekyll-full-help|
-|G		|easy-jekyll-github-deploy|
-|H		|easy-jekyll-github-deploy-timer|
-|I		|easy-jekyll-google-cloud-storage-deploy-timer|
-|i		|easy-jekyll-cancel-google-cloud-storage-deploy-timer|
-|N		|easy-jekyll-no-help|
-|O		|easy-jekyll-open-basedir|
-|P		|easy-jekyll-publish|
-|R		|easy-jekyll-rename|
-|s		|easy-jekyll-sort-char|
-|T		|easy-jekyll-publish-timer|
-|W		|easy-jekyll-amazon-s3-deploy-timer|
-|a		|easy-jekyll-ag|
-|b		|easy-jekyll-cancel-github-deploy-timer|
-|c		|easy-jekyll-open-config|
-|d		|easy-jekyll-delete|
-|g		|easy-jekyll-refresh|
-|J		|easy-jekyll-nth-blog|
-|h		|easy-jekyll-backward-char|
-|j		|easy-jekyll-next-line|
-|k		|easy-jekyll-previous-line|
-|l		|easy-jekyll-forward-char|
-|m		|easy-jekyll-cancel-amazon-s3-deploy-timer|
-|n		|easy-jekyll-newpost|
-|p		|easy-jekyll-preview|
-|q		|easy-jekyll-quit|
-|r		|easy-jekyll-refresh|
-|S		|easy-jekyll-sort-time|
-|t		|easy-jekyll-cancel-publish-timer|
-|u		|easy-jekyll-undraft|
-|v		|easy-jekyll-view|
-|w		|easy-jekyll-newpost|
 |SPC	|easy-jekyll-next-line|
 |Shift-SPC|easy-jekyll-previous-line|
 |←	    |easy-jekyll-backward-char|
@@ -186,6 +141,52 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |C-p	|easy-jekyll-previous-line|
 |M-b	|easy-jekyll-backward-word|
 |M-<	|easy-jekyll-beginning-of-buffer|
+|.      | easy-jekyll-next-postdir|
+|,      |easy-jekyll-previous-postdir|
+|+      |easy-jekyll-next-postdir|
+|-      |easy-jekyll-previous-postdir|
+|<		|easy-jekyll-previous-blog|
+|>		|easy-jekyll-next-blog|
+|?		|describe-mode|
+|A		|easy-jekyll-amazon-s3-deploy|
+|C		|easy-jekyll-google-cloud-storage-deploy|
+|D		|easy-jekyll-list-draft|
+|F		|easy-jekyll-full-help|
+|G		|easy-jekyll-github-deploy|
+|H		|easy-jekyll-github-deploy-timer|
+|I		|easy-jekyll-google-cloud-storage-deploy-timer|
+|J		|easy-jekyll-nth-blog|
+|N		|easy-jekyll-no-help|
+|O		|easy-jekyll-open-basedir|
+|P		|easy-jekyll-publish|
+|R		|easy-jekyll-rename|
+|S		|easy-jekyll-sort-time|
+|T		|easy-jekyll-publish-timer|
+|V		|easy-jekyll-view-other-window|
+|W		|easy-jekyll-amazon-s3-deploy-timer|
+|a		|easy-jekyll-ag|
+|b		|easy-jekyll-cancel-github-deploy-timer|
+|c		|easy-jekyll-open-config|
+|d		|easy-jekyll-delete|
+|e      |easy-jekyll-open|
+|f		|easy-jekyll-open|
+|g		|easy-jekyll-refresh|
+|h		|easy-jekyll-backward-char|
+|i		|easy-jekyll-cancel-google-cloud-storage-deploy-timer|
+|j		|easy-jekyll-next-line|
+|k		|easy-jekyll-previous-line|
+|l		|easy-jekyll-forward-char|
+|m		|easy-jekyll-cancel-amazon-s3-deploy-timer|
+|n		|easy-jekyll-newpost|
+|o		|easy-jekyll-open-other-window|
+|p		|easy-jekyll-preview|
+|q		|easy-jekyll-quit|
+|r		|easy-jekyll-refresh|
+|s		|easy-jekyll-sort-char|
+|t		|easy-jekyll-cancel-publish-timer|
+|u		|easy-jekyll-undraft|
+|v		|easy-jekyll-view|
+|w		|easy-jekyll-newpost|
 
 ## Requirements
 

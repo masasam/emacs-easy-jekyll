@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.2.10
+;; Version: 1.3.10
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -139,7 +139,7 @@ The default is drwxr-xr-x."
   :group 'easy-jekyll
   :type 'integer)
 
-(defcustom easy-jekyll-add-help-line 4
+(defcustom easy-jekyll-add-help-line 5
   "Number of lines of `easy-jekyll-add-help'."
   :group 'easy-jekyll
   :type 'integer)
@@ -815,9 +815,10 @@ Enjoy!
 
 (defcustom easy-jekyll-add-help
   "O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
-m .. X s3-timer       i .. X GCS timer   f .. File open        J .. Jump blog-number
 k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
+m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
 - .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
+J .. Jump blog        e .. Edit file
 "
   "Add help of easy-jekyll."
   :group 'easy-jekyll
@@ -866,6 +867,7 @@ k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
     (define-key map [right] 'easy-jekyll-forward-char)
     (define-key map [left] 'easy-jekyll-backward-char)
     (define-key map "v" 'easy-jekyll-view)
+    (define-key map "V" 'easy-jekyll-view-other-window)
     (define-key map "r" 'easy-jekyll-refresh)
     (define-key map "g" 'easy-jekyll-refresh)
     (if (null easy-jekyll-sort-default-char)
@@ -1163,6 +1165,29 @@ Optional prefix ARG says how many lines to move; default is one line."
 			(not (file-directory-p file)))
 	       (view-file file)))))
      (view-file buffer-file-name))))
+
+(defun easy-jekyll-view-other-window ()
+  "Open the file on the pointer with 'view-mode' at other window."
+  (interactive)
+  (easy-jekyll-with-env
+   (if (equal (buffer-name (current-buffer)) easy-jekyll--buffer-name)
+       (progn
+	 (unless (or (string-match "^$" (thing-at-point 'line))
+		     (eq (point) (point-max))
+		     (> (+ 1 easy-jekyll--forward-char) (length (thing-at-point 'line))))
+	   (let ((file (expand-file-name
+			(if easy-jekyll--draft-list
+			    (expand-file-name
+			     (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+			     "_drafts")
+			  (expand-file-name
+			   (substring (thing-at-point 'line) easy-jekyll--forward-char -1)
+			   easy-jekyll-postdir))
+			easy-jekyll-basedir)))
+	     (when (and (file-exists-p file)
+			(not (file-directory-p file)))
+	       (view-file-other-window file)))))
+     (view-file-other-window buffer-file-name))))
 
 (defun easy-jekyll-delete ()
   "Delete the file on the pointer."
