@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.3.10
+;; Version: 1.4.10
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -165,21 +165,6 @@ The default is drwxr-xr-x."
 (defvar easy-jekyll--draft-mode nil
   "Display draft-mode.")
 
-(defvar easy-jekyll--publish-timer nil
-  "Easy-jekyll-publish-timer.")
-
-(defvar easy-jekyll--basedir-timer nil
-  "Easy-jekyll-basedir-timer.")
-
-(defvar easy-jekyll--sshdomain-timer nil
-  "Easy-jekyll-sshdomain-timer.")
-
-(defvar easy-jekyll--root-timer nil
-  "Easy-jekyll-root-timer.")
-
-(defvar easy-jekyll--url-timer nil
-  "Easy-jekyll-url-timer.")
-
 (defvar easy-jekyll--github-deploy-timer nil
   "Easy-jekyll-github-deploy-timer.")
 
@@ -312,6 +297,9 @@ The default is drwxr-xr-x."
 	(easy-jekyll-postdir . ,easy-jekyll-postdir))
       easy-jekyll-bloglist)
 
+(defvar easy-jekyll--publish-timer-list (make-list (length easy-jekyll-bloglist) 'nil)
+  "Timer list for cansel timer.")
+
 (defconst easy-jekyll--default-github-deploy-script easy-jekyll-github-deploy-script
   "Default easy-jekyll github-deploy-script.")
 
@@ -372,6 +360,11 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   "Macros to eval variables of BODY from `easy-jekyll-bloglist'."
   `(cdr (assoc ',body
 	       (nth easy-jekyll--current-blog easy-jekyll-bloglist))))
+
+(defmacro easy-jekyll-nth-eval-bloglist (body blog)
+  "Macros to eval variables of BODY from `easy-jekyll-bloglist' at BLOG."
+  `(cdr (assoc ',body
+	       (nth ,blog easy-jekyll-bloglist))))
 
 ;;;###autoload
 (defun easy-jekyll-article ()
@@ -466,42 +459,51 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 (defun easy-jekyll-publish-timer (n)
   "A timer that publish after the specified number as N of minutes has elapsed."
   (interactive "nMinute:")
-  (setq easy-jekyll--basedir-timer easy-jekyll-basedir)
-  (setq easy-jekyll--sshdomain-timer easy-jekyll-sshdomain)
-  (setq easy-jekyll--root-timer easy-jekyll-root)
-  (setq easy-jekyll--url-timer easy-jekyll-url)
-  (if easy-jekyll--publish-timer
-      (message "There is already reserved publish-timer")
-    (setq easy-jekyll--publish-timer
-	  (run-at-time (* n 60) nil #'easy-jekyll-publish-on-timer))))
+  (unless easy-jekyll-basedir
+    (error "Please set easy-jekyll-basedir variable"))
+  (unless (executable-find "jekyll")
+    (error "'jekyll' is not installed"))
+  (unless easy-jekyll-sshdomain
+    (error "Please set easy-jekyll-sshdomain variable"))
+  (unless easy-jekyll-root
+    (error "Please set easy-jekyll-root variable"))
+  (unless (executable-find "rsync")
+    (error "'rsync' is not installed"))
+  (unless (file-exists-p "~/.ssh/config")
+    (error "There is no ~/.ssh/config"))
+  (let ((blognum easy-jekyll--current-blog))
+    (if (nth blognum easy-jekyll--publish-timer-list)
+	(message "There is already reserved publish-timer on %s" easy-jekyll-url)
+      (setf (nth easy-jekyll--current-blog easy-jekyll--publish-timer-list)
+	    (run-at-time (* n 60) nil #'(lambda () (easy-jekyll-publish-on-timer blognum)))))))
 
 ;;;###autoload
 (defun easy-jekyll-cancel-publish-timer ()
   "Cancel timer that publish after the specified number of minutes has elapsed."
   (interactive)
-  (if easy-jekyll--publish-timer
+  (if (nth easy-jekyll--current-blog easy-jekyll--publish-timer-list)
       (progn
-	(cancel-timer easy-jekyll--publish-timer)
-	(setq easy-jekyll--publish-timer nil)
-	(message "Publish-timer canceled"))
-    (message "There is no reserved publish-timer")))
+	(cancel-timer (nth easy-jekyll--current-blog easy-jekyll--publish-timer-list))
+	(setf (nth easy-jekyll--current-blog easy-jekyll--publish-timer-list) nil)
+	(message "Publish-timer canceled on %s" easy-jekyll-url))
+    (message "There is no reserved publish-timer on %s" easy-jekyll-url)))
 
-(defun easy-jekyll-publish-on-timer ()
-  "Adapt local change to the server with jekyll on timer."
-  (setq easy-jekyll--publish-basedir easy-jekyll-basedir)
-  (setq easy-jekyll-basedir easy-jekyll--basedir-timer)
-  (setq easy-jekyll--publish-sshdomain easy-jekyll-sshdomain)
-  (setq easy-jekyll-sshdomain easy-jekyll--sshdomain-timer)
-  (setq easy-jekyll--publish-root easy-jekyll-root)
-  (setq easy-jekyll-root easy-jekyll--root-timer)
-  (setq easy-jekyll--publish-url easy-jekyll-url)
-  (setq easy-jekyll-url easy-jekyll--url-timer)
-  (easy-jekyll-publish)
-  (setq easy-jekyll--publish-timer nil)
-  (setq easy-jekyll-basedir easy-jekyll--publish-basedir)
-  (setq easy-jekyll-sshdomain easy-jekyll--publish-sshdomain)
-  (setq easy-jekyll-root easy-jekyll--publish-root)
-  (setq easy-jekyll-url easy-jekyll--publish-url))
+(defun easy-jekyll-publish-on-timer (n)
+  "Adapt local change to the server with jekyll on timer at N."
+  (let ((default-directory (easy-jekyll-nth-eval-bloglist easy-jekyll-basedir n)))
+    (when (file-directory-p "_site")
+      (delete-directory "_site" t nil))
+    (let ((ret (call-process "bundle" nil "*jekyll-publish*" t "exec" "jekyll" "build" "--destination" "_site")))
+      (unless (zerop ret)
+	(switch-to-buffer (get-buffer "*jekyll-publish*"))
+	(error "'bundle exec jekyll build' command does not end normally")))
+    (when (get-buffer "*jekyll-publish*")
+      (kill-buffer "*jekyll-publish*"))
+    (shell-command-to-string (concat "rsync -rtpl --chmod=" easy-jekyll-publish-chmod " --delete _site/ " (easy-jekyll-nth-eval-bloglist easy-jekyll-sshdomain n) ":" (shell-quote-argument (easy-jekyll-nth-eval-bloglist easy-jekyll-root n))))
+    (message "Blog published")
+    (when (easy-jekyll-nth-eval-bloglist easy-jekyll-url n)
+      (browse-url (easy-jekyll-nth-eval-bloglist easy-jekyll-url n)))
+    (setf (nth n easy-jekyll--publish-timer-list) nil)))
 
 (defun easy-jekyll--headers (file)
   "Return a draft header string for a new article as FILE."
