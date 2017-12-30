@@ -234,11 +234,13 @@ easy-jekyll-previewtime "Preview display time."
 
 If you want deploy jekyll at Amazon S3, please install AWS CLI and set easy-jekyll-amazon-s3-bucket-name.
 
-Please set up for with 'aws configure' command if you are the first time aws command.
+Please set up for with `aws configure` command if you are the first time aws command.
 
 	(setq easy-jekyll-amazon-s3-bucket-name "your-amazon-s3-bucket-name")
 
 If you want deploy jekyll at Google Cloud Storage, please install Google Cloud SDK and set easy-jekyll-google-cloud-storage-bucket-name.
+
+Please set up for with `gcloud auth login` command if you are the first time gcloud command.
 
 	(setq easy-jekyll-google-cloud-storage-bucket-name "your-google-cloud-storage-bucket-name")
 
