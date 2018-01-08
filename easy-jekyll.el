@@ -134,6 +134,11 @@ The default is drwxr-xr-x."
   :group 'easy-jekyll
   :type 'string)
 
+(defcustom easy-jekyll-rsync-delete-directory "_site/"
+  "Disappear directory when synchronizing with rsync."
+  :group 'easy-jekyll
+  :type 'string)
+
 (defcustom easy-jekyll-help-line 7
   "Number of lines of `easy-jekyll-help'."
   :group 'easy-jekyll
@@ -443,7 +448,8 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
    (when (get-buffer "*jekyll-publish*")
      (kill-buffer "*jekyll-publish*"))
    (shell-command-to-string (concat "rsync -rtpl --chmod="
-				    easy-jekyll-publish-chmod " --delete _site/ "
+				    easy-jekyll-publish-chmod " --delete "
+				    easy-jekyll-rsync-delete-directory " "
 				    easy-jekyll-sshdomain ":"
 				    (shell-quote-argument easy-jekyll-root)))
    (message "Blog published")
@@ -498,7 +504,8 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
     (when (get-buffer "*jekyll-publish*")
       (kill-buffer "*jekyll-publish*"))
     (shell-command-to-string (concat "rsync -rtpl --chmod="
-				     easy-jekyll-publish-chmod " --delete _site/ "
+				     easy-jekyll-publish-chmod " --delete "
+				     easy-jekyll-rsync-delete-directory " "
 				     (easy-jekyll-nth-eval-bloglist easy-jekyll-sshdomain n) ":"
 				     (shell-quote-argument (easy-jekyll-nth-eval-bloglist
 							    easy-jekyll-root
