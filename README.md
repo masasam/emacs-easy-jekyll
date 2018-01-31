@@ -232,13 +232,13 @@ easy-jekyll-root "Root directory of jekyll at your server."
 
 easy-jekyll-previewtime "Preview display time."
 
-If you want deploy jekyll at Amazon S3, please install AWS CLI and set easy-jekyll-amazon-s3-bucket-name.
+If you want to deploy jekyll at Amazon S3, please install AWS CLI and set easy-jekyll-amazon-s3-bucket-name.
 
 Please set up for with `aws configure` command if you are the first time aws command.
 
 	(setq easy-jekyll-amazon-s3-bucket-name "your-amazon-s3-bucket-name")
 
-If you want deploy jekyll at Google Cloud Storage, please install Google Cloud SDK and set easy-jekyll-google-cloud-storage-bucket-name.
+If you want to deploy jekyll at Google Cloud Storage, please install Google Cloud SDK and set easy-jekyll-google-cloud-storage-bucket-name.
 
 Please set up for with `gcloud auth login` command if you are the first time gcloud command.
 
@@ -259,7 +259,7 @@ If not set the default s key will be charactor-sort.
 
 	(setq easy-jekyll-sort-default-char nil)
 
-If you want customise color, write the following in the init.el or .emacs.
+If you want to customise color, write the following in the init.el or .emacs.
 
 	(defface easy-jekyll-help-face
 	'((((class color) (background light)) (:bold t :foreground "your-hex-color" :background "your-hex-color"))
@@ -338,10 +338,55 @@ If you use [use-package](https://github.com/jwiegley/use-package), please write 
 
 You can manage as many blogs as you like.
 
-If you want change markdown filename extension, please select markdown.
+If you want to change markdown filename extension, please select markdown.
 Because only markdown is supported by jekyll. If not set markdown filename extension will be 'md'.
 
 	(setq easy-jekyll-markdown-extension "markdown")
+
+## For spacemacs or evil-mode users example
+
+If you use [spacemacs](https://github.com/syl20bnr/spacemacs) or [evil-mode](https://github.com/emacs-evil/evil)
+
+	(defun cesco/easy-jekyll ()
+	(interactive)
+	(evil-define-key
+    (list 'normal 'insert 'visual 'motion)
+    easy-jekyll-mode-map
+    "n" 'easy-jekyll-newpost
+    "D" 'easy-jekyll-article
+    "p" 'easy-jekyll-preview
+    "P" 'easy-jekyll-publish
+    "o" 'easy-jekyll-open
+    "d" 'easy-jekyll-delete
+    "e" 'easy-jekyll-open
+    "c" 'easy-jekyll-open-config
+    "f" 'easy-jekyll-open
+    "N" 'easy-jekyll-no-help
+    "v" 'easy-jekyll-view
+    "r" 'easy-jekyll-refresh
+    "g" 'easy-jekyll-refresh
+    "s" 'easy-jekyll-sort-time
+    "S" 'easy-jekyll-sort-char
+    "G" 'easy-jekyll-github-deploy
+    "A" 'easy-jekyll-amazon-s3-deploy
+    "C" 'easy-jekyll-google-cloud-storage-deploy
+    "q" 'evil-delete-buffer
+    (kbd "TAB") 'easy-jekyll-open
+    (kbd "RET") 'easy-jekyll-preview)
+	(define-key global-map (kbd "C-c C-e") 'easy/jekyll))
+
+	(use-package easy-jekyll
+	:after (helm-ag)
+	:ensure t
+	:config
+	(setq easy-jekyll-basedir "~/go/src/github.com/cescoferraro/me/"
+	easy-jekyll-postdir "content/blog"
+        easy-jekyll-url "http://127.0.0.1:1313/me"
+        easy-jekyll-preview-url "http://127.0.0.1:1313/me"
+        easy-jekyll-sshdomain "me"
+        easy-jekyll-root "~/go/src/github.com/cescoferraro/me/"
+        easy-jekyll-previewtime "20")
+	(add-hook 'easy-jekyll-mode-hook 'cesco/easy-jekyll))
 
 ## Preparation for using this package
 
@@ -374,7 +419,7 @@ _config.yml
 
 Let's build with a free trial of "google compute engine" or "amazon ec2".
 
-If you want deploy jekyll at GitHub Pages or Amazon S3 or Google Cloud Storage, This paragraph is not necessary.
+If you want to deploy jekyll at GitHub Pages or Amazon S3 or Google Cloud Storage, This paragraph is not necessary.
 
 I created my blog in google compute engine.
 
