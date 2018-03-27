@@ -156,6 +156,7 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |H		|easy-jekyll-github-deploy-timer|
 |I		|easy-jekyll-google-cloud-storage-deploy-timer|
 |J		|easy-jekyll-nth-blog|
+|M		|easy-jekyll-magit|
 |N		|easy-jekyll-no-help|
 |O		|easy-jekyll-open-basedir|
 |P		|easy-jekyll-publish|

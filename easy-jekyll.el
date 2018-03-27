@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.5.12
+;; Version: 1.6.12
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -338,6 +338,16 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (unless easy-jekyll-basedir
     (error "Please set easy-jekyll-basedir variable"))
   (find-file (expand-file-name easy-jekyll-postdir easy-jekyll-basedir)))
+
+;;;###autoload
+(defun easy-jekyll-magit ()
+  "Open magit at current blog."
+  (interactive)
+  (unless easy-jekyll-basedir
+    (error "Please set easy-jekyll-basedir variable"))
+  (if (package-installed-p 'magit)
+      (magit-status easy-jekyll-basedir)
+    (error "'magit' is not installed")))
 
 ;;;###autoload
 (defun easy-jekyll-image ()
@@ -861,12 +871,12 @@ v .. Open view-mode   s .. Sort time     T .. Publish timer    W .. AWS S3 timer
 d .. Delete post      c .. Open config   D .. Draft list       I .. GCS timer
 P .. Publish server   C .. Deploy GCS    a .. Search blog ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
-F .. Full help [tab]  S .. Sort char     ? .. Describe-mode    q .. Quit easy-jekyll
+F .. Full help [tab]  M .. Magit status  ? .. Describe-mode    q .. Quit easy-jekyll
 ")
     (progn
       "n .. New blog post    R .. Rename file   G .. Deploy GitHub    N .. No help-mode
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
-v .. Open view-mode   D .. Draft list    T .. Publish timer    S .. Sort time
+v .. Open view-mode   D .. Draft list    T .. Publish timer    M .. Magit status
 d .. Delete post      c .. Open config   u .. Undraft file     I .. GCS timer
 P .. Publish server   C .. Deploy GCS    a .. Search blog ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
@@ -890,12 +900,21 @@ Enjoy!
   "Help of easy-jekyll first time.")
 
 (defcustom easy-jekyll-add-help
-  "O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
+  (if (null easy-jekyll-sort-default-char)
+      (progn
+	"O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
 k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
 m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
 - .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
-J .. Jump blog        e .. Edit file
-"
+J .. Jump blog        e .. Edit file     S .. Sort char
+")
+    (progn
+      "O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
+k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
+m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
+- .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
+J .. Jump blog        e .. Edit file     S .. Sort time
+"))
   "Add help of easy-jekyll."
   :group 'easy-jekyll
   :type 'string)
@@ -909,6 +928,7 @@ J .. Jump blog        e .. Edit file
     (define-key map "n" 'easy-jekyll-newpost)
     (define-key map "w" 'easy-jekyll-newpost)
     (define-key map "a" 'easy-jekyll-ag)
+    (define-key map "M" 'easy-jekyll-magit)
     (define-key map "c" 'easy-jekyll-open-config)
     (define-key map "p" 'easy-jekyll-preview)
     (define-key map "P" 'easy-jekyll-publish)
