@@ -346,7 +346,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (unless easy-jekyll-basedir
     (error "Please set easy-jekyll-basedir variable"))
   (if (package-installed-p 'magit)
-      (magit-status easy-jekyll-basedir)
+      (magit-status-internal easy-jekyll-basedir)
     (error "'magit' is not installed")))
 
 ;;;###autoload
