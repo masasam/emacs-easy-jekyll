@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.6.14
+;; Version: 1.6.15
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -386,13 +386,16 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
       (error "%s does not exist" (expand-file-name
 				  easy-jekyll-image-directory
 				  easy-jekyll-basedir)))
-    (let ((file (read-file-name "Image file: " nil
-				(expand-file-name easy-jekyll-default-picture-directory)
-				t
-				(expand-file-name easy-jekyll-default-picture-directory))))
-      (copy-file file (expand-file-name
-		       (file-name-nondirectory file)
-		       easy-jekyll-image-directory))
+    (let* ((file (read-file-name "Image file: " nil
+				 (expand-file-name easy-jekyll-default-picture-directory)
+				 t
+				 (expand-file-name easy-jekyll-default-picture-directory)))
+	   (putfile (expand-file-name
+		     (file-name-nondirectory file)
+		     easy-jekyll-image-directory)))
+      (when (file-exists-p putfile)
+	(error "%s already exists!" putfile))
+      (copy-file file putfile)
       (insert (concat (format "<img src=\"%s%s\""
 			      easy-jekyll-url
 			      (concat
