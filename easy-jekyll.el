@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.6.15
+;; Version: 1.6.16
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -345,7 +345,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   (interactive)
   (unless easy-jekyll-basedir
     (error "Please set easy-jekyll-basedir variable"))
-  (if (package-installed-p 'magit)
+  (if (require 'magit nil t)
       (magit-status-internal easy-jekyll-basedir)
     (error "'magit' is not installed")))
 
@@ -944,9 +944,9 @@ to the server."
   "Search for blog article with counsel-ag or helm-ag."
   (interactive)
   (easy-jekyll-with-env
-   (if (package-installed-p 'counsel)
+   (if (require 'counsel nil t)
        (counsel-ag nil (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
-     (if (package-installed-p 'helm-ag)
+     (if (require 'helm-ag nil t)
 	 (helm-ag (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
        (error "'counsel' or 'helm-ag' is not installed")))))
 
