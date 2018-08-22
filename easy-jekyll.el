@@ -93,6 +93,11 @@
   :group 'easy-jekyll
   :type 'string)
 
+(defcustom easy-jekyll-helm-ag nil
+  "Helm-ag use flg."
+  :group 'easy-jekyll
+  :type 'string)
+
 (defcustom easy-jekyll-no-help nil
   "No help flg of easy-jekyll."
   :group 'easy-jekyll
@@ -944,7 +949,7 @@ to the server."
   "Search for blog article with counsel-ag or helm-ag."
   (interactive)
   (easy-jekyll-with-env
-   (if (require 'counsel nil t)
+   (if (and (require 'counsel nil t) (not easy-jekyll-helm-ag))
        (counsel-ag nil (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
      (if (require 'helm-ag nil t)
 	 (helm-ag (expand-file-name easy-jekyll-postdir easy-jekyll-basedir))
