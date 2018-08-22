@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.6.16
+;; Version: 1.6.17
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -722,7 +722,7 @@ to the server."
      (unless (executable-find deployscript)
        (error "%s do not execute" deployscript))
      (let ((ret (call-process
-		 (shell-quote-argument deployscript) nil "*jekyll-github-deploy*" t)))
+		 deployscript nil "*jekyll-github-deploy*" t)))
        (unless (zerop ret)
 	 (switch-to-buffer (get-buffer "*jekyll-github-deploy*"))
 	 (error "%s command does not end normally" deployscript)))
@@ -773,7 +773,7 @@ to the server."
 			 (easy-jekyll-nth-eval-bloglist easy-jekyll-basedir n))))
 	 (default-directory (easy-jekyll-nth-eval-bloglist easy-jekyll-basedir n))
 	 (ret (call-process
-	       (shell-quote-argument deployscript) nil "*jekyll-github-deploy*" t))
+	       deployscript nil "*jekyll-github-deploy*" t))
 	 (default-directory easy-jekyll-basedir))
     (unless (zerop ret)
       (switch-to-buffer (get-buffer "*jekyll-github-deploy*"))
