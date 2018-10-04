@@ -9,7 +9,6 @@ Emacs major mode for managing jekyll blogs
 	M-x easy-jekyll
 
 You can manage blogs on easy-jekyll-mode.
-
 If you manage multiple blogs, you can switch blogs with the < or > key.
 
 ![easy-jekyll-mode](image/easy-jekyll-mode.png)
@@ -17,11 +16,8 @@ If you manage multiple blogs, you can switch blogs with the < or > key.
     M-x easy-jekyll-newpost
 
 You can post a new article.
-
 Enter a article file name in the minibuffer.
-
 A markdown file is automatically generated.
-
 You can write a blog with markdown.
 
 ![easy-jekyll1](image/easy-jekyll1.png)
@@ -34,9 +30,7 @@ If you enter '.textile' file name in the minibuffer, textile file is automatical
 (The picture of the header is http://www.pixiv.net/member_illust.php?mode=medium&illust_id=60674880)
 
 The browser opens automatically and you can preview the blog on your laptop or desktop.
-
 Even if you run the easy-jekyll-preview command many times, only one jekyll process will run so do not mind it.
-
 Since the process of jekyll running in the laptop or desktop disappears in 300 seconds, you do not have to worry about killing jekyll process.
 
     M-x easy-jekyll-publish
@@ -48,9 +42,8 @@ You can publish your blog to the server and the browser opens automatically.
 ![easy-jekyll-helm-ag](image/easy-jekyll-helm-ag.png)
 
 You can search blog article with [counsel-ag](https://github.com/abo-abo/swiper) or [helm-ag](https://github.com/syohex/emacs-helm-ag).
-
 If both are installed, counsel-ag takes precedence at default and
-you can use helm-ag by writing the following to .emacs or init.el
+you can use helm-ag by writing the following to .emacs or init.el.
 
 	(setq easy-jekyll-helm-ag t)
 	
@@ -59,8 +52,8 @@ If you deploy your blog at github
 	M-x easy-jekyll-github-deploy
 
 Execute deploy.sh which exists in directory `easy-jekyll-basedir`.
-
 It is useful for hosting on [GitHub Pages](https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/) etc.
+You can use the rake task in deploy.sh. Please refer to [here](https://github.com/masasam/emacs-easy-jekyll/issues/3).
 
 Example of deploy.sh
 
@@ -92,7 +85,6 @@ You can move to a blog with the specified number.
 	M-x easy-jekyll-image
 
 Generate link of image from image file directory under 'easy-jekyll-image-directory' directory.
-
 'easy-jekyll-image-directory' default is 'images'.
 
 ![easy-jekyll-image1](image/easy-jekyll-image1.png)
@@ -104,7 +96,6 @@ When you select the image file you want to use, a link will be inserted.
 	M-x easy-jekyll-put-image
 
 Move image to 'easy-jekyll-image-directory' and generate image link.
-
 You can change the initial launch position with 'easy-jekyll-default-picture-directory'.
 
 ![easy-jekyll-put-image](image/easy-jekyll-put-image.png)
@@ -112,15 +103,12 @@ You can change the initial launch position with 'easy-jekyll-default-picture-dir
 	M-x easy-jekyll-pull-image
 
 Pull image from internet to image directory and generate image link.
-
 Copy the URL of the image you want to download with your browser.
-
 Execute M-x easy-jekyll-pull-image.
 
 ![easy-jekyll-pull-image](image/easy-jekyll-pull-image.png)
 
 Decide file name.
-
 If you press enter without deciding the file name, the file name can be used as it is.
 
 ![easy-jekyll-pull-image1](image/easy-jekyll-pull-image1.png)
@@ -203,13 +191,9 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 
 You can install `easy-jekyll.el` from [MELPA](http://melpa.org) with package.el
 (`M-x package-install easy-jekyll`).
-
 Confirm that PATH passes from emacs to jekyll.
-
 I recommend you are going to install [exec-path-from-shell]( https://github.com/purcell/exec-path-from-shell).
-
 Easy-jekyll-ag needs [the_silver_searcher](https://github.com/ggreer/the_silver_searcher).
-
 Easy-jekyll-ag needs [counsel-ag](https://github.com/abo-abo/swiper) or [helm-ag](https://github.com/syohex/emacs-helm-ag).
 
 ## Sample Configuration
@@ -232,30 +216,25 @@ If you use [use-package](https://github.com/jwiegley/use-package), please write 
 	(setq easy-jekyll-previewtime "300")
 	:bind ("C-c C-e" . easy-jekyll))
 
-easy-jekyll-basedir "Directory where jekyll html source code is placed on your laptop or desktop."
-
-easy-jekyll-url "Url of the blog."
-
-easy-jekyll-sshdomain "Domain written in ~/.ssh/config."
-
-easy-jekyll-root "Root directory of jekyll at your server."
-
-easy-jekyll-previewtime "Preview display time."
+|name    |description      |
+|-------|--------------|
+|easy-jekyll-basedir | Directory where jekyll html source code is placed on your laptop or desktop|
+|easy-jekyll-url |Url of the blog|
+|easy-jekyll-sshdomain |Domain written in ~/.ssh/config|
+|easy-jekyll-root |Root directory of jekyll at your server|
+|easy-jekyll-previewtime |Preview display time|
 
 If you want to deploy jekyll at Amazon S3, please install AWS CLI and set easy-jekyll-amazon-s3-bucket-name.
-
 Please set up for with `aws configure` command if you are the first time aws command.
 
 	(setq easy-jekyll-amazon-s3-bucket-name "your-amazon-s3-bucket-name")
 
 If you want to deploy jekyll at Google Cloud Storage, please install Google Cloud SDK and set easy-jekyll-google-cloud-storage-bucket-name.
-
 Please set up for with `gcloud auth login` command if you are the first time gcloud command.
 
 	(setq easy-jekyll-google-cloud-storage-bucket-name "your-google-cloud-storage-bucket-name")
 
 If you want the default extension to be '.textile'.
-
 If not set the default extension will be '.md'.
 
 	(setq easy-jekyll-default-ext ".textile")
@@ -278,9 +257,7 @@ If you want to customise color, write the following in the init.el or .emacs.
 	:group 'easy-jekyll-faces)
 
 In order to generate link of image from image file directory under 'easy-jekyll-image-directory' directory,
-
 If you want to change image file directory.
-
 If not set the default image file directory will be 'images'.
 
 	(setq easy-jekyll-image-directory "img")
@@ -289,9 +266,7 @@ Setting the picture directory of your laptop or desktop, it is easy to execute M
 
 	(setq easy-jekyll-default-picture-directory "~/Pictures")
 
-If you want to manage multiple blogs.
-
-Example of multiple blogs setting
+## Multiple blogs setting
 
 	;; Main blog
 	(setq easy-jekyll-basedir "~/my-awesome-site/")
@@ -428,11 +403,8 @@ _config.yml
 ### Prepare the server
 
 Let's build with a free trial of "google compute engine" or "amazon ec2".
-
 If you want to deploy jekyll at GitHub Pages or Amazon S3 or Google Cloud Storage, This paragraph is not necessary.
-
 I created my blog in google compute engine.
-
 Check if rsync is installed on the server.
 
 Write at ~/.ssh/config on your laptop or desktop
