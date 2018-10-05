@@ -53,7 +53,7 @@ If you deploy your blog at github
 
 Execute deploy.sh which exists in directory `easy-jekyll-basedir`.
 It is useful for hosting on [GitHub Pages](https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/) etc.
-You can use the rake task in deploy.sh. Please refer to [here](https://github.com/masasam/emacs-easy-jekyll/issues/3).
+If you use the rake task in deploy.sh. please refer to [here](https://github.com/masasam/emacs-easy-jekyll/issues/3).
 
 Example of deploy.sh
 
