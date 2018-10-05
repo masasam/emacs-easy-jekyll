@@ -66,7 +66,7 @@ Example of deploy.sh
 Don't forget granting execute permission to deploy.sh.
 
 Below is how to pass password to deploy.sh.
-You are to set up connecting to GitHub with SSH. (see https://help.github.com/articles/connecting-to-github-with-ssh/)
+You are to set up connecting to GitHub with SSH (see https://help.github.com/articles/connecting-to-github-with-ssh/).
 You install keychain (see http://www.funtoo.org/Keychain).
 Now that you don't need a password, you can run deploy.sh.
 
@@ -262,7 +262,7 @@ If you want to customise color, write the following in the init.el or .emacs.
 	:group 'easy-jekyll-faces)
 
 In order to generate link of image from image file directory under 'easy-jekyll-image-directory' directory,
-If you want to change image file directory.
+if you want to change image file directory.
 If not set the default image file directory will be 'images'.
 
 	(setq easy-jekyll-image-directory "img")
