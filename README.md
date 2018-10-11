@@ -95,6 +95,9 @@ Generate link of image from image file directory under 'easy-jekyll-image-direct
 ![easy-jekyll-image1](image/easy-jekyll-image1.png)
 
 When you select the image file you want to use, a link will be inserted.
+The default for the image file directory name is "images", but if you want to change it, write as follows.
+
+	(setq easy-jekyll-image-directory "img")
 
 ![easy-jekyll-image2](image/easy-jekyll-image2.png)
 
