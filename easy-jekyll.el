@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.6.17
+;; Version: 1.7.17
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -971,18 +971,18 @@ to the server."
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    u .. Undraft file
 v .. Open view-mode   s .. Sort time     T .. Publish timer    W .. AWS S3 timer
 d .. Delete post      c .. Open config   D .. Draft list       I .. GCS timer
-P .. Publish server   C .. Deploy GCS    a .. Search blog ag   H .. GitHub timer
+P .. Publish server   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
-F .. Full help [tab]  M .. Magit status  ? .. Describe-mode    q .. Quit easy-jekyll
+F .. Full help [tab]  M .. Magit status  ; .. Select blog    q .. Quit easy-jekyll
 ")
     (progn
       "n .. New blog post    R .. Rename file   G .. Deploy GitHub    N .. No help-mode
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
 v .. Open view-mode   D .. Draft list    T .. Publish timer    M .. Magit status
 d .. Delete post      c .. Open config   u .. Undraft file     I .. GCS timer
-P .. Publish server   C .. Deploy GCS    a .. Search blog ag   H .. GitHub timer
+P .. Publish server   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
-F .. Full help [tab]  W .. AWS S3 timer  ? .. Describe-mode    q .. Quit easy-jekyll
+F .. Full help [tab]  W .. AWS S3 timer  ; .. Select blog      q .. Quit easy-jekyll
 "))
   "Help of easy-jekyll."
   :group 'easy-jekyll
@@ -1008,14 +1008,14 @@ Enjoy!
 k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
 m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
 - .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
-J .. Jump blog        e .. Edit file     S .. Sort char
+J .. Jump blog        e .. Edit file     S .. Sort char        ? .. Describe-mode
 ")
     (progn
       "O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
 k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
 m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
 - .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
-J .. Jump blog        e .. Edit file     S .. Sort time
+J .. Jump blog        e .. Edit file     S .. Sort time        ? .. Describe-mode
 "))
   "Add help of easy-jekyll."
   :group 'easy-jekyll
@@ -1086,6 +1086,7 @@ J .. Jump blog        e .. Edit file     S .. Sort time
     (define-key map "D" 'easy-jekyll-list-draft)
     (define-key map "u" 'easy-jekyll-undraft)
     (define-key map "q" 'easy-jekyll-quit)
+    (define-key map ";" 'easy-jekyll-select-blog)
     (define-key map "<" 'easy-jekyll-previous-blog)
     (define-key map ">" 'easy-jekyll-next-blog)
     map)
@@ -1574,6 +1575,25 @@ Optional prefix ARG says how many lines to move; default is one line."
       (setq easy-jekyll-postdir easy-jekyll--default-postdir))
     (easy-jekyll--preview-end)
     (easy-jekyll)))
+
+(defun easy-jekyll-url-list (a)
+  "Return url list from blog max number A."
+  (if (>= a 0)
+      (cons
+       (list (cdr (rassoc (easy-jekyll-nth-eval-bloglist easy-jekyll-url a)
+			  (nth a easy-jekyll-bloglist)))
+	     a)
+       (easy-jekyll-url-list (- a 1)))))
+
+;;;###autoload
+(defun easy-jekyll-select-blog ()
+  "Select blog url you want to go."
+  (interactive)
+  (let ((completions (easy-jekyll-url-list (- (length easy-jekyll-bloglist) 1))))
+    (easy-jekyll-nth-blog
+     (cadr (assoc
+	    (completing-read "Complete easy-jekyll-url: " completions nil t)
+	    completions)))))
 
 (defun easy-jekyll-next-postdir ()
   "Go to next postdir."
