@@ -87,6 +87,12 @@ With this you can go to a directory other than _post.
 
 You can move to a blog with the specified number.
 
+	M-x easy-jekyll-select-blog
+
+Select blog you want to go. You can go to a selected blog.
+
+![easy-jekyll-select-blog](image/easy-jekyll-select-blog.png)
+
 	M-x easy-jekyll-image
 
 Generate link of image from image file directory under 'easy-jekyll-image-directory' directory.
