@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.7.17
+;; Version: 1.7.18
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -1409,7 +1409,7 @@ Optional prefix ARG says how many lines to move; default is one line."
 		    easy-jekyll-basedir)))
 	 (when (and (file-exists-p file)
 		    (not (file-directory-p file)))
-	   (when (y-or-n-p (concat "Delete " file))
+	   (when (yes-or-no-p (concat "Delete " file))
 	     (if easy-jekyll-no-help
 		 (setq easy-jekyll--line (- (line-number-at-pos) 4))
 	       (setq easy-jekyll--line (- (line-number-at-pos) (+ easy-jekyll--unmovable-line 1))))
