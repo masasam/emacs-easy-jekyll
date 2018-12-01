@@ -48,7 +48,20 @@ If both are installed, counsel-ag takes precedence at default and
 you can use helm-ag by writing the following to .emacs or init.el.
 
 	(setq easy-jekyll-helm-ag t)
-	
+
+If you deploy your blog at [Firebase](https://firebase.google.com/)
+
+	M-x easy-jekyll-firebase-deploy
+
+To use easy-jekyll-firebase-deploy, you make project at firebase hosting using your browser.
+Next run command.
+
+    npm install -g firebase-tools
+	cd [your-jekyll-directory]
+	firebase login
+	firebase init
+	firebase deploy
+
 If you deploy your blog at github
 
 	M-x easy-jekyll-github-deploy
