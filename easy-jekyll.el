@@ -260,48 +260,48 @@ The default is drwxr-xr-x."
   "Timer list for cansel google cloud storage deploy timer.")
 
 (defconst easy-jekyll--default-github-deploy-script
-  easy-jekyll-github-deploy-script
+  "deploy.sh"
   "Default easy-jekyll github-deploy-script.")
 
 (defconst easy-jekyll--default-image-directory
-  easy-jekyll-image-directory
+  "images"
   "Default easy-jekyll image-directory.")
 
 (defconst easy-jekyll--default-picture-directory
-  easy-jekyll-default-picture-directory
+  "~"
   "Default easy-jekyll picture-directory.")
 
 (defconst easy-jekyll--default-publish-chmod
-  easy-jekyll-publish-chmod
+  "Du=rwx,Dgo=rx,Fu=rw,Fog=r"
   "Default easy-jekyll publish-chmod.")
 
 (defconst easy-jekyll--default-previewtime
-  easy-jekyll-previewtime
+  300
   "Default easy-jekyll previewtime.")
 
 (defconst easy-jekyll--default-preview-url
-  easy-jekyll-preview-url
+  "http://localhost:4000/"
   "Default easy-jekyll preview-url.")
 
 (defconst easy-jekyll--default-sort-default-char
-  easy-jekyll-sort-default-char
+  t
   "Default easy-jekyll sort-default-char.")
 
 (defconst easy-jekyll--default-textile-extension
-  easy-jekyll-textile-extension
+  "textile"
   "Default easy-jekyll textile-extension.")
 
 (defconst easy-jekyll--default-markdown-extension
-  easy-jekyll-markdown-extension
+  "md"
   "Default easy-jekyll markdown-extension.")
+
+(defconst easy-jekyll--default-postdir
+  "_posts"
+  "Default easy-jekyll-postdir.")
 
 (defconst easy-jekyll--default-ext
   easy-jekyll-default-ext
   "Default easy-jekyll default-ext.")
-
-(defconst easy-jekyll--default-postdir
-  easy-jekyll-postdir
-  "Default easy-jekyll-postdir.")
 
 (defconst easy-jekyll--buffer-name "*Easy-jekyll*"
   "Buffer name of easy-jekyll.")
