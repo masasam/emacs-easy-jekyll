@@ -149,7 +149,7 @@ The default is drwxr-xr-x."
   :group 'easy-jekyll
   :type 'integer)
 
-(defcustom easy-jekyll-add-help-line 5
+(defcustom easy-jekyll-add-help-line 6
   "Number of lines of `easy-jekyll-add-help'."
   :group 'easy-jekyll
   :type 'integer)
@@ -245,19 +245,23 @@ The default is drwxr-xr-x."
 
 (defvar easy-jekyll--publish-timer-list
   (make-list (length easy-jekyll-bloglist) 'nil)
-  "Timer list for cansel publish timer.")
+  "Timer list for cancel publish timer.")
+
+(defvar easy-jekyll--firebase-deploy-timer-list
+  (make-list (length easy-jekyll-bloglist) 'nil)
+  "Timer list for cancel firebase deploy timer.")
 
 (defvar easy-jekyll--github-deploy-timer-list
   (make-list (length easy-jekyll-bloglist) 'nil)
-  "Timer list for cansel github deploy timer.")
+  "Timer list for cancel github deploy timer.")
 
 (defvar easy-jekyll--amazon-s3-deploy-timer-list
   (make-list (length easy-jekyll-bloglist) 'nil)
-  "Timer list for cansel amazon s3 deploy timer.")
+  "Timer list for cancel amazon s3 deploy timer.")
 
 (defvar easy-jekyll--google-cloud-storage-deploy-timer-list
   (make-list (length easy-jekyll-bloglist) 'nil)
-  "Timer list for cansel google cloud storage deploy timer.")
+  "Timer list for cancel google cloud storage deploy timer.")
 
 (defconst easy-jekyll--default-github-deploy-script
   "deploy.sh"
@@ -582,6 +586,62 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
    (message "Blog published")
    (when easy-jekyll-url
      (browse-url easy-jekyll-url))))
+
+;;;###autoload
+(defun easy-jekyll-firebase-deploy-timer (n)
+  "A timer that firebase deploy after the specified number as N of minutes has elapsed."
+  (interactive "nMinute:")
+  (unless easy-jekyll-basedir
+    (error "Please set easy-jekyll-basedir variable"))
+  (unless (executable-find "jekyll")
+    (error "'jekyll' is not installed"))
+  (unless (executable-find "firebase")
+    (error "'firebase-tools' is not installed"))
+  (let ((blognum easy-jekyll--current-blog))
+    (if (nth blognum easy-jekyll--firebase-deploy-timer-list)
+	(message "There is already reserved firebase-deploy-timer on %s" easy-jekyll-url)
+      (setf (nth easy-jekyll--current-blog easy-jekyll--firebase-deploy-timer-list)
+	    (run-at-time (* n 60) nil
+			 #'(lambda () (easy-jekyll-firebase-deploy-on-timer blognum)))))))
+
+;;;###autoload
+(defun easy-jekyll-cancel-firebase-deploy-timer ()
+  "Cancel timer that firebase deploy after the specified number of minutes has elapsed."
+  (interactive)
+  (if (nth easy-jekyll--current-blog easy-jekyll--firebase-deploy-timer-list)
+      (progn
+	(cancel-timer (nth easy-jekyll--current-blog easy-jekyll--firebase-deploy-timer-list))
+	(setf (nth easy-jekyll--current-blog easy-jekyll--firebase-deploy-timer-list) nil)
+	(message "Firebase-deploy-timer canceled on %s" easy-jekyll-url))
+    (message "There is no reserved firebase-deploy-timer on %s" easy-jekyll-url)))
+
+(defun easy-jekyll-firebase-deploy-on-timer (n)
+  "Deploy jekyll at firebase hosting on timer at N."
+  (let ((default-directory (easy-jekyll-nth-eval-bloglist easy-jekyll-basedir n)))
+    (when (file-directory-p "public")
+      (delete-directory "public" t nil))
+    (let ((ret (call-process "bundle" nil "*jekyll-firebase*" t
+			     "exec" "jekyll" "build" "--destination" "public")))
+      (unless (zerop ret)
+	(switch-to-buffer (get-buffer "*jekyll-firebase*"))
+	(setf (nth n easy-jekyll--firebase-deploy-timer-list) nil)
+	(error "'bundle exec jekyll build' command does not end normally")))
+    (when (get-buffer "*jekyll-firebase*")
+      (kill-buffer "*jekyll-firebase*"))
+    (let ((ret (call-process "firebase"
+			     nil
+			     "*jekyll-firebase*"
+			     t
+			     "deploy")))
+      (unless (zerop ret)
+	(switch-to-buffer (get-buffer "*jekyll-firebase*"))
+	(error "'firebase deploy' command does not end normally")))
+    (when (get-buffer "*jekyll-firebase*")
+      (kill-buffer "*jekyll-firebase*"))
+    (message "Blog published")
+    (when (easy-jekyll-nth-eval-bloglist easy-jekyll-url n)
+      (browse-url (easy-jekyll-nth-eval-bloglist easy-jekyll-url n)))
+    (setf (nth n easy-jekyll--publish-timer-list) nil)))
 
 (defun easy-jekyll--headers (file)
   "Return a draft header string for a new article as FILE."
@@ -1038,14 +1098,16 @@ Enjoy!
 k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
 m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
 - .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
-J .. Jump blog        e .. Edit file     S .. Sort char        ? .. Describe-mode
+J .. Jump blog        e .. Edit file     B .. Firebase deploy  ! .. X firebase timer
+L .. Firebase timer   S .. Sort char     ? .. Describe-mode
 ")
     (progn
       "O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
 k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
 m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
 - .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
-J .. Jump blog        e .. Edit file     S .. Sort time        ? .. Describe-mode
+J .. Jump blog        e .. Edit file     B .. Firebase deploy  ! .. X firebase timer
+L .. Firebase timer   S .. Sort time     ? .. Describe-mode
 "))
   "Add help of easy-jekyll."
   :group 'easy-jekyll
@@ -1105,6 +1167,9 @@ J .. Jump blog        e .. Edit file     S .. Sort time        ? .. Describe-mod
       (progn
 	(define-key map "S" 'easy-jekyll-sort-time)
 	(define-key map "s" 'easy-jekyll-sort-char)))
+    (define-key map "B" 'easy-jekyll-firebase-deploy)
+    (define-key map "L" 'easy-jekyll-firebase-deploy-timer)
+    (define-key map "!" 'easy-jekyll-cancel-firebase-deploy-timer)
     (define-key map "G" 'easy-jekyll-github-deploy)
     (define-key map "H" 'easy-jekyll-github-deploy-timer)
     (define-key map "b" 'easy-jekyll-cancel-github-deploy-timer)
