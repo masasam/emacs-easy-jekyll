@@ -170,7 +170,9 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |<		|easy-jekyll-previous-blog|
 |>		|easy-jekyll-next-blog|
 |?		|describe-mode|
+|!		|easy-jekyll-cansel-firebase-deploy-timer|
 |A		|easy-jekyll-amazon-s3-deploy|
+|B		|easy-jekyll-firebase-deploy|
 |C		|easy-jekyll-google-cloud-storage-deploy|
 |D		|easy-jekyll-list-draft|
 |F		|easy-jekyll-full-help|
@@ -178,6 +180,7 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |H		|easy-jekyll-github-deploy-timer|
 |I		|easy-jekyll-google-cloud-storage-deploy-timer|
 |J		|easy-jekyll-nth-blog|
+|L		|easy-jekyll-firebase-deploy-timer|
 |M		|easy-jekyll-magit|
 |N		|easy-jekyll-no-help|
 |O		|easy-jekyll-open-basedir|
