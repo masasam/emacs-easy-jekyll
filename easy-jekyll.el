@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.7.19
+;; Version: 1.8.19
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -552,6 +552,36 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
     (when (easy-jekyll-nth-eval-bloglist easy-jekyll-url n)
       (browse-url (easy-jekyll-nth-eval-bloglist easy-jekyll-url n)))
     (setf (nth n easy-jekyll--publish-timer-list) nil)))
+
+;;;###autoload
+(defun easy-jekyll-firebase-deploy ()
+  "Deploy jekyll source at firebase hosting."
+  (interactive)
+  (unless (executable-find "firebase")
+    (error "'firebase-tools' is not installed"))
+  (easy-jekyll-with-env
+   (when (file-directory-p "public")
+     (delete-directory "public" t nil))
+   (let ((ret (call-process "bundle" nil "*jekyll-publish*" t
+			    "exec" "jekyll" "build" "--destination" "public")))
+     (unless (zerop ret)
+       (switch-to-buffer (get-buffer "*jekyll-firebase*"))
+       (error "'bundle exec jekyll build' command does not end normally")))
+   (when (get-buffer "*jekyll-firebase*")
+     (kill-buffer "*jekyll-firebase*"))
+   (let ((ret (call-process "firebase"
+			    nil
+			    "*jekyll-firebase*"
+			    t
+			    "deploy")))
+     (unless (zerop ret)
+       (switch-to-buffer (get-buffer "*jekyll-firebase*"))
+       (error "'firebase deploy' command does not end normally")))
+   (when (get-buffer "*jekyll-firebase*")
+     (kill-buffer "*jekyll-firebase*"))
+   (message "Blog published")
+   (when easy-jekyll-url
+     (browse-url easy-jekyll-url))))
 
 (defun easy-jekyll--headers (file)
   "Return a draft header string for a new article as FILE."
