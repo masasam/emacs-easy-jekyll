@@ -1,10 +1,10 @@
 ;;; easy-jekyll.el --- Major mode managing jekyll blogs -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2017 by Masashı Mıyaura
+;; Copyright (C) 2017-2018 by Masashı Mıyaura
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.9.19
+;; Version: 2.0.19
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -446,6 +446,28 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 			       "/"
 			       (file-name-nondirectory file)))
 		      " alt=\"\" width=\"100%\"/>"))))))
+
+;;;###autoload
+(defun easy-jekyll-publish-clever ()
+  "Clever publish command.
+Automatically select the deployment destination from init.el."
+  (interactive)
+  (easy-jekyll-with-env
+   (cond ((easy-jekyll-eval-bloglist easy-jekyll-root)
+	  (easy-jekyll-publish))
+	 ((easy-jekyll-eval-bloglist easy-jekyll-amazon-s3-bucket-name)
+	  (easy-jekyll-amazon-s3-deploy))
+	 ((easy-jekyll-eval-bloglist easy-jekyll-google-cloud-storage-bucket-name)
+	  (easy-jekyll-google-cloud-storage-deploy))
+	 ((executable-find (expand-file-name
+			    (if (easy-jekyll-eval-bloglist easy-jekyll-github-deploy-script)
+				(easy-jekyll-eval-bloglist easy-jekyll-github-deploy-script)
+			      easy-jekyll-github-deploy-script)
+			    easy-jekyll-basedir))
+	  (easy-jekyll-github-deploy))
+	 ((executable-find "firebase")
+	  (easy-jekyll-firebase-deploy))
+	 (t (error "Nothing is found to publish at %s" easy-jekyll-basedir)))))
 
 ;;;###autoload
 (defun easy-jekyll-publish ()
@@ -1061,7 +1083,7 @@ to the server."
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    u .. Undraft file
 v .. Open view-mode   s .. Sort time     T .. Publish timer    W .. AWS S3 timer
 d .. Delete post      c .. Open config   D .. Draft list       f .. Select filename
-P .. Publish server   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
+P .. Publish clever   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
 F .. Full help [tab]  M .. Magit status  ; .. Select blog    q .. Quit easy-jekyll
 ")
@@ -1070,7 +1092,7 @@ F .. Full help [tab]  M .. Magit status  ; .. Select blog    q .. Quit easy-jeky
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
 v .. Open view-mode   D .. Draft list    T .. Publish timer    M .. Magit status
 d .. Delete post      c .. Open config   u .. Undraft file     f .. Select filename
-P .. Publish server   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
+P .. Publish clever   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
 F .. Full help [tab]  W .. AWS S3 timer  ; .. Select blog      q .. Quit easy-jekyll
 "))
@@ -1125,7 +1147,7 @@ L .. Firebase timer   S .. Sort time     I .. GCS timer        ? .. Describe-mod
     (define-key map "M" 'easy-jekyll-magit)
     (define-key map "c" 'easy-jekyll-open-config)
     (define-key map "p" 'easy-jekyll-preview)
-    (define-key map "P" 'easy-jekyll-publish)
+    (define-key map "P" 'easy-jekyll-publish-clever)
     (define-key map "T" 'easy-jekyll-publish-timer)
     (define-key map "W" 'easy-jekyll-amazon-s3-deploy-timer)
     (define-key map "t" 'easy-jekyll-cancel-publish-timer)
