@@ -315,15 +315,21 @@ Setting the picture directory of your laptop or desktop, it is easy to execute M
 		(easy-jekyll-url . "http://example2.com")
 		(easy-jekyll-sshdomain . "myblogdomain")
 		(easy-jekyll-root . "/home/jekyll/"))
-		;; blog3 setting
+		;; blog3 setting for aws s3
 		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll3/")
 		(easy-jekyll-url . "http://example3.net")
 		(easy-jekyll-amazon-s3-bucket-name . "yours3bucketname"))
-		;; blog4 setting
+		;; blog4 setting for google cloud storage
 		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll4/")
 		(easy-jekyll-url . "http://example4.net")
 		(easy-jekyll-google-cloud-storage-bucket-name . "yourGCPbucketname")
-		(easy-jekyll-image-directory . "img"))))
+		(easy-jekyll-image-directory . "img"))
+		;; blog5 for github pages
+		((easy-jekyll-basedir . "~/src/github.com/masasam/githubpages/")
+		(easy-jekyll-url . "https://yourid.github.io"))
+		;; blog6 for firebase hosting
+		((easy-jekyll-basedir . "~/src/github.com/masasam/firebase/")
+		(easy-jekyll-url . "https://yourproject.firebaseapp.com"))))
 
 If you use [use-package](https://github.com/jwiegley/use-package), please write them all in :init.
 
@@ -343,15 +349,21 @@ If you use [use-package](https://github.com/jwiegley/use-package), please write 
 		(easy-jekyll-url . "http://example2.com")
 		(easy-jekyll-sshdomain . "myblogdomain")
 		(easy-jekyll-root . "/home/jekyll/"))
-		;; blog3 setting
+		;; blog3 setting for aws s3
 		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll3/")
 		(easy-jekyll-url . "http://example3.net")
 		(easy-jekyll-amazon-s3-bucket-name . "yours3bucketname"))
-		;; blog4 setting
+		;; blog4 setting for google cloud storage
 		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll4/")
 		(easy-jekyll-url . "http://example4.net")
 		(easy-jekyll-google-cloud-storage-bucket-name . "yourGCPbucketname")
-		(easy-jekyll-image-directory . "img"))))
+		(easy-jekyll-image-directory . "img"))
+		;; blog5 for github pages
+		((easy-jekyll-basedir . "~/src/github.com/masasam/githubpages/")
+		(easy-jekyll-url . "https://yourid.github.io"))
+		;; blog6 for firebase hosting
+		((easy-jekyll-basedir . "~/src/github.com/masasam/firebase/")
+		(easy-jekyll-url . "https://yourproject.firebaseapp.com"))))
 	:bind ("C-c C-e" . easy-jekyll))
 
 You can manage as many blogs as you like.
