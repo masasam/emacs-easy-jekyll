@@ -201,7 +201,7 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |c		|easy-jekyll-open-config|
 |d		|easy-jekyll-delete|
 |e      |easy-jekyll-open|
-|f		|easy-jekyll-open|
+|f		|easy-jekyll-select-filename|
 |g		|easy-jekyll-refresh|
 |h		|easy-jekyll-backward-char|
 |i		|easy-jekyll-cancel-google-cloud-storage-deploy-timer|
