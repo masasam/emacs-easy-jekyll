@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 1.8.19
+;; Version: 1.9.19
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -1060,7 +1060,7 @@ to the server."
 	"n .. New blog post    R .. Rename file   G .. Deploy GitHub    ? .. Help easy-jekyll
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    u .. Undraft file
 v .. Open view-mode   s .. Sort time     T .. Publish timer    W .. AWS S3 timer
-d .. Delete post      c .. Open config   D .. Draft list       I .. GCS timer
+d .. Delete post      c .. Open config   D .. Draft list       f .. Select filename
 P .. Publish server   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
 F .. Full help [tab]  M .. Magit status  ; .. Select blog    q .. Quit easy-jekyll
@@ -1069,7 +1069,7 @@ F .. Full help [tab]  M .. Magit status  ; .. Select blog    q .. Quit easy-jeky
       "n .. New blog post    R .. Rename file   G .. Deploy GitHub    N .. No help-mode
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
 v .. Open view-mode   D .. Draft list    T .. Publish timer    M .. Magit status
-d .. Delete post      c .. Open config   u .. Undraft file     I .. GCS timer
+d .. Delete post      c .. Open config   u .. Undraft file     f .. Select filename
 P .. Publish server   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
 F .. Full help [tab]  W .. AWS S3 timer  ; .. Select blog      q .. Quit easy-jekyll
@@ -1099,7 +1099,7 @@ k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
 m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
 - .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
 J .. Jump blog        e .. Edit file     B .. Firebase deploy  ! .. X firebase timer
-L .. Firebase timer   S .. Sort char     ? .. Describe-mode
+L .. Firebase timer   S .. Sort char     I .. GCS timer        ? .. Describe-mode
 ")
     (progn
       "O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
@@ -1107,7 +1107,7 @@ k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
 m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
 - .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
 J .. Jump blog        e .. Edit file     B .. Firebase deploy  ! .. X firebase timer
-L .. Firebase timer   S .. Sort time     ? .. Describe-mode
+L .. Firebase timer   S .. Sort time     I .. GCS timer        ? .. Describe-mode
 "))
   "Add help of easy-jekyll."
   :group 'easy-jekyll
@@ -1136,7 +1136,7 @@ L .. Firebase timer   S .. Sort time     ? .. Describe-mode
     (put 'easy-jekyll-open :advertised-binding "\C-m")
     (define-key map "d" 'easy-jekyll-delete)
     (define-key map "e" 'easy-jekyll-open)
-    (define-key map "f" 'easy-jekyll-open)
+    (define-key map "f" 'easy-jekyll-select-filename)
     (define-key map "F" 'easy-jekyll-full-help)
     (define-key map [tab] 'easy-jekyll-full-help)
     (define-key map [backtab] 'easy-jekyll-no-help)
@@ -1679,6 +1679,43 @@ Optional prefix ARG says how many lines to move; default is one line."
 			  (nth a easy-jekyll-bloglist)))
 	     a)
        (easy-jekyll-url-list (- a 1)))))
+
+;;;###autoload
+(defun easy-jekyll-select-filename ()
+  "Select filename you want to open."
+  (interactive)
+  (find-file
+   (concat (expand-file-name easy-jekyll-postdir easy-jekyll-basedir)
+	   "/"
+	   (completing-read
+	    "Complete filename: "
+	    (easy-jekyll--directory-files-nondirectory
+	     (expand-file-name easy-jekyll-postdir easy-jekyll-basedir)
+	     "\\.\\(textile\\|md\\)\\'")
+	    nil t))))
+
+(defsubst easy-jekyll--directory-name-p (name)
+  "Return non-nil if NAME ends with a directory separator character."
+  (let ((len (length name))
+        (lastc ?.))
+    (if (> len 0)
+        (setq lastc (aref name (1- len))))
+    (or (= lastc ?/)
+        (and (memq system-type '(windows-nt ms-dos))
+             (= lastc ?\\)))))
+
+(defun easy-jekyll--directory-files-nondirectory (dir regexp)
+  "Return list of all files nondirectory under DIR that have file names matching REGEXP."
+  (let ((result nil)
+	(files nil)
+	(tramp-mode (and tramp-mode (file-remote-p (expand-file-name dir)))))
+    (dolist (file (sort (file-name-all-completions "" dir)
+			'string<))
+      (unless (member file '("./" "../"))
+	(if (not (easy-jekyll--directory-name-p file))
+	    (when (string-match regexp file)
+	      (push (file-name-nondirectory  file) files)))))
+    (nconc result (nreverse files))))
 
 ;;;###autoload
 (defun easy-jekyll-select-blog ()
