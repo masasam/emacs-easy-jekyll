@@ -102,6 +102,12 @@ With this you can go to a directory other than _post.
 
 You can move to a blog with the specified number.
 
+	M-x easy-jekyll-select-filename
+
+Select filename you want to open. You can open a selected filename article.
+
+![easy-jekyll-select-filename](image/easy-jekyll-select-filename.png)
+
 	M-x easy-jekyll-select-blog
 
 Select blog you want to go. You can go to a selected blog.
