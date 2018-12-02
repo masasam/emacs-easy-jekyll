@@ -39,6 +39,16 @@ Since the process of jekyll running in the laptop or desktop disappears in 300 s
 
 You can publish your blog to the server and the browser opens automatically.
 
+	M-x easy-jekyll-publish-clever
+
+Clever publish command.
+Automatically select the deployment destination from init.el.
+If the target blog set easy-jekyll-root, easy-jekyll-publish will be executed.
+If the target blog set easy-jekyll-amazon-s3-bucket-name, easy-jekyll-amazon-s3-deploy will be executed.
+If the target blog set easy-jekyll-google-cloud-storage-bucket-name, easy-jekyll-google-cloud-storage-deploy be executed.
+If the target blog has "deploy.sh" on easy-jekyll-basedir, easy-jekyll-github-deploy will be executed.
+If there is firebase command , easy-jekyll-firebase-deploy will be executed.
+
 	M-x easy-jekyll-ag
 
 ![easy-jekyll-helm-ag](image/easy-jekyll-helm-ag.png)
@@ -190,7 +200,7 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |M		|easy-jekyll-magit|
 |N		|easy-jekyll-no-help|
 |O		|easy-jekyll-open-basedir|
-|P		|easy-jekyll-publish|
+|P		|easy-jekyll-publish-clever|
 |R		|easy-jekyll-rename|
 |S		|easy-jekyll-sort-time|
 |T		|easy-jekyll-publish-timer|
