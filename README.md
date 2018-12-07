@@ -95,6 +95,26 @@ You are to set up connecting to GitHub with SSH (see https://help.github.com/art
 You install keychain (see http://www.funtoo.org/Keychain).
 Now that you don't need a password, you can run deploy.sh.
 
+Example of deploy.sh for netlify
+
+	npm install netlify-cli -g
+
+```bash
+#!/bin/bash
+
+rm -rf public
+hugo --destination public
+
+expect -c "
+set timeout 100
+spawn env LANG=C netlify deploy --prod
+expect \"(.)\"
+send \"\n\"
+expect \"$\"
+exit 0
+"
+```
+
 	M-x easy-jekyll-amazon-s3-deploy
 
 Deploy jekyll source at Amazon S3.
