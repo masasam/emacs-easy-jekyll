@@ -4,8 +4,8 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 2.0.20
-;; Package-Requires: ((emacs "24.4"))
+;; Version: 2.0.21
+;; Package-Requires: ((emacs "24.4") (request "0.3.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 ;;; Code:
 
 (require 'cl-lib)
+(require 'request)
 
 (defgroup easy-jekyll nil
   "Major mode managing jekyll blogs."
@@ -416,6 +417,22 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 				 (file-name-nondirectory file)))
 			" alt=\"\" width=\"100%\"/>")))))))
 
+(defun easy-jekyll--request-image (url file)
+  "Resuest image from URL and save file at the location of FILE."
+  (request
+   url
+   :parser 'buffer-string
+   :success
+   (cl-function (lambda (&key data &allow-other-keys)
+		  (when data
+		    (with-current-buffer (get-buffer-create "*request image*")
+		      (erase-buffer)
+		      (insert data)
+		      (write-file file)))))
+   :error
+   (cl-function (lambda (&rest args &key error-thrown &allow-other-keys)
+		  (message "Got error: %S" error-thrown)))))
+
 ;;;###autoload
 (defun easy-jekyll-pull-image ()
   "Pull image from internet to image directory and generate image link."
@@ -439,7 +456,7 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
 				nil)))
       (when (file-exists-p (file-truename file))
 	(error "%s already exists!" (file-truename file)))
-      (url-copy-file url file t)
+      (easy-jekyll--request-image url file)
       (insert (concat (format "<img src=\"%s%s\""
 			      easy-jekyll-url
 			      (concat
