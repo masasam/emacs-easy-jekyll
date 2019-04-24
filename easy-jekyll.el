@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 2.0.21
+;; Version: 2.0.22
 ;; Package-Requires: ((emacs "24.4") (request "0.3.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -29,6 +29,7 @@
 ;;; Code:
 
 (require 'cl-lib)
+(require 'url)
 (require 'request)
 
 (defgroup easy-jekyll nil
