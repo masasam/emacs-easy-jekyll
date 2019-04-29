@@ -268,6 +268,8 @@ Easy-jekyll-ag needs [counsel-ag](https://github.com/abo-abo/swiper) or [helm-ag
 
 ## Sample Configuration
 
+When you change setting, you need to restart emacs.
+
 	(setq easy-jekyll-basedir "~/my-awesome-site/")
 	(setq easy-jekyll-url "https://yourblogdomain")
 	(setq easy-jekyll-sshdomain "blogdomain")
@@ -337,6 +339,8 @@ Setting the picture directory of your laptop or desktop, it is easy to execute M
 	(setq easy-jekyll-default-picture-directory "~/Pictures")
 
 ## Multiple blogs setting
+
+When you change setting, you need to restart emacs.
 
 	;; Main blog
 	(setq easy-jekyll-basedir "~/my-awesome-site/")
