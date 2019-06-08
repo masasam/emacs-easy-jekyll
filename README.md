@@ -211,6 +211,7 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |+      |easy-jekyll-next-postdir|
 |-      |easy-jekyll-previous-postdir|
 |/      |easy-jekyll-select-postdir|
+|;      |easy-jekyll-select-blog|
 |<		|easy-jekyll-previous-blog|
 |>		|easy-jekyll-next-blog|
 |?		|describe-mode|
