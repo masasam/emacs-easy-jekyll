@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 2.0.22
+;; Version: 2.1.22
 ;; Package-Requires: ((emacs "24.4") (request "0.3.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -1105,16 +1105,16 @@ v .. Open view-mode   s .. Sort time     T .. Publish timer    W .. AWS S3 timer
 d .. Delete post      c .. Open config   D .. Draft list       f .. Select filename
 P .. Publish clever   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
-F .. Full help [tab]  M .. Magit status  ; .. Select blog    q .. Quit easy-jekyll
+F .. Full help [tab]  ; .. Select blog   / .. Select postdir   q .. Quit easy-jekyll
 ")
     (progn
       "n .. New blog post    R .. Rename file   G .. Deploy GitHub    N .. No help-mode
 p .. Preview          g .. Refresh       A .. Deploy AWS S3    s .. Sort character
-v .. Open view-mode   D .. Draft list    T .. Publish timer    M .. Magit status
+v .. Open view-mode   D .. Draft list    T .. Publish timer    W .. AWS S3 timer
 d .. Delete post      c .. Open config   u .. Undraft file     f .. Select filename
 P .. Publish clever   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
-F .. Full help [tab]  W .. AWS S3 timer  ; .. Select blog      q .. Quit easy-jekyll
+F .. Full help [tab]  ; .. Select blog   / .. Select postdir   q .. Quit easy-jekyll
 "))
   "Help of easy-jekyll."
   :group 'easy-jekyll
@@ -1138,18 +1138,18 @@ Enjoy!
       (progn
 	"O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
 k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
-m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
+m .. X s3-timer       i .. X GCS timer   I .. GCS timer        V .. View other window
 - .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
 J .. Jump blog        e .. Edit file     B .. Firebase deploy  ! .. X firebase timer
-L .. Firebase timer   S .. Sort char     I .. GCS timer        ? .. Describe-mode
+L .. Firebase timer   S .. Sort char     M .. Magit status     ? .. Describe-mode
 ")
     (progn
       "O .. Open basedir     r .. Refresh       b .. X github timer   t .. X publish-timer
 k .. Previous-line    j .. Next line     h .. backward-char    l .. forward-char
-m .. X s3-timer       i .. X GCS timer   f .. File open        V .. View other window
+m .. X s3-timer       i .. X GCS timer   I .. GCS timer        V .. View other window
 - .. Pre postdir      + .. Next postdir  w .. Write post       o .. Open other window
 J .. Jump blog        e .. Edit file     B .. Firebase deploy  ! .. X firebase timer
-L .. Firebase timer   S .. Sort time     I .. GCS timer        ? .. Describe-mode
+L .. Firebase timer   S .. Sort time     M .. Magit status     ? .. Describe-mode
 "))
   "Add help of easy-jekyll."
   :group 'easy-jekyll
@@ -1223,6 +1223,7 @@ L .. Firebase timer   S .. Sort time     I .. GCS timer        ? .. Describe-mod
     (define-key map "D" 'easy-jekyll-list-draft)
     (define-key map "u" 'easy-jekyll-undraft)
     (define-key map "q" 'easy-jekyll-quit)
+    (define-key map "/" 'easy-jekyll-select-postdir)
     (define-key map ";" 'easy-jekyll-select-blog)
     (define-key map "<" 'easy-jekyll-previous-blog)
     (define-key map ">" 'easy-jekyll-next-blog)
@@ -1723,6 +1724,26 @@ Optional prefix ARG says how many lines to move; default is one line."
        (easy-jekyll-url-list (- a 1)))))
 
 ;;;###autoload
+(defun easy-jekyll-select-postdir ()
+  "Select postdir you want to go."
+  (interactive)
+  (setq easy-jekyll--postdir-list
+	(easy-jekyll--directory-list
+	 (easy-jekyll--directory-files-recursively
+	  (expand-file-name "_posts" easy-jekyll-basedir) "" t)))
+  (add-to-list 'easy-jekyll--postdir-list
+	       (expand-file-name easy-jekyll-basedir))
+  (add-to-list 'easy-jekyll--postdir-list
+  	       (expand-file-name "_posts" easy-jekyll-basedir))
+  (setq easy-jekyll-postdir
+	(file-relative-name
+	 (completing-read
+	  "Complete easy-jekyll-postdir: "
+	  easy-jekyll--postdir-list
+	  nil t)))
+  (easy-jekyll))
+
+;;;###autoload
 (defun easy-jekyll-select-filename ()
   "Select filename you want to open."
   (interactive)
@@ -1769,13 +1790,52 @@ Optional prefix ARG says how many lines to move; default is one line."
 	    (completing-read "Complete easy-jekyll-url: " completions nil t)
 	    completions)))))
 
+(defun easy-jekyll--directory-list (list)
+  "Return only directories in LIST."
+  (if list
+      (if (file-directory-p (car list))
+	  (cons (car list)
+		(easy-jekyll--directory-list (cdr list)))
+	(easy-jekyll--directory-list (cdr list)))))
+
+(defun easy-jekyll--directory-files-recursively (dir regexp &optional include-directories)
+  "Return list of all files under DIR that have file names matching REGEXP.
+This function works recursively.  Files are returned in \"depth first\"
+order, and files from each directory are sorted in alphabetical order.
+Each file name appears in the returned list in its absolute form.
+Optional argument INCLUDE-DIRECTORIES non-nil means also include in the
+output directories whose names match REGEXP."
+  (let ((result nil)
+	(files nil)
+	(tramp-mode (and tramp-mode (file-remote-p (expand-file-name dir)))))
+    (dolist (file (sort (file-name-all-completions "" dir)
+			'string<))
+      (unless (member file '("./" "../"))
+	(if (easy-jekyll--directory-name-p file)
+	    (let* ((leaf (substring file 0 (1- (length file))))
+		   (full-file (expand-file-name leaf dir)))
+	      (unless (file-symlink-p full-file)
+		(setq result
+		      (nconc result (easy-jekyll--directory-files-recursively
+				     full-file regexp include-directories))))
+	      (when (and include-directories
+			 (string-match regexp leaf))
+		(setq result (nconc result (list full-file)))))
+	  (when (string-match regexp file)
+	    (push (expand-file-name file dir) files)))))
+    (nconc result (nreverse files))))
+
 (defun easy-jekyll-next-postdir ()
   "Go to next postdir."
   (interactive)
+  (setq easy-jekyll--postdir-list
+	(easy-jekyll--directory-list
+	 (easy-jekyll--directory-files-recursively
+	  (expand-file-name "_posts" easy-jekyll-basedir) "" t)))
   (add-to-list 'easy-jekyll--postdir-list
 	       (expand-file-name easy-jekyll-basedir))
   (add-to-list 'easy-jekyll--postdir-list
-	       (expand-file-name "_posts" easy-jekyll-basedir))
+  	       (expand-file-name "_posts" easy-jekyll-basedir))
   (if (eq (- (length easy-jekyll--postdir-list) 1) easy-jekyll--current-postdir)
       (setq easy-jekyll--current-postdir 0)
     (setq easy-jekyll--current-postdir (+ easy-jekyll--current-postdir 1)))
@@ -1788,6 +1848,10 @@ Optional prefix ARG says how many lines to move; default is one line."
 (defun easy-jekyll-previous-postdir ()
   "Go to previous postdir."
   (interactive)
+  (setq easy-jekyll--postdir-list
+	(easy-jekyll--directory-list
+	 (easy-jekyll--directory-files-recursively
+	  (expand-file-name "_posts" easy-jekyll-basedir) "" t)))
   (add-to-list 'easy-jekyll--postdir-list
 	       (expand-file-name easy-jekyll-basedir))
   (add-to-list 'easy-jekyll--postdir-list
