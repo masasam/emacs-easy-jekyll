@@ -139,6 +139,12 @@ Select filename you want to open. You can open a selected filename article.
 
 ![easy-jekyll-select-filename](image/easy-jekyll-select-filename.png)
 
+	M-x easy-jekyll-select-postdir
+
+Select postdir you want to go. You can go to a selected directory.
+
+![easy-jekyll-select-postdir](image/easy-jekyll-select-postdir.png)
+
 	M-x easy-jekyll-select-blog
 
 Select blog you want to go. You can go to a selected blog.
@@ -204,6 +210,7 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |,      |easy-jekyll-previous-postdir|
 |+      |easy-jekyll-next-postdir|
 |-      |easy-jekyll-previous-postdir|
+|/      |easy-jekyll-select-postdir|
 |<		|easy-jekyll-previous-blog|
 |>		|easy-jekyll-next-blog|
 |?		|describe-mode|
