@@ -102,9 +102,9 @@ Example of deploy.sh for netlify
 ```bash
 #!/bin/bash
 
-rm -rf public
-hugo --destination public
-cd public
+rm -rf _site
+bundle exec jekyll build --destination _site
+cd _site
 
 expect -c "
 set timeout 100
