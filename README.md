@@ -261,7 +261,7 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 
 ## Requirements
 
-- Emacs 24.4 or higher
+- Emacs 25.1 or higher
 - jekyll 3.5.1 or higher
 
 ## Installation
