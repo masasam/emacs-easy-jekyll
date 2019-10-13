@@ -5,7 +5,7 @@
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
 ;; Version: 2.2.22
-;; Package-Requires: ((emacs "24.4") (request "0.3.0"))
+;; Package-Requires: ((emacs "25.1") (request "0.3.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@
   :type 'string)
 
 (defcustom easy-jekyll-preview-url "http://localhost:4000/"
-  "Preview url of easy-jekyll."
+  "Preview url of `easy-jekyll'."
   :group 'easy-jekyll
   :type 'string)
 
@@ -101,12 +101,12 @@
   :type 'string)
 
 (defcustom easy-jekyll-no-help nil
-  "No help flg of easy-jekyll."
+  "No help flg of `easy-jekyll'."
   :group 'easy-jekyll
   :type 'integer)
 
 (defcustom easy-jekyll-additional-help nil
-  "Additional help flg of easy-jekyll."
+  "Additional help flg of `easy-jekyll'."
   :group 'easy-jekyll
   :type 'integer)
 
@@ -201,22 +201,22 @@ The default is drwxr-xr-x."
   :group 'easy-jekyll-faces)
 
 (defvar easy-jekyll--mode-buffer nil
-  "Main buffer of easy-jekyll.")
+  "Main buffer of `easy-jekyll'.")
 
 (defvar easy-jekyll--cursor nil
-  "Cursor of easy-jekyll.")
+  "Cursor of `easy-jekyll'.")
 
 (defvar easy-jekyll--line nil
-  "Line of easy-jekyll.")
+  "Line of `easy-jekyll'.")
 
 (defvar easy-jekyll--sort-time-flg nil
-  "Sort time flg of easy-jekyll.")
+  "Sort time flg of `easy-jekyll'.")
 
 (defvar easy-jekyll--sort-char-flg 2
-  "Sort char flg of easy-jekyll.")
+  "Sort char flg of `easy-jekyll'.")
 
 (defvar easy-jekyll--refresh nil
-  "Refresh flg of easy-jekyll.")
+  "Refresh flg of `easy-jekyll'.")
 
 (defvar easy-jekyll--current-blog 0
   "Current blog number.")
@@ -267,39 +267,39 @@ The default is drwxr-xr-x."
 
 (defconst easy-jekyll--default-github-deploy-script
   "deploy.sh"
-  "Default easy-jekyll github-deploy-script.")
+  "Default `easy-jekyll' github-deploy-script.")
 
 (defconst easy-jekyll--default-image-directory
   "images"
-  "Default easy-jekyll image-directory.")
+  "Default `easy-jekyll' image-directory.")
 
 (defconst easy-jekyll--default-picture-directory
   "~"
-  "Default easy-jekyll picture-directory.")
+  "Default `easy-jekyll' picture-directory.")
 
 (defconst easy-jekyll--default-publish-chmod
   "Du=rwx,Dgo=rx,Fu=rw,Fog=r"
-  "Default easy-jekyll publish-chmod.")
+  "Default `easy-jekyll' publish-chmod.")
 
 (defconst easy-jekyll--default-previewtime
   300
-  "Default easy-jekyll previewtime.")
+  "Default `easy-jekyll' previewtime.")
 
 (defconst easy-jekyll--default-preview-url
   "http://localhost:4000/"
-  "Default easy-jekyll preview-url.")
+  "Default `easy-jekyll' preview-url.")
 
 (defconst easy-jekyll--default-sort-default-char
   t
-  "Default easy-jekyll sort-default-char.")
+  "Default `easy-jekyll' sort-default-char.")
 
 (defconst easy-jekyll--default-textile-extension
   "textile"
-  "Default easy-jekyll textile-extension.")
+  "Default `easy-jekyll' textile-extension.")
 
 (defconst easy-jekyll--default-markdown-extension
   "md"
-  "Default easy-jekyll markdown-extension.")
+  "Default `easy-jekyll' markdown-extension.")
 
 (defconst easy-jekyll--default-postdir
   "_posts"
@@ -307,13 +307,13 @@ The default is drwxr-xr-x."
 
 (defconst easy-jekyll--default-ext
   easy-jekyll-default-ext
-  "Default easy-jekyll default-ext.")
+  "Default `easy-jekyll' default-ext.")
 
 (defconst easy-jekyll--buffer-name "*Easy-jekyll*"
-  "Buffer name of easy-jekyll.")
+  "Buffer name of `easy-jekyll'.")
 
 (defconst easy-jekyll--forward-char 20
-  "Forward-char of easy-jekyll.")
+  "Forward-char of `easy-jekyll'.")
 
 (defmacro easy-jekyll-with-env (&rest body)
   "Evaluate BODY with `default-directory' set to `easy-jekyll-basedir'.
@@ -1078,7 +1078,7 @@ to the server."
 
 ;;;###autoload
 (defun easy-jekyll-ag ()
-  "Search for blog article with counsel-ag or helm-ag."
+  "Search for blog article with `counsel-ag' or `helm-ag'."
   (interactive)
   (easy-jekyll-with-env
    (if (and (require 'counsel nil t) (not easy-jekyll-helm-ag))
@@ -1116,7 +1116,7 @@ P .. Publish clever   C .. Deploy GCS    a .. Search with ag   H .. GitHub timer
 < .. Previous blog    > .. Next blog     , .. Pre postdir      . .. Next postdir
 F .. Full help [tab]  ; .. Select blog   / .. Select postdir   q .. Quit easy-jekyll
 "))
-  "Help of easy-jekyll."
+  "Help of `easy-jekyll'."
   :group 'easy-jekyll
   :type 'string)
 
@@ -1131,7 +1131,7 @@ article which you wrote should appear here.
 Enjoy!
 
 "
-  "Help of easy-jekyll first time.")
+  "Help of `easy-jekyll' first time.")
 
 (defcustom easy-jekyll-add-help
   (if (null easy-jekyll-sort-default-char)
@@ -1151,7 +1151,7 @@ m .. X s3-timer       i .. X GCS timer   I .. GCS timer        V .. View other w
 J .. Jump blog        e .. Edit file     B .. Firebase deploy  ! .. X firebase timer
 L .. Firebase timer   S .. Sort time     M .. Magit status     ? .. Describe-mode
 "))
-  "Add help of easy-jekyll."
+  "Add help of `easy-jekyll'."
   :group 'easy-jekyll
   :type 'string)
 
@@ -1228,7 +1228,7 @@ L .. Firebase timer   S .. Sort time     M .. Magit status     ? .. Describe-mod
     (define-key map "<" 'easy-jekyll-previous-blog)
     (define-key map ">" 'easy-jekyll-next-blog)
     map)
-  "Keymap for easy-jekyll major mode.")
+  "Keymap for `easy-jekyll' major mode.")
 
 (define-derived-mode easy-jekyll-mode special-mode "Easy-jekyll"
   "Major mode for easy jekyll.")
@@ -1880,7 +1880,7 @@ output directories whose names match REGEXP."
   (easy-jekyll))
 
 (defun easy-jekyll-draft-list ()
-  "Drafts list mode of easy-jekyll."
+  "Drafts list mode of `easy-jekyll'."
   (easy-jekyll-with-env
    (unless (file-directory-p (expand-file-name "_drafts" easy-jekyll-basedir))
      (make-directory (expand-file-name "_drafts" easy-jekyll-basedir) t))
