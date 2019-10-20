@@ -98,6 +98,8 @@ Now that you don't need a password, you can run deploy.sh.
 Example of deploy.sh for netlify
 
 	npm install netlify-cli -g
+	netlify login
+	netlify init
 
 ```bash
 #!/bin/bash
