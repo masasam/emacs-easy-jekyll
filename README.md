@@ -280,6 +280,8 @@ Easy-jekyll-ag needs [counsel-ag](https://github.com/abo-abo/swiper) or [helm-ag
 
 When you change setting, you need to restart emacs.
 
+If you deploy your blog at your server.
+
 	(setq easy-jekyll-basedir "~/my-awesome-site/")
 	(setq easy-jekyll-url "https://yourblogdomain")
 	(setq easy-jekyll-sshdomain "blogdomain")
@@ -297,6 +299,28 @@ If you use [use-package](https://github.com/jwiegley/use-package), please write 
 	(setq easy-jekyll-root "/home/blog/")
 	(setq easy-jekyll-previewtime "300")
 	:bind ("C-c C-e" . easy-jekyll))
+
+If you deploy your blog at amazon s3.
+
+	(setq easy-jekyll-basedir "~/bookshelf/")
+	(setq easy-jekyll-url "https://yourblogdomain")
+	(setq easy-jekyll-amazon-s3-bucket-name "yourS3bucketname")
+
+If you deploy your blog at google cloud strage.
+
+	(setq easy-jekyll-basedir "~/bookshelf/")
+	(setq easy-jekyll-url "https://yourblogdomain")
+	(setq easy-jekyll-google-cloud-storage-bucket-name "yourGCPbucketname")
+
+If you deploy your blog at github pages etc.
+
+	(setq easy-jekyll-basedir "~/bookshelf/")
+	(setq easy-jekyll-url "https://yourid.github.io"))
+
+If you deploy your blog at firebase hosting.
+
+	(setq easy-jekyll-basedir "~/bookshelf/")
+	(setq easy-jekyll-url "https://yourproject.firebaseapp.com")
 
 |name    |description      |
 |-------|--------------|
@@ -369,7 +393,7 @@ When you change setting, you need to restart emacs.
 		;; blog3 setting for aws s3
 		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll3/")
 		(easy-jekyll-url . "http://example3.net")
-		(easy-jekyll-amazon-s3-bucket-name . "yours3bucketname"))
+		(easy-jekyll-amazon-s3-bucket-name . "yourS3bucketname"))
 		;; blog4 setting for google cloud storage
 		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll4/")
 		(easy-jekyll-url . "http://example4.net")
@@ -403,7 +427,7 @@ If you use [use-package](https://github.com/jwiegley/use-package), please write 
 		;; blog3 setting for aws s3
 		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll3/")
 		(easy-jekyll-url . "http://example3.net")
-		(easy-jekyll-amazon-s3-bucket-name . "yours3bucketname"))
+		(easy-jekyll-amazon-s3-bucket-name . "yourS3bucketname"))
 		;; blog4 setting for google cloud storage
 		((easy-jekyll-basedir . "~/src/github.com/masasam/jekyll4/")
 		(easy-jekyll-url . "http://example4.net")
