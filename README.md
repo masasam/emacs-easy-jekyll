@@ -59,7 +59,7 @@ you can use helm-ag by writing the following to .emacs or init.el.
 
 	(setq easy-jekyll-helm-ag t)
 
-If you deploy your blog at [Firebase](https://firebase.google.com/)
+If you deploy your blog at [Firebase](https://firebase.google.com/).
 
 	M-x easy-jekyll-firebase-deploy
 
@@ -72,7 +72,7 @@ Next run command.
 	firebase init
 	firebase deploy
 
-If you deploy your blog at github
+If you deploy your blog at github.
 
 	M-x easy-jekyll-github-deploy
 
@@ -201,14 +201,14 @@ The file is saved in 'easy-jekyll-image-directory' and generate image link.
 |SPC	|easy-jekyll-next-line|
 |Shift-SPC|easy-jekyll-previous-line|
 |←	    |easy-jekyll-backward-char|
-|→     |easy-jekyll-forward-char|
+|→      |easy-jekyll-forward-char|
 |C-b	|easy-jekyll-backward-char|
 |C-f	|easy-jekyll-forward-char|
 |C-n	|easy-jekyll-next-line|
 |C-p	|easy-jekyll-previous-line|
 |M-b	|easy-jekyll-backward-word|
 |M-<	|easy-jekyll-beginning-of-buffer|
-|.      | easy-jekyll-next-postdir|
+|.      |easy-jekyll-next-postdir|
 |,      |easy-jekyll-previous-postdir|
 |+      |easy-jekyll-next-postdir|
 |-      |easy-jekyll-previous-postdir|
@@ -345,7 +345,7 @@ If not set the default extension will be '.md'.
 
 	(setq easy-jekyll-default-ext ".textile")
 
-If you want to change to No help-mode from startup
+If you want to change to No help-mode from startup.
 
 	(setq easy-jekyll-no-help t)
 
@@ -368,7 +368,7 @@ If not set the default image file directory will be 'images'.
 
 	(setq easy-jekyll-image-directory "img")
 
-Setting the picture directory of your laptop or desktop, it is easy to execute M-x easy-jekyll-put-image
+Setting the picture directory of your laptop or desktop, it is easy to execute M-x easy-jekyll-put-image.
 
 	(setq easy-jekyll-default-picture-directory "~/Pictures")
 
@@ -450,7 +450,7 @@ Because only markdown is supported by jekyll. If not set markdown filename exten
 
 ## For spacemacs or evil-mode users example
 
-If you use [spacemacs](https://github.com/syl20bnr/spacemacs) or [evil-mode](https://github.com/emacs-evil/evil)
+If you use [spacemacs](https://github.com/syl20bnr/spacemacs) or [evil-mode](https://github.com/emacs-evil/evil).
 
 	(defun cesco/easy-jekyll ()
 	(interactive)
@@ -527,7 +527,7 @@ If you want to deploy jekyll at GitHub Pages or Amazon S3 or Google Cloud Storag
 I created my blog in google compute engine.
 Check if rsync is installed on the server.
 
-Write at ~/.ssh/config on your laptop or desktop
+Write at ~/.ssh/config on your laptop or desktop.
 
 	 Host blogdomain
                         HostName "Your server's IP"
@@ -560,7 +560,7 @@ sample nginx.conf
 		}
 	}
 
-PPAP blog source code sample for jekyll
+PPAP blog source code sample for jekyll.
 
 https://github.com/masasam/PPAP2
 
