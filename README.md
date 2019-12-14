@@ -94,6 +94,9 @@ Below is how to pass password to deploy.sh.
 You are to set up connecting to GitHub with SSH (see https://help.github.com/articles/connecting-to-github-with-ssh/).
 You install keychain (see http://www.funtoo.org/Keychain).
 Now that you don't need a password, you can run deploy.sh.
+
+	M-x easy-jekyll-magit
+
 Netlify just press M and commit to GitHub.
 
 	M-x easy-jekyll-amazon-s3-deploy
