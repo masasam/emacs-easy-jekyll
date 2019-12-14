@@ -98,6 +98,7 @@ Now that you don't need a password, you can run deploy.sh.
 	M-x easy-jekyll-magit
 
 Netlify just press M and commit to GitHub.
+Please install [Magit](https://github.com/magit/magit) to use this feature.
 
 	M-x easy-jekyll-amazon-s3-deploy
 
