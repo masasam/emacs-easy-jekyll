@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 2.3.23
+;; Version: 2.3.24
 ;; Package-Requires: ((emacs "25.1") (request "0.3.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -50,12 +50,12 @@
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-server-flags ""
+(defcustom easy-jekyll-serve-flags ""
   "Additional flags to pass to jekyll serve."
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-server-value ""
+(defcustom easy-jekyll-serve-value ""
   "Additional value to pass to jekyll serve."
   :group 'easy-jekyll
   :type 'string)
@@ -748,7 +748,7 @@ POST-FILE needs to have and extension '.md' or '.textile'."
      (progn
        (setq easy-jekyll--server-process
 	     (start-process "jekyll-serve" easy-jekyll--preview-buffer
-			    "bundle" "exec" "jekyll" "serve" easy-jekyll-server-flags easy-jekyll-server-value))
+			    "bundle" "exec" "jekyll" "serve" easy-jekyll-serve-flags easy-jekyll-serve-value))
        (while easy-jekyll--preview-loop
 	 (if (equal (easy-jekyll--preview-status) "200")
 	     (progn
