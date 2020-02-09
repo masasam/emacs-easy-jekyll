@@ -475,6 +475,12 @@ If you use [spacemacs](https://github.com/syl20bnr/spacemacs) or [evil-mode](htt
         easy-jekyll-previewtime "20")
 	(add-hook 'easy-jekyll-mode-hook 'cesco/easy-jekyll))
 
+## Support emacspeak
+
+If you use easy-jekyll with [emacspeak](https://github.com/tvraman/emacspeak).
+
+	(setq easy-jekyll-emacspeak t)
+
 ## Preparation for using this package
 
 Install jekyll and bundler
