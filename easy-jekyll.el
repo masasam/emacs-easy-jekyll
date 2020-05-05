@@ -166,7 +166,7 @@ The default is drwxr-xr-x."
   :group 'easy-jekyll
   :type 'string)
 
-(defcustom easy-jekyll-post--layout "post"
+(defcustom easy-jekyll-post-layout "post"
   "Default layout for a new post."
   :group 'easy-jekyll
   :type 'string
