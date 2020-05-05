@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 2.4.24
+;; Version: 2.4.25
 ;; Package-Requires: ((emacs "25.1") (request "0.3.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -158,6 +158,11 @@ The default is drwxr-xr-x."
 
 (defcustom easy-jekyll-rsync-delete-directory "_site/"
   "Disappear directory when synchronizing with rsync."
+  :group 'easy-jekyll
+  :type 'string)
+
+(defcustom easy-jekyll-rsync-flags "-rtpl"
+  "Additional flags for rsync."
   :group 'easy-jekyll
   :type 'string)
 
@@ -541,7 +546,7 @@ Automatically select the deployment destination from init.el."
 			    nil
 			    "*jekyll-rsync*"
 			    t
-			    "-rtpl"
+			    easy-jekyll-rsync-flags
 			    (concat "--chmod=" easy-jekyll-publish-chmod)
 			    "--delete"
 			    easy-jekyll-rsync-delete-directory
@@ -606,7 +611,7 @@ Automatically select the deployment destination from init.el."
 			     nil
 			     "*jekyll-rsync*"
 			     t
-			     "-rtpl"
+			     easy-jekyll-rsync-flags
 			     (concat "--chmod=" easy-jekyll-publish-chmod)
 			     "--delete"
 			     easy-jekyll-rsync-delete-directory
