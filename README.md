@@ -326,6 +326,10 @@ If you want the default extension to be '.textile'.
 If not set the default extension will be '.md'.
 
 	(setq easy-jekyll-default-ext ".textile")
+      
+If you want to set the default layout for a new post, set the following variable.
+
+    (setq easy-jekyll-post-layout "post")
 
 If you want to change to No help-mode from startup.
 

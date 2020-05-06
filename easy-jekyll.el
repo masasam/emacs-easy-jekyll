@@ -4,7 +4,7 @@
 
 ;; Author: Masashı Mıyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 2.4.25
+;; Version: 2.4.26
 ;; Package-Requires: ((emacs "25.1") (request "0.3.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -165,6 +165,12 @@ The default is drwxr-xr-x."
   "Additional flags for rsync."
   :group 'easy-jekyll
   :type 'string)
+
+(defcustom easy-jekyll-post-layout "post"
+  "Default layout for a new post."
+  :group 'easy-jekyll
+  :type 'string
+  )
 
 (defcustom easy-jekyll-help-line 7
   "Number of lines of `easy-jekyll-help'."
@@ -724,7 +730,7 @@ Automatically select the deployment destination from init.el."
           (format-time-string "%z"))))
     (concat
      "---"
-     "\nlayout: post"
+     "\nlayout: " easy-jekyll-post-layout
      "\ntitle:  " file
      "\ndate:   " datetimezone
      "\n---\n")))
