@@ -1,10 +1,10 @@
 ;;; easy-jekyll.el --- Major mode managing jekyll blogs -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2017-2020 by Masashı Mıyaura
+;; Copyright (C) 2017-2020 by Masashi Miyaura
 
-;; Author: Masashı Mıyaura
+;; Author: Masashi Miyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 2.4.26
+;; Version: 2.4.27
 ;; Package-Requires: ((emacs "25.1") (request "0.3.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -219,11 +219,15 @@ The default is drwxr-xr-x."
 				 ,easy-jekyll-textile-extension))
 
 (defface easy-jekyll-help-face
-  '((((class color) (background light))
-     (:inherit font-lock-function-name-face :background "#f0f8ff"))
+  `((((class color) (background light))
+     ,@(and (>= emacs-major-version 27) '(:extend t))
+     :inherit font-lock-function-name-face
+     :background "#f0f8ff")
     (((class color) (background dark))
-     (:inherit font-lock-function-name-face :background "#2f4f4f")))
-  ""
+     ,@(and (>= emacs-major-version 27) '(:extend t))
+     :inherit font-lock-function-name-face
+     :background "#2f4f4f"))
+  "Definition of help color."
   :group 'easy-jekyll-faces)
 
 (defvar easy-jekyll--mode-buffer nil
