@@ -342,11 +342,21 @@ If not set the default s key will be charactor-sort.
 
 If you want to customise color, write the following in the init.el or .emacs.
 
-	(defface easy-jekyll-help-face
-	'((((class color) (background light)) (:bold t :foreground "your-hex-color" :background "your-hex-color"))
-    (((class color) (background dark)) (:bold t :foreground "your-hex-color" :background "your-hex-color")))
-	""
-	:group 'easy-jekyll-faces)
+```
+(defface easy-jekyll-help-face
+  `((((class color) (background light))
+     ,@(and (>= emacs-major-version 27) '(:extend t))
+     :bold t
+     :foreground "your-hex-color"
+     :background "your-hex-color")
+    (((class color) (background dark))
+     ,@(and (>= emacs-major-version 27) '(:extend t))
+     :bold t
+     :foreground "your-hex-color"
+     :background "your-hex-color"))
+  "Definition of help color."
+  :group 'easy-jekyll-faces)
+```
 
 In order to generate link of image from image file directory under 'easy-jekyll-image-directory' directory,
 if you want to change image file directory.
