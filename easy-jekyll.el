@@ -4,7 +4,7 @@
 
 ;; Author: Masashi Miyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 2.4.29
+;; Version: 2.4.30
 ;; Package-Requires: ((emacs "25.1") (request "0.3.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -1995,14 +1995,15 @@ output directories whose names match REGEXP."
 	   (insert (concat (car lists) "\n"))
 	   (pop lists))
 	 (goto-char easy-jekyll--cursor)
-	 (if easy-jekyll--refresh
+	 (easy-jekyll-ignore-error
+	  (if easy-jekyll--refresh
 	     (progn
 	       (when (< (line-number-at-pos) easy-jekyll--unmovable-line)
 		 (goto-char (point-min))
 		 (forward-line (- easy-jekyll--unmovable-line 1)))
 	       (beginning-of-line)
 	       (forward-char easy-jekyll--forward-char))
-	   (forward-char easy-jekyll--forward-char))
+	   (forward-char easy-jekyll--forward-char)))
 	 (easy-jekyll-mode)
 	 (when easy-jekyll-emacspeak
 	   (easy-jekyll-emacspeak-filename)))))))
