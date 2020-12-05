@@ -4,7 +4,7 @@
 
 ;; Author: Masashi Miyaura
 ;; URL: https://github.com/masasam/emacs-easy-jekyll
-;; Version: 2.4.28
+;; Version: 2.4.29
 ;; Package-Requires: ((emacs "25.1") (request "0.3.0"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -381,6 +381,14 @@ Report an error if jekyll is not installed, or if `easy-jekyll-basedir' is unset
   "Macros to eval variables of BODY from `easy-jekyll-bloglist' at BLOG."
   `(cdr (assoc ',body
 	       (nth ,blog easy-jekyll-bloglist))))
+
+(defmacro easy-jekyll-ignore-error (condition &rest body)
+  "Execute BODY; if the error CONDITION occurs, return nil.
+Otherwise, return result of last form in BODY.
+
+CONDITION can also be a list of error conditions."
+  (declare (debug t) (indent 1))
+  `(condition-case nil (progn ,@body) (,condition nil)))
 
 ;;;###autoload
 (defun easy-jekyll-article ()
@@ -2063,14 +2071,15 @@ output directories whose names match REGEXP."
 	   (insert (concat (car lists) "\n"))
 	   (pop lists))
 	 (goto-char easy-jekyll--cursor)
-	 (if easy-jekyll--refresh
+	 (easy-jekyll-ignore-error
+	  (if easy-jekyll--refresh
 	     (progn
 	       (when (< (line-number-at-pos) easy-jekyll--unmovable-line)
 		 (goto-char (point-min))
 		 (forward-line (- easy-jekyll--unmovable-line 1)))
 	       (beginning-of-line)
 	       (forward-char easy-jekyll--forward-char))
-	   (forward-char easy-jekyll--forward-char))
+	   (forward-char easy-jekyll--forward-char)))
 	 (easy-jekyll-mode)
 	 (when easy-jekyll-emacspeak
 	   (easy-jekyll-emacspeak-filename)))))))
