@@ -39,6 +39,10 @@ Since the process of jekyll running in the laptop or desktop disappears in 300 s
 
 You can publish your blog to the server and the browser opens automatically.
 
+	(setq easy-jekyll-publish-production t)
+
+If you want to use "JEKYLL_ENV=production" at publish and using "JEKYLL_ENV=development" at preview, write it in your init.el as above.
+
 	M-x easy-jekyll-publish-clever
 
 Clever publish command.
