@@ -292,7 +292,8 @@ The default is drwxr-xr-x."
 	(easy-jekyll-textile-extension . ,easy-jekyll-textile-extension)
 	(easy-jekyll-markdown-extension . ,easy-jekyll-markdown-extension)
 	(easy-jekyll-default-ext . ,easy-jekyll-default-ext)
-	(easy-jekyll-postdir . ,easy-jekyll-postdir))
+	(easy-jekyll-postdir . ,easy-jekyll-postdir)
+	(easy-jekyll-additional-postdir . ,easy-jekyll-additional-postdir))
       easy-jekyll-bloglist)
 
 (defvar easy-jekyll--publish-timer-list
@@ -1702,6 +1703,9 @@ Optional prefix ARG says how many lines to move; default is one line."
     (if (easy-jekyll-eval-bloglist easy-jekyll-postdir)
 	(easy-jekyll-set-bloglist easy-jekyll-postdir)
       (setq easy-jekyll-postdir easy-jekyll--default-postdir))
+    (if (easy-jekyll-eval-bloglist easy-jekyll-additional-postdir)
+	(easy-jekyll-set-bloglist easy-jekyll-additional-postdir)
+      (setq easy-jekyll-additional-postdir easy-jekyll--default-additional-postdir))
     (easy-jekyll--preview-end)
     (easy-jekyll)))
 
@@ -1753,6 +1757,9 @@ Optional prefix ARG says how many lines to move; default is one line."
     (if (easy-jekyll-eval-bloglist easy-jekyll-postdir)
 	(easy-jekyll-set-bloglist easy-jekyll-postdir)
       (setq easy-jekyll-postdir easy-jekyll--default-postdir))
+    (if (easy-jekyll-eval-bloglist easy-jekyll-additional-postdir)
+	(easy-jekyll-set-bloglist easy-jekyll-additional-postdir)
+      (setq easy-jekyll-additional-postdir easy-jekyll--default-additional-postdir))
     (easy-jekyll--preview-end)
     (easy-jekyll)))
 
@@ -1806,6 +1813,9 @@ Optional prefix ARG says how many lines to move; default is one line."
     (if (easy-jekyll-eval-bloglist easy-jekyll-postdir)
 	(easy-jekyll-set-bloglist easy-jekyll-postdir)
       (setq easy-jekyll-postdir easy-jekyll--default-postdir))
+    (if (easy-jekyll-eval-bloglist easy-jekyll-additional-postdir)
+	(easy-jekyll-set-bloglist easy-jekyll-additional-postdir)
+      (setq easy-jekyll-additional-postdir easy-jekyll--default-additional-postdir))
     (easy-jekyll--preview-end)
     (easy-jekyll)))
 
