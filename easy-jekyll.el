@@ -1826,6 +1826,9 @@ Optional prefix ARG says how many lines to move; default is one line."
 	       (expand-file-name easy-jekyll-basedir))
   (add-to-list 'easy-jekyll--postdir-list
   	       (expand-file-name "_posts" easy-jekyll-basedir))
+  (when easy-jekyll-additional-postdir
+	     (add-to-list 'easy-jekyll--postdir-list
+			(expand-file-name easy-jekyll-additional-postdir easy-jekyll-basedir)))
   (setq easy-jekyll-postdir
 	(file-relative-name
 	 (completing-read
@@ -1927,6 +1930,9 @@ output directories whose names match REGEXP."
 	       (expand-file-name easy-jekyll-basedir))
   (add-to-list 'easy-jekyll--postdir-list
   	       (expand-file-name "_posts" easy-jekyll-basedir))
+  (when easy-jekyll-additional-postdir
+	     (add-to-list 'easy-jekyll--postdir-list
+			(expand-file-name easy-jekyll-additional-postdir easy-jekyll-basedir)))
   (if (eq (- (length easy-jekyll--postdir-list) 1) easy-jekyll--current-postdir)
       (setq easy-jekyll--current-postdir 0)
     (setq easy-jekyll--current-postdir (+ easy-jekyll--current-postdir 1)))
@@ -1947,6 +1953,9 @@ output directories whose names match REGEXP."
 	       (expand-file-name easy-jekyll-basedir))
   (add-to-list 'easy-jekyll--postdir-list
 	       (expand-file-name "_posts" easy-jekyll-basedir))
+  (when easy-jekyll-additional-postdir
+	     (add-to-list 'easy-jekyll--postdir-list
+			(expand-file-name easy-jekyll-additional-postdir easy-jekyll-basedir)))
   (setq easy-jekyll--current-postdir (- easy-jekyll--current-postdir 1))
   (when (> 0 easy-jekyll--current-postdir)
     (setq easy-jekyll--current-postdir (- (length easy-jekyll--postdir-list) 1)))
