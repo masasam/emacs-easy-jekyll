@@ -355,6 +355,10 @@ The default is drwxr-xr-x."
   "_posts"
   "Default easy-jekyll-postdir.")
 
+(defconst easy-jekyll--default-additional-postdir
+  nil
+  "Default `easy-jekyll-additional-postdir'.")
+
 (defconst easy-jekyll--default-ext
   easy-jekyll-default-ext
   "Default `easy-jekyll' default-ext.")
