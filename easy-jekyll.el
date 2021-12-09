@@ -171,6 +171,11 @@ The default is drwxr-xr-x."
   :group 'easy-jekyll
   :type 'string)
 
+(defcustom easy-jekyll-additional-postdir nil
+  "Additional directory where stores its markdown files."
+  :group 'easy-jekyll
+  :type 'string)
+
 (defcustom easy-jekyll-rsync-delete-directory "_site/"
   "Disappear directory when synchronizing with rsync."
   :group 'easy-jekyll
